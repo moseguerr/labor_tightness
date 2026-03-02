@@ -1,0 +1,52 @@
+# ── Symlinked directories (live in Dropbox) ──
+data/
+logs/
+notes/
+secrets/
+
+# ── Large data files (live on external drive / server) ──
+*.dta
+*.parquet
+*.csv
+*.csv.zip
+*.zip
+*.xlsx
+*.xls
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Python ──
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+
+# ── R ──
+.Rhistory
+.RData
+.Rproj.user/
+
+# ── Output files ──
+*.pdf
+*.png
+*.jpg
+*.jpeg
+
+# ── Regression output / logs ──
+code/regressions/**/*.txt
+code/data_clean/*.txt
+
+# ── Quarto output ──
+drafts/_output/
+drafts/figures/*.pdf
+drafts/figures/*.png
+
+# ── Temp ──
+/tmp/
+
+# ── Quality reports (local only) ──
+quality_reports/

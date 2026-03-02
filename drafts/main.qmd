@@ -1,0 +1,32 @@
+---
+title: "Organizational Purpose as a Costly Signal in Tight Labor Markets"
+author: "Miguel Oseguera"
+date: today
+format: pdf
+---
+
+<!-- This is the Quarto source file for the main paper.
+     Edit this file, then run render_all.sh to generate PDF and .tex output.
+     The .tex output syncs to Overleaf via sync_to_overleaf.sh. -->
+
+# Introduction
+
+<!-- TODO: Port content from Overleaf Current Draft.tex -->
+
+# Literature Review
+
+# Theoretical Framework
+
+# Data and Sample Construction
+
+# Empirical Strategy
+
+# Results
+
+# Robustness Checks
+
+# Discussion
+
+# Conclusion
+
+# References {.unnumbered}

@@ -1,0 +1,69 @@
+#################################################################################################
+### Load libraries
+#################################################################################################
+library(lubridate)
+library(estimatr)
+library(haven)
+library(lfe)
+library(dplyr)
+library(texreg)
+########################################################################################################
+### Load data
+#########################################################################################################
+panel_main <- read_stata("/global/home/pc_moseguera/data/Burning Glass 2/merged_variables/merge_main/job_wages.dta")
+
+
+########################################################################################################
+###Variable transformation
+########################################################################################################
+log_sal=log(panel_main$MinSalary)
+log_length=log(panel_main$length)
+log_num_skills=log(panel_main$num_skills)
+
+
+panel_main<-panel_main %>% 
+  mutate(above75_emp = 1*(log_change > quantile(log_change, probs = 0.75, na.rm = T))) %>% 
+  ungroup()
+
+#########################################################################################################
+###Regressions
+#########################################################################################################
+### 1a. Low Unemployment
+
+
+
+reg_1<-felm(log_sal ~ above75_emp+main_strict_ind | as.factor(year) | 0 | CanonEmployer, data=panel_main)
+reg_2<-felm(log_sal ~ above75_emp:main_strict_ind+above75_emp+main_strict_ind+college+parttime+bon_com | as.factor(year):as.factor(OccFam)+as.factor(BestFitMSA)+IsSpecialized  | 0 | CanonEmployer, data=panel_main)
+reg_3<-felm(log_sal ~ above75_emp:main_strict_ind+above75_emp+main_strict_ind+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(year):as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer)  | 0 | CanonEmployer, data=panel_main)
+reg_4<-felm(log_sal ~ above75_emp:main_strict_ind+above75_emp+main_strict_ind+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer):as.factor(year)  | 0 | CanonEmployer, data=panel_main)
+
+
+texreg(list(reg_1, reg_2, reg_3, reg_4), digits =4, file='/global/home/pc_moseguera/data/Burning Glass 2/Regression Tables/quarter/wages_main_strict_emp_0313.txt')
+
+reg_1<-felm(log_sal ~ above75_emp+main_ind | as.factor(year) | 0 | CanonEmployer, data=panel_main)
+reg_2<-felm(log_sal ~ above75_emp:main_ind+above75_emp+main_ind+college+parttime+bon_com | as.factor(year):as.factor(OccFam)+as.factor(BestFitMSA)+IsSpecialized  | 0 | CanonEmployer, data=panel_main)
+reg_3<-felm(log_sal ~ above75_emp:main_ind+above75_emp+main_ind+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(year):as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer)  | 0 | CanonEmployer, data=panel_main)
+reg_4<-felm(log_sal ~ above75_emp:main_ind+above75_emp+main_ind+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer):as.factor(year)  | 0 | CanonEmployer, data=panel_main)
+
+
+texreg(list(reg_1, reg_2, reg_3, reg_4), digits =4, file='/global/home/pc_moseguera/data/Burning Glass 2/Regression Tables/quarter/wages_main_emp_0313.txt')
+
+reg_1<-felm(log_sal ~ above75_emp+main_mean_str | as.factor(year) | 0 | CanonEmployer, data=panel_main)
+reg_2<-felm(log_sal ~ above75_emp:main_mean_str+above75_emp+main_mean_str+college+parttime+bon_com | as.factor(year):as.factor(OccFam)+as.factor(BestFitMSA)+IsSpecialized  | 0 | CanonEmployer, data=panel_main)
+reg_3<-felm(log_sal ~ above75_emp:main_mean_str+above75_emp+main_mean_str+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(year):as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer)  | 0 | CanonEmployer, data=panel_main)
+reg_4<-felm(log_sal ~ above75_emp:main_mean_str+above75_emp+main_mean_str+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer):as.factor(year)  | 0 | CanonEmployer, data=panel_main)
+
+
+texreg(list(reg_1, reg_2, reg_3, reg_4), digits =4, file='/global/home/pc_moseguera/data/Burning Glass 2/Regression Tables/quarter/wages_mean_strict_emp_0313.txt')
+
+reg_1<-felm(log_sal ~ above75_emp+main_mean | as.factor(year) | 0 | CanonEmployer, data=panel_main)
+reg_2<-felm(log_sal ~ above75_emp:main_mean+above75_emp+main_mean+college+parttime+bon_com | as.factor(year):as.factor(OccFam)+as.factor(BestFitMSA)+IsSpecialized  | 0 | CanonEmployer, data=panel_main)
+reg_3<-felm(log_sal ~ above75_emp:main_mean+above75_emp+main_mean+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(year):as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer)  | 0 | CanonEmployer, data=panel_main)
+reg_4<-felm(log_sal ~ above75_emp:main_mean+above75_emp+main_mean+college+parttime+bon_com | as.factor(BestFitMSA)+as.factor(OccFam)+IsSpecialized+as.factor(CanonEmployer):as.factor(year)  | 0 | CanonEmployer, data=panel_main)
+
+
+texreg(list(reg_1, reg_2, reg_3, reg_4), digits =4, file='/global/home/pc_moseguera/data/Burning Glass 2/Regression Tables/quarter/wages_mean_emp_0313.txt')
+
+
+
+

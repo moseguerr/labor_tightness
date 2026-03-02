@@ -1,0 +1,22 @@
+# Data pipeline (runs on Georgetown server)
+pandas>=2.0
+numpy
+pyarrow
+fastparquet
+glob2
+
+# NLP / Dictionary refinement
+keybert
+sentence-transformers
+scikit-learn
+joblib
+
+# Data processing
+zipfile36
+lxml
+
+# Utilities
+gc-utils
+tqdm
+ipykernel
+jupyterlab

@@ -1,0 +1,22 @@
+name: labor_tightness
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10,<3.13
+  - pip
+  - ipykernel
+  - jupyterlab
+  - notebook
+  - pandas>=2.0
+  - numpy
+  - pyarrow
+  - fastparquet
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - tqdm
+  - lxml
+  - pip:
+      - keybert
+      - sentence-transformers
+      - joblib
