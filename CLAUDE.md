@@ -67,6 +67,13 @@ Sample: 4,040 firms, 21.5M posts (full); 3,464 firms, 4.9M posts (wage subsample
 | `refine_dictionaries.py` | Dictionary expansion via KeyBERT + SentenceTransformers |
 | `call_*.py` | Orchestrator scripts for batch processing |
 | `debugg*.py` | Debug versions of pipeline scripts |
+| `construct_bartik.py` | Bartik shift-share IV instrument (BHJ 2022) |
+| `construct_bartik_robustness.py` | Alternative baseline (2007) + state LOO variants |
+| `bartik_diagnostics.py` | Core IV diagnostics (effective N, F-stat, Rotemberg, balance) |
+| `bartik_diagnostics_fixes.py` | JRS dynamic, change spec, no-611 fix variants |
+| `bartik_covariate_balance.py` | Bai-style covariate balance on MSA demographics |
+| `bartik_ssaggregate.py` | BHJ exposure-robust SEs (ssaggregate) |
+| `process_qcew_2022_2025.py` | Download/process QCEW data through 2025 Q2 |
 
 Server paths:
 - Input: `/global/home/pc_moseguera/data/Burning Glass 2/`
@@ -83,6 +90,7 @@ Root level:
 - `wages_decomposed_skills_*.R` — Skill decomposition
 - `unemp_reg*.R` — Unemployment regressions (Analysis 1)
 - `Table3_*.R`, `Table4_*.R` — Final publication tables
+- `wages_iv_bartik.R` — Full IV regression suite (first stage, 2SLS, JRS, Oster)
 
 Subfolders:
 - `firm_level/prosocial_main/` — Firm-level unemployment regressions (by quartile, MSA, year)
@@ -110,14 +118,15 @@ Older-generation scripts from Jan 2023 (pre-construct-refinement). Kept for refe
 
 - **Analysis 1:** Purpose claims ~ labor market tightness (firm × MSA × occupation × quarter)
 - **Analysis 2:** Log wages ~ purpose claims × tightness (job post level)
-- **Identification:** Within-firm variation in MSA-level unemployment; Bartik shift-share IV (in progress)
+- **Identification:** Within-firm variation in MSA-level unemployment; Bartik shift-share IV (BHJ 2022 framework, exposure-robust SEs)
 - **Fixed effects:** Firm, occupation×industry×year, MSA, specialized skills proportion
 
 ## Current Status
 
 - Full empirical analysis complete; all main tables and robustness checks produced
-- **In progress:** Construct narrowing (SR → organizational purpose), Bartik IV integration, framing revision
-- **Next:** Dictionary revision + re-run, IV results tables, rewrite intro/theory, submit (AMJ/SMJ/OS)
+- **Bartik IV:** Instrument constructed, diagnostics complete, robustness variants built, exposure-robust SEs computed. IV R scripts ready — need to run on Georgetown server.
+- **In progress:** Construct narrowing (SR → organizational purpose), framing revision
+- **Next:** Run IV regressions on server, dictionary revision + re-run, IV results tables, rewrite intro/theory, submit (AMJ/SMJ/OS)
 - **Lab studies:** Two studies under IRB prep at Georgetown (dictionary validation + credibility mechanism)
 
 ## Notion

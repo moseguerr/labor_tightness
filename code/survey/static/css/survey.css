@@ -1,0 +1,75 @@
+/* Custom styles layered on Tailwind */
+
+/* Checkbox styling — larger, teal-blue accent */
+input[type="checkbox"].category-check {
+    width: 20px;
+    height: 20px;
+    accent-color: #4a7c8a;
+    cursor: pointer;
+}
+
+/* Radio buttons for Likert scales */
+input[type="radio"]:checked + div {
+    background-color: #4a7c8a;
+    border-color: #4a7c8a;
+    color: white;
+}
+
+/* Card hover for ranking drag-and-drop */
+.ranking-card {
+    cursor: grab;
+    transition: box-shadow 0.15s, transform 0.15s;
+}
+.ranking-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.ranking-card.sortable-ghost {
+    opacity: 0.4;
+}
+.ranking-card.sortable-chosen {
+    cursor: grabbing;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+}
+
+/* Button lift on hover */
+.btn-primary {
+    transition: background-color 0.2s, transform 0.1s;
+}
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Phrase highlight */
+.phrase-highlight {
+    background-color: #e0f2f1;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* Feedback cards */
+.feedback-correct {
+    border-left: 4px solid #4ade80;
+    background-color: #f0fdf4;
+}
+.feedback-partial {
+    border-left: 4px solid #fbbf24;
+    background-color: #fefce8;
+}
+
+/* Smooth page transitions */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Mobile-friendly tap targets */
+@media (max-width: 640px) {
+    .category-label {
+        padding: 12px;
+        min-height: 48px;
+    }
+}

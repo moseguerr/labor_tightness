@@ -25,6 +25,10 @@ __pycache__/
 venv/
 .env
 
+# ── Django ──
+db.sqlite3
+staticfiles/
+
 # ── R ──
 .Rhistory
 .RData

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Part 2 — Comprehension Checks" current=1 total=1 %}
+{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
+    <h2 class="text-xl font-semibold text-slate-800 mb-2">Quick Comprehension Check</h2>
+    <p class="text-slate-500 text-sm mb-8">
+        Before we move on, please answer these questions based on the postings you just read.
+    </p>
+
+    <form method="post" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- Most mission-driven -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                Which company seemed to emphasize its mission or social purpose the most?
+            </label>
+            <div class="space-y-2">
+                {% for company in companies %}
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="most_mission" value="{{ company }}"
+                           class="w-4 h-4 text-primary-500" required>
+                    <span class="text-sm text-slate-700">{{ company }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Best workplace -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                Which company seemed to emphasize being a great place to work the most?
+            </label>
+            <div class="space-y-2">
+                {% for company in companies %}
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="most_workplace" value="{{ company }}"
+                           class="w-4 h-4 text-primary-500" required>
+                    <span class="text-sm text-slate-700">{{ company }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Highest salary -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                Which company offered the highest salary?
+            </label>
+            <div class="space-y-2">
+                {% for company in companies %}
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="highest_salary" value="{{ company }}"
+                           class="w-4 h-4 text-primary-500" required>
+                    <span class="text-sm text-slate-700">{{ company }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Job title check -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                What was the job title in the postings?
+            </label>
+            <div class="space-y-2">
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="job_title_check" value="Marketing Analyst"
+                           class="w-4 h-4 text-primary-500" required>
+                    <span class="text-sm text-slate-700">Marketing Analyst</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="job_title_check" value="Sales Associate"
+                           class="w-4 h-4 text-primary-500">
+                    <span class="text-sm text-slate-700">Sales Associate</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="job_title_check" value="Product Manager"
+                           class="w-4 h-4 text-primary-500">
+                    <span class="text-sm text-slate-700">Product Manager</span>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="job_title_check" value="Financial Analyst"
+                           class="w-4 h-4 text-primary-500">
+                    <span class="text-sm text-slate-700">Financial Analyst</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-8 rounded-lg text-base">
+                Continue to Rankings
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

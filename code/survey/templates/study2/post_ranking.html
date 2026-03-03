@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
+    <h2 class="text-xl font-semibold text-slate-800 mb-2">Follow-Up Questions</h2>
+    <p class="text-slate-500 text-sm mb-8">A few more questions about your top-ranked posting.</p>
+
+    <form method="post" class="space-y-8">
+        {% csrf_token %}
+        <input type="hidden" name="top_company" value="{{ top_company }}">
+
+        <!-- Why this posting -->
+        <div>
+            <label for="explanation_text" class="block text-sm font-medium text-slate-700 mb-2">
+                You ranked <strong class="text-primary-600">{{ top_company }}</strong> as the posting you
+                would most want to apply to. What stood out about this posting?
+            </label>
+            <textarea id="explanation_text" name="explanation_text" rows="3"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm
+                             focus:border-primary-500 focus:ring-1 focus:ring-primary-500
+                             placeholder-slate-400"
+                      placeholder="Share what stood out to you..." required></textarea>
+        </div>
+
+        <!-- Minimum acceptable salary -->
+        <div>
+            <label for="min_acceptable_salary" class="block text-sm font-medium text-slate-700 mb-2">
+                What is the minimum annual salary you would accept to work at
+                <strong class="text-primary-600">{{ top_company }}</strong>?
+            </label>
+            <div class="relative max-w-xs">
+                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 text-sm">$</span>
+                <input type="number" id="min_acceptable_salary" name="min_acceptable_salary"
+                       class="w-full pl-8 pr-4 py-3 rounded-lg border border-gray-300 text-sm
+                              focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                       placeholder="e.g. 55000" min="0" step="1000" required>
+            </div>
+        </div>
+
+        <!-- P-O Fit items -->
+        <div class="space-y-6">
+            <p class="text-sm font-medium text-slate-700">
+                Thinking about <strong class="text-primary-600">{{ top_company }}</strong>,
+                how much do you agree with each statement?
+            </p>
+
+            <div>
+                <label class="block text-sm text-slate-600 mb-3">
+                    "This company's values seem to align with my personal values."
+                </label>
+                {% include "components/likert_scale.html" with name="po_fit_values" low_label="Strongly disagree" high_label="Strongly agree" required=True %}
+            </div>
+
+            <div>
+                <label class="block text-sm text-slate-600 mb-3">
+                    "I think I would fit in well at this company."
+                </label>
+                {% include "components/likert_scale.html" with name="po_fit_belong" low_label="Strongly disagree" high_label="Strongly agree" required=True %}
+            </div>
+
+            <div>
+                <label class="block text-sm text-slate-600 mb-3">
+                    "This company's focus reflects the things I care about."
+                </label>
+                {% include "components/likert_scale.html" with name="po_fit_care" low_label="Strongly disagree" high_label="Strongly agree" required=True %}
+            </div>
+        </div>
+
+        <div class="pt-4">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-8 rounded-lg text-base">
+                Continue
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

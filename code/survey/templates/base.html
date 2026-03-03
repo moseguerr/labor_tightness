@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Research Study — Georgetown University{% endblock %}</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': {
+                            50: '#f0f7f8',
+                            100: '#d9ecef',
+                            200: '#b3d9df',
+                            300: '#8cc5cf',
+                            400: '#6aabb8',
+                            500: '#4a7c8a',
+                            600: '#3d6873',
+                            700: '#365d68',
+                            800: '#2d4d56',
+                            900: '#243f47',
+                        },
+                        'accent': {
+                            50: '#e0f2f1',
+                            100: '#b2dfdb',
+                            200: '#80cbc4',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(12px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/survey.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="h-full bg-gray-50 font-sans text-slate-800 antialiased">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">G</span>
+                </div>
+                <span class="text-sm font-medium text-slate-600">Georgetown University Research Study</span>
+            </div>
+            {% block header_right %}{% endblock %}
+        </div>
+    </header>
+
+    <!-- Progress bar -->
+    {% block progress_bar %}{% endblock %}
+
+    <!-- Main content -->
+    <main class="min-h-[calc(100vh-4rem)] flex items-start justify-center px-4 py-8 sm:py-12">
+        <div class="w-full max-w-3xl animate-fade-in">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-xs text-slate-400">
+        Georgetown University McDonough School of Business
+    </footer>
+
+    {% load static %}
+    <script src="{% static 'js/timing.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

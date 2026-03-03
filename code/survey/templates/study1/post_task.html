@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
+    <h2 class="text-xl font-semibold text-slate-800 mb-2">Almost Done with Part 1</h2>
+    <p class="text-slate-500 text-sm mb-8">A few quick follow-up questions.</p>
+
+    <form method="post" class="space-y-8">
+        {% csrf_token %}
+
+        <!-- Confidence -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                Overall, how confident were you in your classifications?
+            </label>
+            {% include "components/likert_scale.html" with name="confidence" low_label="Not at all confident" high_label="Very confident" required=True %}
+        </div>
+
+        <!-- Confusion -->
+        <div>
+            <label for="confusion_text" class="block text-sm font-medium text-slate-700 mb-2">
+                Were any categories confusing or hard to tell apart? If so, which ones and why?
+            </label>
+            <textarea id="confusion_text" name="confusion_text" rows="3"
+                      class="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm
+                             focus:border-primary-500 focus:ring-1 focus:ring-primary-500
+                             placeholder-slate-400"
+                      placeholder="Optional — share any thoughts here"></textarea>
+        </div>
+
+        <!-- Familiarity -->
+        <div>
+            <label class="block text-sm font-medium text-slate-700 mb-3">
+                How familiar are you with reading and evaluating job postings?
+            </label>
+            {% include "components/likert_scale.html" with name="familiarity" low_label="Not at all familiar" high_label="Very familiar" required=True %}
+        </div>
+
+        <div class="pt-4">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-8 rounded-lg text-base">
+                Continue
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

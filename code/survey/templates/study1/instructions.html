@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Part 1: Phrase Classification</h1>
+    <p class="text-sm text-slate-500 mb-6">Instructions</p>
+
+    <div class="space-y-4 text-slate-600">
+        <p>
+            In this task, you will see phrases that come from real job postings in the United States.
+        </p>
+        <p>
+            For each phrase, please check <strong>ALL</strong> categories you think it fits into.
+            Some phrases may fit more than one category — that is completely fine. If a phrase does
+            not seem to fit any category, select "None of these / I'm not sure."
+        </p>
+        <p>
+            There are no trick questions. We want your honest judgment about what each phrase is
+            communicating to a job seeker.
+        </p>
+        <p>
+            You will start with <strong>a few practice items</strong> to get familiar with the
+            categories. After the practice round, you will begin the main task.
+        </p>
+
+        <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <p class="text-sm text-slate-700">
+                <strong>Tip:</strong> A reference panel with category definitions will stay visible
+                on the side of your screen throughout the task. You can refer to it at any time.
+            </p>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <a href="{% url 'core:study1_practice' item_num=0 %}"
+           class="btn-primary inline-block bg-primary-500 hover:bg-primary-700 text-white
+                  font-medium py-3 px-8 rounded-lg text-base">
+            Start Practice Round
+        </a>
+    </div>
+</div>
+{% endblock %}

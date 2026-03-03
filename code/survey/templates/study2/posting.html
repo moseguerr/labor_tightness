@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Part 2 — Postings" current=posting_num|add:1 total=total_postings %}
+{% endblock %}
+
+{% block content %}
+{% if posting %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+    <!-- Company header -->
+    <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 sm:px-8 py-6">
+        <div class="text-xs font-medium text-primary-100 uppercase tracking-wide mb-2">
+            Posting {{ posting_num|add:1 }} of {{ total_postings }}
+        </div>
+        <h2 class="text-xl font-bold text-white">{{ posting.company_name }}</h2>
+        {% if posting.company_tagline %}
+        <p class="text-primary-100 text-sm mt-1 italic">{{ posting.company_tagline }}</p>
+        {% endif %}
+    </div>
+
+    <div class="px-6 sm:px-8 py-6 space-y-6">
+        <!-- Job title & location -->
+        <div class="flex flex-wrap gap-4 text-sm text-slate-500">
+            <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                {{ posting.job_title }}
+            </div>
+            <div class="flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                {{ posting.location }}
+            </div>
+        </div>
+
+        <!-- Company description (the framing paragraph) -->
+        <div>
+            <h3 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-2">About the Company</h3>
+            <p class="text-slate-600 leading-relaxed">{{ posting.company_description }}</p>
+        </div>
+
+        <!-- Responsibilities -->
+        <div>
+            <h3 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-2">Key Responsibilities</h3>
+            <ul class="space-y-2">
+                {% for item in posting.responsibilities %}
+                <li class="flex items-start gap-2 text-slate-600">
+                    <span class="text-primary-500 mt-1 flex-shrink-0">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                    {{ item }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Compensation & Benefits -->
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+            <h3 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-2">Compensation & Benefits</h3>
+            <div class="flex items-baseline gap-2 mb-2">
+                <span class="text-2xl font-bold text-slate-800">${{ posting.salary_amount|floatformat:"0" }}</span>
+                <span class="text-sm text-slate-500">per year</span>
+            </div>
+            <p class="text-sm text-slate-600">{{ posting.benefits_text }}</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="px-6 sm:px-8 py-4 bg-gray-50 border-t border-gray-100">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="time_spent" id="time_spent" value="">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-2.5 px-6 rounded-lg">
+                {% if posting_num|add:1 == total_postings %}
+                    Finish Reading Postings
+                {% else %}
+                    Next Posting
+                {% endif %}
+            </button>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Track time on this posting
+    const startTime = Date.now();
+    document.querySelector('form').addEventListener('submit', function() {
+        const elapsed = Math.round((Date.now() - startTime) / 1000);
+        document.getElementById('time_spent').value = elapsed;
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto text-center">
+    <!-- Success icon -->
+    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M5 13l4 4L19 7"/>
+        </svg>
+    </div>
+
+    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Thank You!</h1>
+    <p class="text-slate-500 text-sm mb-8">You have completed the study.</p>
+
+    {% if participant_code %}
+    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-8 inline-block">
+        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Your Participant ID</p>
+        <p class="text-2xl font-mono font-bold text-primary-600">{{ participant_code }}</p>
+    </div>
+    {% endif %}
+
+    <div class="prose prose-slate prose-sm max-w-none text-left space-y-4 text-slate-600">
+        <h3 class="text-base font-semibold text-slate-700">About This Study</h3>
+
+        {% if session_type == 'study1' %}
+        <p>
+            The phrases you classified came from real U.S. job postings. We are studying how
+            employers communicate different types of information to job seekers — including statements
+            about organizational mission and purpose, employee treatment, compensation, job duties,
+            and qualifications.
+        </p>
+        <p>
+            Your classifications will help us validate a coding system that categorizes these
+            phrases automatically across millions of job postings. This research aims to understand
+            how employers use different types of language when competing for talent.
+        </p>
+
+        {% elif session_type == 'study2' %}
+        <p>
+            The job postings you evaluated were fictional, created specifically for this study.
+            We systematically varied three aspects of the postings: (1) whether the company emphasized
+            a social mission, (2) whether it emphasized being a great workplace, and (3) the salary offered.
+        </p>
+        <p>
+            We are studying how these features — particularly claims about organizational purpose
+            and mission — influence job seekers' evaluations. This research investigates whether
+            organizational purpose claims function as genuine signals of employer quality or as
+            substitutes for concrete benefits like salary.
+        </p>
+
+        {% else %}
+        <p>
+            In Part 1, the phrases you classified came from real U.S. job postings. We are studying
+            how employers communicate different types of information to job seekers. Your classifications
+            will help validate our automated coding system.
+        </p>
+        <p>
+            In Part 2, the job postings were fictional, created specifically for this study. We
+            systematically varied the company's framing (social mission vs. good workplace vs. neutral)
+            and salary level. We are studying how organizational purpose claims influence job seekers'
+            evaluations and whether these claims function as genuine signals or as substitutes for
+            concrete benefits.
+        </p>
+        {% endif %}
+
+        <h3 class="text-base font-semibold text-slate-700">Confidentiality</h3>
+        <p>
+            Your responses are completely anonymous and will only be reported in aggregate.
+            No individual participant will be identifiable in any publications or presentations.
+        </p>
+
+        <h3 class="text-base font-semibold text-slate-700">Questions?</h3>
+        <p>
+            If you have any questions about this study, please contact the Principal Investigator,
+            Mariana Oseguera, at
+            <a href="mailto:m.oseguera@georgetown.edu" class="text-primary-600 hover:text-primary-700">
+                m.oseguera@georgetown.edu</a>.
+        </p>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-gray-200">
+        <p class="text-sm text-slate-500">
+            You may now close this browser window. Thank you for your participation!
+        </p>
+    </div>
+</div>
+{% endblock %}

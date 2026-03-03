@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Part 1 — Practice" current=item_num|add:1 total=5 %}
+{% endblock %}
+
+{% block content %}
+<div class="lg:flex lg:gap-6">
+    <!-- Main content -->
+    <div class="flex-1">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
+            <div class="text-xs font-medium text-primary-600 uppercase tracking-wide mb-4">
+                Practice Item {{ item_num|add:1 }} of 5
+            </div>
+
+            {% if phrase %}
+            <!-- Phrase in context -->
+            <div class="mb-6">
+                <p class="text-slate-700 leading-relaxed text-base">
+                    {{ phrase.context_text|safe }}
+                </p>
+            </div>
+
+            {% if show_feedback %}
+            <!-- Feedback card -->
+            <div class="{% if phrase.correct_categories %}feedback-correct{% else %}feedback-partial{% endif %} rounded-lg p-4 mb-6">
+                <p class="text-sm text-slate-700">{{ phrase.feedback_text }}</p>
+            </div>
+            <div class="mt-4">
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="feedback_shown" value="1">
+                    <button type="submit"
+                            class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                                   font-medium py-2.5 px-6 rounded-lg">
+                        Next
+                    </button>
+                </form>
+            </div>
+            {% else %}
+            <!-- Category checkboxes -->
+            <form method="post">
+                {% csrf_token %}
+                <p class="text-sm font-medium text-slate-500 mb-3">
+                    Check ALL categories that apply:
+                </p>
+                <div class="space-y-2">
+                    {% for slug, label in categories %}
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="{{ slug }}"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">{{ label }}</span>
+                    </label>
+                    {% endfor %}
+
+                    <div class="pt-2 border-t border-gray-100">
+                        <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                      hover:bg-gray-50 cursor-pointer transition-colors">
+                            <input type="checkbox" name="categories" value="none_unsure"
+                                   class="category-check mt-0.5">
+                            <span class="text-sm text-slate-500">None of these / I'm not sure</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit"
+                            class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                                   font-medium py-2.5 px-6 rounded-lg">
+                        Submit
+                    </button>
+                </div>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Category reference panel (desktop sidebar) -->
+    <div class="hidden lg:block lg:w-72 lg:flex-shrink-0 mt-6 lg:mt-0">
+        <div class="sticky top-4">
+            {% include "components/category_panel.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

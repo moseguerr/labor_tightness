@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Part 1 — Classification" current=display_num total=total_classify %}
+{% endblock %}
+
+{% block content %}
+<div class="lg:flex lg:gap-6">
+    <!-- Main content -->
+    <div class="flex-1">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
+            <div class="text-xs font-medium text-primary-600 uppercase tracking-wide mb-4">
+                Phrase {{ display_num }} of {{ total_classify }}
+            </div>
+
+            {% if phrase %}
+            <!-- Phrase in context -->
+            <div class="mb-6">
+                <p class="text-slate-700 leading-relaxed text-base">
+                    {{ phrase.context_text|safe }}
+                </p>
+            </div>
+
+            <!-- Category checkboxes -->
+            <form method="post">
+                {% csrf_token %}
+                <p class="text-sm font-medium text-slate-500 mb-3">
+                    Check ALL categories that apply:
+                </p>
+                <div class="space-y-2">
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="mission_values"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">The company's mission, values, or social/environmental impact</span>
+                    </label>
+
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="treats_well"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">The company treats employees well</span>
+                    </label>
+
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="pay_benefits"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">Pay, benefits, or financial perks</span>
+                    </label>
+
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="job_tasks"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">Job tasks, duties, or responsibilities</span>
+                    </label>
+
+                    <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                  hover:bg-gray-50 cursor-pointer transition-colors">
+                        <input type="checkbox" name="categories" value="job_requirements"
+                               class="category-check mt-0.5">
+                        <span class="text-sm text-slate-700">Job requirements or qualifications</span>
+                    </label>
+
+                    <div class="pt-2 border-t border-gray-100">
+                        <label class="category-label flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                                      hover:bg-gray-50 cursor-pointer transition-colors">
+                            <input type="checkbox" name="categories" value="none_unsure"
+                                   class="category-check mt-0.5">
+                            <span class="text-sm text-slate-500">None of these / I'm not sure</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button type="submit"
+                            class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                                   font-medium py-2.5 px-6 rounded-lg">
+                        Next
+                    </button>
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Category reference panel (desktop sidebar) -->
+    <div class="hidden lg:block lg:w-72 lg:flex-shrink-0 mt-6 lg:mt-0">
+        <div class="sticky top-4">
+            {% include "components/category_panel.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto text-center">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-4">Participation Withdrawn</h1>
+
+    <p class="text-slate-600 mb-6">
+        Your participation has been recorded as withdrawn. No data from your session will
+        be used in the study.
+    </p>
+
+    <p class="text-sm text-slate-500">
+        If you have questions, please contact Mariana Oseguera at
+        <a href="mailto:m.oseguera@georgetown.edu" class="text-primary-600 hover:text-primary-700">
+            m.oseguera@georgetown.edu</a>.
+    </p>
+
+    <div class="mt-8 pt-6 border-t border-gray-200">
+        <p class="text-sm text-slate-400">You may now close this browser window.</p>
+    </div>
+</div>
+{% endblock %}

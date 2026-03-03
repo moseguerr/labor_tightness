@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Part 2 — Rankings" current=dimension_num total=total_dimensions %}
+{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<style>
+    .posting-rank-card {
+        cursor: grab;
+        user-select: none;
+        transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+    }
+    .posting-rank-card:active { cursor: grabbing; }
+    .posting-rank-card:hover {
+        border-color: #4a7c8a;
+        box-shadow: 0 2px 8px rgba(74,124,138,0.12);
+    }
+    .posting-rank-card.sortable-ghost {
+        opacity: 0.4;
+        border-color: #4a7c8a;
+        background: #f0f9fb;
+    }
+    .posting-rank-card.sortable-chosen {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        transform: scale(1.01);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <!-- Prompt card -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 mb-5">
+        <div class="text-xs font-medium text-primary-600 uppercase tracking-wide mb-2">
+            Ranking {{ dimension_num }} of {{ total_dimensions }}
+        </div>
+        <h2 class="text-lg font-semibold text-slate-800 mb-1">
+            {% if dimension == 'attractiveness' %}Application Attractiveness
+            {% elif dimension == 'sincerity' %}Perceived Sincerity
+            {% elif dimension == 'employee_treatment' %}Employee Treatment
+            {% elif dimension == 'accept_lower_pay' %}Willingness to Accept Lower Pay
+            {% elif dimension == 'instrumentality' %}Perceived Instrumentality
+            {% endif %}
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed">{{ prompt }}</p>
+        <p class="text-xs text-slate-400 mt-3">Drag the postings to reorder them. 1 = top rank.</p>
+    </div>
+
+    <!-- Draggable posting cards -->
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="ranking_order" id="ranking-order-input" value="">
+
+        <div id="ranking-container" class="space-y-3">
+            {% for posting in postings %}
+            <div class="posting-rank-card bg-white rounded-xl border border-gray-200 overflow-hidden"
+                 data-company="{{ posting.company_name }}">
+
+                <!-- Rank badge + drag handle header -->
+                <div class="flex items-center gap-3 px-4 py-2.5 bg-gray-50 border-b border-gray-100">
+                    <div class="rank-number w-7 h-7 bg-primary-500 text-white rounded-full
+                                flex items-center justify-center text-xs font-bold flex-shrink-0">
+                        {{ forloop.counter }}
+                    </div>
+                    <h3 class="text-sm font-semibold text-slate-800 flex-1">{{ posting.company_name }}</h3>
+                    <span class="text-xs font-semibold text-slate-600">${{ posting.salary_amount|floatformat:"0" }}/yr</span>
+                    <div class="text-slate-300 flex-shrink-0 ml-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 8h16M4 16h16"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Posting summary body -->
+                <div class="px-4 py-3">
+                    <p class="text-xs text-slate-500 italic mb-2">{{ posting.company_tagline }}</p>
+                    <p class="text-xs text-slate-600 leading-relaxed">{{ posting.company_description|truncatewords:35 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Fallback for no-JS -->
+        <noscript>
+            <div class="space-y-3 mt-4">
+                {% for posting in postings %}
+                <div class="flex items-center gap-3">
+                    <select name="rank_{{ forloop.counter0 }}" class="rounded-lg border border-gray-300 px-3 py-2 text-sm">
+                        {% for i in "123456" %}
+                        <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="text-sm text-slate-700">{{ posting.company_name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </noscript>
+
+        <div class="mt-6">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-2.5 px-6 rounded-lg">
+                {% if dimension_num == total_dimensions %}
+                    Continue
+                {% else %}
+                    Next Ranking
+                {% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% load static %}
+<script src="{% static 'js/ranking.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-xl mx-auto">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10">
+        <h1 class="text-2xl font-semibold text-slate-800 mb-2">Welcome</h1>
+        <p class="text-slate-600 mb-8">
+            Thank you for participating in this research study. Before we begin, please select which
+            study session you will be completing today.
+        </p>
+
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+
+            <label class="block cursor-pointer">
+                <input type="radio" name="session_type" value="combined"
+                       class="sr-only peer" {% if preselected == 'combined' %}checked{% endif %}>
+                <div class="p-4 rounded-lg border-2 border-gray-200
+                            peer-checked:border-primary-500 peer-checked:bg-primary-50
+                            hover:border-gray-300 transition-colors">
+                    <p class="font-medium text-slate-700">Combined Session</p>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Complete both Part 1 (phrase classification) and Part 2 (job posting evaluation).
+                        Approximately 25 minutes.
+                    </p>
+                </div>
+            </label>
+
+            <label class="block cursor-pointer">
+                <input type="radio" name="session_type" value="study1"
+                       class="sr-only peer" {% if preselected == 'study1' %}checked{% endif %}>
+                <div class="p-4 rounded-lg border-2 border-gray-200
+                            peer-checked:border-primary-500 peer-checked:bg-primary-50
+                            hover:border-gray-300 transition-colors">
+                    <p class="font-medium text-slate-700">Part 1 Only</p>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Classify phrases from job postings. Approximately 10 minutes.
+                    </p>
+                </div>
+            </label>
+
+            <label class="block cursor-pointer">
+                <input type="radio" name="session_type" value="study2"
+                       class="sr-only peer" {% if preselected == 'study2' %}checked{% endif %}>
+                <div class="p-4 rounded-lg border-2 border-gray-200
+                            peer-checked:border-primary-500 peer-checked:bg-primary-50
+                            hover:border-gray-300 transition-colors">
+                    <p class="font-medium text-slate-700">Part 2 Only</p>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Evaluate fictional job postings. Approximately 10 minutes.
+                    </p>
+                </div>
+            </label>
+
+            <div class="pt-4">
+                <button type="submit"
+                        class="btn-primary w-full bg-primary-500 hover:bg-primary-700 text-white
+                               font-medium py-3 px-6 rounded-lg text-base">
+                    Begin Study
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
