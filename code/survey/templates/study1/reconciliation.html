@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
+    <h2 class="text-xl font-semibold text-slate-800 mb-2">Quick Follow-Up</h2>
+    <p class="text-slate-500 text-sm mb-6">
+        For a few phrases, you sorted them into different categories at different times.
+        We would like to understand why.
+    </p>
+
+    <form method="post" class="space-y-8">
+        {% csrf_token %}
+
+        {% for item in inconsistent_phrases %}
+        <div class="border border-gray-200 rounded-lg p-5">
+            <p class="text-base font-semibold text-slate-800 mb-1">
+                "{{ item.phrase_text }}"
+            </p>
+            <p class="text-sm text-slate-500 mb-4">
+                You sorted this into <strong>{{ item.first_label }}</strong>
+                and then <strong>{{ item.second_label }}</strong>.
+            </p>
+
+            <div class="space-y-2">
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="resolve_{{ item.phrase_id }}" value="mistake"
+                           class="mt-0.5" required
+                           onchange="document.getElementById('final_{{ item.phrase_id }}').style.display='block'">
+                    <span class="text-sm text-slate-700">
+                        It was a mistake &mdash; I meant to put it in one category
+                    </span>
+                </label>
+
+                <div id="final_{{ item.phrase_id }}" style="display: none;" class="ml-8 mt-2 mb-2 space-y-1">
+                    <p class="text-xs text-slate-500 mb-2">Which category should it be in?</p>
+                    {% for bucket_id, bucket_label in buckets %}
+                    <label class="flex items-center gap-2 p-2 rounded border border-gray-100
+                                  hover:bg-gray-50 cursor-pointer text-sm text-slate-700">
+                        <input type="radio" name="final_{{ item.phrase_id }}" value="{{ bucket_id }}">
+                        {{ bucket_label }}
+                    </label>
+                    {% endfor %}
+                </div>
+
+                <label class="flex items-start gap-3 p-3 rounded-lg border border-gray-200
+                              hover:bg-gray-50 cursor-pointer transition-colors">
+                    <input type="radio" name="resolve_{{ item.phrase_id }}" value="fits_both"
+                           class="mt-0.5"
+                           onchange="document.getElementById('final_{{ item.phrase_id }}').style.display='none'">
+                    <span class="text-sm text-slate-700">
+                        I think it genuinely fits both categories
+                    </span>
+                </label>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="pt-4">
+            <button type="submit"
+                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-8 rounded-lg text-base">
+                Continue
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function updateRankNumbers() {
-        container.querySelectorAll('.posting-rank-card').forEach(function(card, i) {
+        container.querySelectorAll('.posting-drag-card').forEach(function(card, i) {
             card.querySelector('.rank-number').textContent = (i + 1);
         });
     }
 
     function updateHiddenField() {
         const names = [];
-        container.querySelectorAll('.posting-rank-card').forEach(function(card) {
-            names.push(card.dataset.company);
+        container.querySelectorAll('.posting-drag-card').forEach(function(card) {
+            names.push(card.dataset.condition);
         });
         document.getElementById('ranking-order-input').value = names.join(',');
     }

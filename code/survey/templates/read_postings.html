@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 mb-8">
+        <h1 class="text-2xl font-semibold text-slate-800 mb-2">Review Job Postings</h1>
+
+        {% if is_study3 %}
+        <p class="text-slate-600 mb-4">
+            Imagine you are a <strong>hiring manager</strong> reviewing these postings.
+            Read each one carefully — you will be asked to evaluate and compare them next.
+        </p>
+        {% else %}
+        <p class="text-slate-600 mb-4">
+            Imagine you are a <strong>job seeker</strong> looking for a new position.
+            Read each posting carefully — you will be asked to evaluate and compare them next.
+        </p>
+        {% endif %}
+
+        <p class="text-sm text-slate-500">
+            There are {{ postings|length }} postings below. Please read all of them before continuing.
+        </p>
+    </div>
+
+    <!-- Postings -->
+    <div class="space-y-6">
+        {% for posting in postings %}
+            {% include "components/posting_card.html" with posting=posting wage_display="hidden" %}
+        {% endfor %}
+    </div>
+
+    <!-- Continue button -->
+    <div class="mt-8">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit"
+                    class="btn-primary w-full bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-6 rounded-lg text-base">
+                I've Read All Postings — Continue
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

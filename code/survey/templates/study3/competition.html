@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% block content_width %}max-w-6xl{% endblock %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Posting Review" current=2 total=2 %}
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    .card-tile {
+        cursor: pointer;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    .card-tile:hover {
+        border-color: #4a7c8a;
+        box-shadow: 0 2px 8px rgba(74,124,138,0.12);
+    }
+    .card-tile.selected {
+        border-color: #4a7c8a;
+        background: #f0f7f8;
+        box-shadow: 0 0 0 2px #4a7c8a;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Competition prompt -->
+<div class="bg-amber-50 rounded-xl border border-amber-200 p-5 mb-5">
+    <div class="flex items-start gap-3">
+        <svg class="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+        </svg>
+        <div>
+            <h2 class="text-base font-semibold text-amber-800 mb-1">Competition Update</h2>
+            <p class="text-sm text-amber-700 leading-relaxed">
+                HR has just flagged that several <strong>strong candidates</strong> for these types of roles
+                are already well into hiring processes at other firms. You have some flexibility to
+                strengthen your posting at <strong>{{ posting.company_name }}</strong>.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Original selection summary -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-5">
+    <h3 class="text-sm font-semibold text-slate-700 mb-2">Your original additions:</h3>
+    <div class="space-y-1.5">
+        {% for card in original_cards %}
+        <div class="text-sm text-slate-600 flex items-start gap-2">
+            <span class="text-primary-500 font-bold">{{ forloop.counter }}.</span>
+            <span>{{ card.card_text }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+    <!-- Posting (left, 2 cols) -->
+    <div class="lg:col-span-2">
+        <div class="sticky top-4">
+            {% include "components/posting_card.html" with posting=posting wage_display=wage_display %}
+        </div>
+    </div>
+
+    <!-- Decision (right, 3 cols) -->
+    <div class="lg:col-span-3">
+        <form method="post" id="competition-form">
+            {% csrf_token %}
+            <input type="hidden" name="cards_selected" id="cards-selected-input" value="">
+            <input type="hidden" name="response_time_ms" id="response-time-input" value="">
+            <input type="hidden" name="would_change" id="would-change-input" value="">
+
+            <!-- Yes/No question -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-4">
+                <p class="text-sm font-semibold text-slate-700 mb-3">
+                    Would you make a change to this posting?
+                </p>
+                <div class="flex gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="change_choice" value="yes"
+                               class="w-4 h-4 text-primary-500 focus:ring-primary-500">
+                        <span class="text-sm text-slate-700">Yes</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="radio" name="change_choice" value="no"
+                               class="w-4 h-4 text-primary-500 focus:ring-primary-500">
+                        <span class="text-sm text-slate-700">No</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card grid (hidden until "Yes" selected) -->
+            <div id="card-section" class="hidden">
+                <p class="text-sm font-medium text-slate-600 mb-3">
+                    What is the <strong>single most important</strong> thing you would add or strengthen?
+                </p>
+
+                <div class="space-y-2" id="card-grid">
+                    {% for card in cards %}
+                    <div class="card-tile bg-white rounded-lg border border-gray-200 p-3 flex items-start gap-3"
+                         data-card-id="{{ card.card_id }}">
+                        <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex-shrink-0 mt-0.5 flex items-center justify-center" data-radio>
+                            <div class="w-2.5 h-2.5 rounded-full bg-primary-500 hidden" data-dot></div>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">{{ card.card_text }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="mt-5">
+                <button type="submit" id="submit-btn"
+                        class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                               font-medium py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed"
+                        disabled>
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    const startTime = Date.now();
+    let selectedCard = null;
+    let wouldChange = null;
+
+    const radios = document.querySelectorAll('input[name="change_choice"]');
+    const cardSection = document.getElementById('card-section');
+    const tiles = document.querySelectorAll('.card-tile');
+    const submitBtn = document.getElementById('submit-btn');
+    const form = document.getElementById('competition-form');
+    const cardsInput = document.getElementById('cards-selected-input');
+    const timeInput = document.getElementById('response-time-input');
+    const wouldChangeInput = document.getElementById('would-change-input');
+
+    function updateSubmitState() {
+        if (wouldChange === 'no') {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else if (wouldChange === 'yes' && selectedCard) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    // Yes/No toggle
+    radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            wouldChange = radio.value;
+            if (wouldChange === 'yes') {
+                cardSection.classList.remove('hidden');
+            } else {
+                cardSection.classList.add('hidden');
+                // Clear card selection when switching to No
+                selectedCard = null;
+                tiles.forEach(t => {
+                    t.classList.remove('selected');
+                    t.querySelector('[data-dot]').classList.add('hidden');
+                    t.querySelector('[data-radio]').classList.remove('border-primary-500');
+                    t.querySelector('[data-radio]').classList.add('border-gray-300');
+                });
+            }
+            updateSubmitState();
+        });
+    });
+
+    // Card selection (single)
+    tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+            const id = tile.dataset.cardId;
+
+            // Deselect all
+            tiles.forEach(t => {
+                t.classList.remove('selected');
+                t.querySelector('[data-dot]').classList.add('hidden');
+                t.querySelector('[data-radio]').classList.remove('border-primary-500');
+                t.querySelector('[data-radio]').classList.add('border-gray-300');
+            });
+
+            // Select this one
+            selectedCard = id;
+            tile.classList.add('selected');
+            tile.querySelector('[data-dot]').classList.remove('hidden');
+            tile.querySelector('[data-radio]').classList.add('border-primary-500');
+            tile.querySelector('[data-radio]').classList.remove('border-gray-300');
+
+            updateSubmitState();
+        });
+    });
+
+    form.addEventListener('submit', (e) => {
+        wouldChangeInput.value = wouldChange || '';
+        cardsInput.value = selectedCard || '';
+        timeInput.value = Date.now() - startTime;
+    });
+
+    updateSubmitState();
+})();
+</script>
+{% endblock %}

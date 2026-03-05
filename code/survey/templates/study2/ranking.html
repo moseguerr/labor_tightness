@@ -1,117 +1,135 @@
 {% extends "base.html" %}
 
+{% block content_width %}max-w-6xl{% endblock %}
+
 {% block progress_bar %}
-{% include "components/progress_bar.html" with section="Part 2 — Rankings" current=dimension_num total=total_dimensions %}
+{% include "components/progress_bar.html" with section="Rankings" current=dimension_num total=total_dimensions %}
 {% endblock %}
 
 {% block extra_head %}
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <style>
-    .posting-rank-card {
+    /* Draggable posting cards */
+    .posting-drag-card {
         cursor: grab;
         user-select: none;
-        transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+        transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
     }
-    .posting-rank-card:active { cursor: grabbing; }
-    .posting-rank-card:hover {
+    .posting-drag-card:active { cursor: grabbing; }
+    .posting-drag-card:hover {
         border-color: #4a7c8a;
-        box-shadow: 0 2px 8px rgba(74,124,138,0.12);
+        box-shadow: 0 4px 12px rgba(74,124,138,0.15);
     }
-    .posting-rank-card.sortable-ghost {
-        opacity: 0.4;
-        border-color: #4a7c8a;
+    .posting-drag-card.sortable-ghost {
+        opacity: 0.3;
+        border: 2px dashed #4a7c8a;
         background: #f0f9fb;
     }
-    .posting-rank-card.sortable-chosen {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        transform: scale(1.01);
+    .posting-drag-card.sortable-chosen {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        transform: scale(1.02);
+        z-index: 10;
+    }
+    /* Rank badge in header */
+    .rank-number {
+        background: white;
+        color: #3d6873;
+        font-weight: 700;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto">
-    <!-- Prompt card -->
-    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 sm:p-6 mb-5">
-        <div class="text-xs font-medium text-primary-600 uppercase tracking-wide mb-2">
+<!-- Dimension prompt -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-5">
+    <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-medium text-primary-600 uppercase tracking-wide">
             Ranking {{ dimension_num }} of {{ total_dimensions }}
+        </span>
+    </div>
+    <h2 class="text-lg font-semibold text-slate-800 mb-1">{{ dimension.label }}</h2>
+    <p class="text-slate-600 text-sm leading-relaxed">{{ dimension.prompt }}</p>
+    {% if is_first_dimension %}
+    <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 mt-3">
+        <p class="text-xs text-slate-700">
+            <strong>How this works:</strong> Drag and drop the job postings below to rank them.
+            The top-left position is rank 1 (highest). You will complete {{ total_dimensions }}
+            rankings in total, each on a different dimension.
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Draggable posting grid: 2x2 -->
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="ranking_order" id="ranking-order-input" value="">
+
+    <div id="ranking-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for posting in postings %}
+        <div class="posting-drag-card bg-white rounded-xl border border-gray-200 overflow-hidden"
+             data-condition="{{ posting.signal_type }}">
+
+            <!-- Company header with rank -->
+            <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-2.5 flex items-center gap-2.5">
+                <span class="rank-number w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                    {{ forloop.counter }}
+                </span>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-bold text-white truncate">{{ posting.company_name }}</h3>
+                    <span class="text-xs text-primary-100">{{ posting.job_title }}</span>
+                </div>
+            </div>
+
+            <div class="px-4 py-3 space-y-2 text-xs text-slate-600 leading-relaxed max-h-[24rem] overflow-y-auto">
+                <p>{{ posting.company_intro }}</p>
+
+                <div>
+                    <h4 class="font-semibold text-slate-700 uppercase tracking-wide text-[10px] mb-0.5">The Role</h4>
+                    <p>{{ posting.role_description }}</p>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-slate-700 uppercase tracking-wide text-[10px] mb-0.5">{{ posting.signal_section_title }}</h4>
+                    <p>{{ posting.signal_section_text }}</p>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-slate-700 uppercase tracking-wide text-[10px] mb-0.5">Requirements</h4>
+                    <p>{{ posting.requirements_text }}</p>
+                </div>
+
+                <!-- Salary (only shown when wages are visible for this dimension) -->
+                {% if wage_display == "visible" %}
+                <div class="bg-gray-50 rounded p-2 border border-gray-100">
+                    <span class="font-semibold text-slate-700">Salary: </span>
+                    <span class="font-bold text-slate-800">{{ posting.salary_text_for_participant }}/yr</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Drag handle indicator -->
+            <div class="px-4 py-1.5 bg-gray-50 border-t border-gray-100 text-center">
+                <svg class="w-5 h-5 text-slate-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
+                </svg>
+            </div>
         </div>
-        <h2 class="text-lg font-semibold text-slate-800 mb-1">
-            {% if dimension == 'attractiveness' %}Application Attractiveness
-            {% elif dimension == 'sincerity' %}Perceived Sincerity
-            {% elif dimension == 'employee_treatment' %}Employee Treatment
-            {% elif dimension == 'accept_lower_pay' %}Willingness to Accept Lower Pay
-            {% elif dimension == 'instrumentality' %}Perceived Instrumentality
-            {% endif %}
-        </h2>
-        <p class="text-slate-600 text-sm leading-relaxed">{{ prompt }}</p>
-        <p class="text-xs text-slate-400 mt-3">Drag the postings to reorder them. 1 = top rank.</p>
+        {% endfor %}
     </div>
 
-    <!-- Draggable posting cards -->
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="ranking_order" id="ranking-order-input" value="">
-
-        <div id="ranking-container" class="space-y-3">
-            {% for posting in postings %}
-            <div class="posting-rank-card bg-white rounded-xl border border-gray-200 overflow-hidden"
-                 data-company="{{ posting.company_name }}">
-
-                <!-- Rank badge + drag handle header -->
-                <div class="flex items-center gap-3 px-4 py-2.5 bg-gray-50 border-b border-gray-100">
-                    <div class="rank-number w-7 h-7 bg-primary-500 text-white rounded-full
-                                flex items-center justify-center text-xs font-bold flex-shrink-0">
-                        {{ forloop.counter }}
-                    </div>
-                    <h3 class="text-sm font-semibold text-slate-800 flex-1">{{ posting.company_name }}</h3>
-                    <span class="text-xs font-semibold text-slate-600">${{ posting.salary_amount|floatformat:"0" }}/yr</span>
-                    <div class="text-slate-300 flex-shrink-0 ml-1">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 8h16M4 16h16"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Posting summary body -->
-                <div class="px-4 py-3">
-                    <p class="text-xs text-slate-500 italic mb-2">{{ posting.company_tagline }}</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">{{ posting.company_description|truncatewords:35 }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Fallback for no-JS -->
-        <noscript>
-            <div class="space-y-3 mt-4">
-                {% for posting in postings %}
-                <div class="flex items-center gap-3">
-                    <select name="rank_{{ forloop.counter0 }}" class="rounded-lg border border-gray-300 px-3 py-2 text-sm">
-                        {% for i in "123456" %}
-                        <option value="{{ i }}">{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                    <span class="text-sm text-slate-700">{{ posting.company_name }}</span>
-                </div>
-                {% endfor %}
-            </div>
-        </noscript>
-
-        <div class="mt-6">
-            <button type="submit"
-                    class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
-                           font-medium py-2.5 px-6 rounded-lg">
-                {% if dimension_num == total_dimensions %}
-                    Continue
-                {% else %}
-                    Next Ranking
-                {% endif %}
-            </button>
-        </div>
-    </form>
-</div>
+    <div class="mt-6">
+        <button type="submit"
+                class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                       font-medium py-2.5 px-6 rounded-lg">
+            {% if dimension_num == total_dimensions %}
+                Finish Rankings
+            {% else %}
+                Next Ranking
+            {% endif %}
+        </button>
+    </div>
+</form>
 {% endblock %}
 
 {% block extra_js %}

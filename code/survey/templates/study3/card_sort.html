@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block content_width %}max-w-6xl{% endblock %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Posting Review" current=1 total=2 %}
+{% endblock %}
+
+{% block extra_head %}
+<style>
+    .card-tile {
+        cursor: pointer;
+        transition: all 0.2s;
+        user-select: none;
+    }
+    .card-tile:hover {
+        border-color: #4a7c8a;
+        box-shadow: 0 2px 8px rgba(74,124,138,0.12);
+    }
+    .card-tile.selected {
+        border-color: #4a7c8a;
+        background: #f0f7f8;
+        box-shadow: 0 0 0 2px #4a7c8a;
+    }
+    .card-tile.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    .selection-badge {
+        background: #4a7c8a;
+        color: white;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Instruction -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-5">
+    <h2 class="text-lg font-semibold text-slate-800 mb-2">Strengthen This Posting</h2>
+    <p class="text-sm text-slate-600 leading-relaxed">
+        Imagine you are a hiring manager reviewing the posting below. Your goal is to make it
+        more attractive to strong candidates. From the options listed, select the
+        <strong>3 things</strong> you would most want to add or strengthen in this posting
+        for <strong>{{ posting.company_name }}</strong>.
+    </p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+    <!-- Posting (left, 2 cols) -->
+    <div class="lg:col-span-2">
+        <div class="sticky top-4">
+            {% include "components/posting_card.html" with posting=posting wage_display=wage_display %}
+        </div>
+    </div>
+
+    <!-- Cards (right, 3 cols) -->
+    <div class="lg:col-span-3">
+        <form method="post" id="card-sort-form">
+            {% csrf_token %}
+            <input type="hidden" name="cards_selected" id="cards-selected-input" value="">
+            <input type="hidden" name="selection_order" id="selection-order-input" value="">
+            <input type="hidden" name="response_time_ms" id="response-time-input" value="">
+
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-sm font-medium text-slate-600">
+                    Selected: <span id="selection-count" class="font-bold text-primary-600">0</span> of 3
+                </span>
+            </div>
+
+            <div class="space-y-2" id="card-grid">
+                {% for card in cards %}
+                <div class="card-tile bg-white rounded-lg border border-gray-200 p-3 flex items-start gap-3"
+                     data-card-id="{{ card.card_id }}">
+                    <div class="selection-badge hidden flex-shrink-0" data-badge>
+                        <span></span>
+                    </div>
+                    <div class="w-5 h-5 rounded border-2 border-gray-300 flex-shrink-0 mt-0.5 flex items-center justify-center" data-checkbox>
+                        <svg class="w-3.5 h-3.5 text-white hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <p class="text-sm text-slate-700 leading-relaxed">{{ card.card_text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="mt-5">
+                <button type="submit" id="submit-btn"
+                        class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                               font-medium py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed"
+                        disabled>
+                    Continue
+                </button>
+                <p class="text-xs text-slate-400 mt-1">Select exactly 3 items to continue.</p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    const MAX = 3;
+    const selected = [];
+    const selectionOrder = [];
+    const startTime = Date.now();
+    const tiles = document.querySelectorAll('.card-tile');
+    const countEl = document.getElementById('selection-count');
+    const submitBtn = document.getElementById('submit-btn');
+    const cardsInput = document.getElementById('cards-selected-input');
+    const orderInput = document.getElementById('selection-order-input');
+    const timeInput = document.getElementById('response-time-input');
+
+    function updateUI() {
+        const count = selected.length;
+        countEl.textContent = count;
+
+        tiles.forEach(tile => {
+            const id = tile.dataset.cardId;
+            const idx = selected.indexOf(id);
+            const badge = tile.querySelector('[data-badge]');
+            const checkbox = tile.querySelector('[data-checkbox]');
+            const checkSvg = checkbox.querySelector('svg');
+
+            if (idx >= 0) {
+                tile.classList.add('selected');
+                tile.classList.remove('disabled');
+                badge.classList.remove('hidden');
+                badge.querySelector('span').textContent = idx + 1;
+                checkbox.classList.add('bg-primary-500', 'border-primary-500');
+                checkbox.classList.remove('border-gray-300');
+                checkSvg.classList.remove('hidden');
+            } else {
+                tile.classList.remove('selected');
+                badge.classList.add('hidden');
+                checkbox.classList.remove('bg-primary-500', 'border-primary-500');
+                checkbox.classList.add('border-gray-300');
+                checkSvg.classList.add('hidden');
+                if (count >= MAX) {
+                    tile.classList.add('disabled');
+                } else {
+                    tile.classList.remove('disabled');
+                }
+            }
+        });
+
+        // Require exactly 3 for hiring manager
+        if (count === MAX) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+            const id = tile.dataset.cardId;
+            const idx = selected.indexOf(id);
+            if (idx >= 0) {
+                selected.splice(idx, 1);
+                const oIdx = selectionOrder.indexOf(id);
+                if (oIdx >= 0) selectionOrder.splice(oIdx, 1);
+            } else if (selected.length < MAX) {
+                selected.push(id);
+                selectionOrder.push(id);
+            }
+            updateUI();
+        });
+    });
+
+    document.getElementById('card-sort-form').addEventListener('submit', (e) => {
+        cardsInput.value = selected.join(',');
+        orderInput.value = selectionOrder.join(',');
+        timeInput.value = Date.now() - startTime;
+    });
+
+    updateUI();
+})();
+</script>
+{% endblock %}

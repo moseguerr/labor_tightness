@@ -1,14 +1,16 @@
+import json
 import random
-from django.shortcuts import redirect, get_object_or_404
+from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.views import View
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 from django.utils import timezone
-from django.http import HttpResponse
 
 from .models import (
-    Participant, Phrase, Study1Response, Study1PostTask,
-    JobPosting, PostingViewRecord, Study2ManipulationCheck,
-    Study2Ranking, Study2PostRanking, IndividualDifferences, Demographics,
+    Participant, Posting, Demographics, IndividualDifferences,
+    RankingResponse, CardSortCard, CardSortResponse,
+    HiringManagerCard, HiringManagerResponse,
+    BucketSortPhrase, BucketSortResponse, BucketSortReconciliation,
 )
 
 
@@ -17,10 +19,9 @@ from .models import (
 # ---------------------------------------------------------------------------
 
 class SurveyFlowMixin:
-    """
-    Mixin that manages participant session state and enforces linear flow.
-    """
-    step_name = None
+    """Manages participant session state and enforces linear flow."""
+    requires_participant = True
+    requires_consent = True
 
     def get_participant(self):
         participant_id = self.request.session.get('participant_id')
@@ -32,15 +33,18 @@ class SurveyFlowMixin:
             return None
 
     def dispatch(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        # Landing and consent don't require a participant yet
-        if self.step_name in ('landing', 'consent', 'withdraw'):
+        if not self.requires_participant:
             return super().dispatch(request, *args, **kwargs)
+        participant = self.get_participant()
         if not participant:
             return redirect('core:landing')
-        if not participant.consented:
+        if self.requires_consent and not participant.consented:
             return redirect('core:consent')
         return super().dispatch(request, *args, **kwargs)
+
+    def update_status(self, participant, status):
+        participant.status = status
+        participant.save(update_fields=['status'])
 
 
 # ---------------------------------------------------------------------------
@@ -49,27 +53,48 @@ class SurveyFlowMixin:
 
 class LandingView(SurveyFlowMixin, TemplateView):
     template_name = 'landing.html'
-    step_name = 'landing'
+    requires_participant = False
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        # Pre-select session type from URL param if provided
-        ctx['preselected'] = self.request.GET.get('session_type', '')
+        ctx['preselected_study'] = self.request.GET.get('study', '')
         return ctx
 
     def post(self, request, *args, **kwargs):
-        session_type = request.POST.get('session_type')
-        if session_type not in ('study1', 'study2', 'combined'):
+        study = request.POST.get('study_assignment')
+        if study not in ('study2', 'study3'):
             return self.get(request, *args, **kwargs)
 
-        external_id = request.GET.get('external_id', '')
+        prolific_id = request.GET.get('PROLIFIC_PID', '')
+        wage_arm = random.choice(['A', 'B'])
+        posting_order_seed = random.randint(1, 999999)
+
+        # Random occupation pool
+        occupation_pool = random.choice([
+            'business_analyst', 'financial_analyst', 'marketing_analyst',
+        ])
+
+        # Wage counterbalancing: randomly pick 2 of 4 signal types to get high wages
+        signal_types = ['purpose_innovation', 'purpose_social', 'good_employer', 'neutral']
+        high_wage_signals = random.sample(signal_types, 2)
+        wage_counterbalance = ','.join(high_wage_signals)
 
         participant = Participant(
-            session_type=session_type,
-            external_id=external_id,
+            study_assignment=study,
+            wage_arm=wage_arm,
+            prolific_id=prolific_id,
+            posting_order_seed=posting_order_seed,
+            occupation_pool=occupation_pool,
+            wage_counterbalance=wage_counterbalance,
             user_agent=request.META.get('HTTP_USER_AGENT', ''),
         )
         participant.save()
+
+        # Assign random posting for card sort (1 of 4 in their pool)
+        pool_postings = list(Posting.objects.filter(occupation_pool=occupation_pool))
+        if pool_postings:
+            participant.card_sort_posting = random.choice(pool_postings)
+            participant.save(update_fields=['card_sort_posting'])
 
         request.session['participant_id'] = str(participant.id)
         return redirect('core:consent')
@@ -77,7 +102,7 @@ class LandingView(SurveyFlowMixin, TemplateView):
 
 class ConsentView(SurveyFlowMixin, TemplateView):
     template_name = 'consent.html'
-    step_name = 'consent'
+    requires_consent = False
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
@@ -87,432 +112,480 @@ class ConsentView(SurveyFlowMixin, TemplateView):
         if request.POST.get('consent') == 'agree':
             participant.consented = True
             participant.consent_timestamp = timezone.now()
+            participant.status = 'consented'
             participant.save()
+            # Route to the study-specific flow
+            return redirect('core:read_postings')
 
-            if participant.session_type in ('study1', 'combined'):
-                return redirect('core:study1_instructions')
-            else:
-                return redirect('core:study2_instructions')
-
-        # Did not consent — withdraw
         return redirect('core:withdraw')
 
 
 # ---------------------------------------------------------------------------
-# Study 1
+# Posting reading (shared entry point for Study 2 & 3)
 # ---------------------------------------------------------------------------
 
-class Study1InstructionsView(SurveyFlowMixin, TemplateView):
-    template_name = 'study1/instructions.html'
-    step_name = 'study1_instructions'
+class ReadPostingsView(SurveyFlowMixin, TemplateView):
+    template_name = 'read_postings.html'
 
     def get(self, request, *args, **kwargs):
         participant = self.get_participant()
-        if participant and 'phrase_sequence' not in request.session:
-            self._init_phrase_sequence(participant, request)
-        participant.status = 'in_study1'
-        participant.save()
+        self.update_status(participant, 'reading')
         return super().get(request, *args, **kwargs)
 
-    def _init_phrase_sequence(self, participant, request):
-        """Build the phrase sequence: practice + shuffled main + interspersed attention."""
-        seed = random.randint(1, 999999)
-        participant.phrase_seed = seed
-        participant.save()
-        rng = random.Random(seed)
-
-        practice_ids = list(
-            Phrase.objects.filter(item_type='practice', is_active=True)
-            .order_by('display_order').values_list('id', flat=True))
-        attention_ids = list(
-            Phrase.objects.filter(item_type='attention', is_active=True)
-            .order_by('display_order').values_list('id', flat=True))
-        main_ids = list(
-            Phrase.objects.filter(item_type='main', is_active=True)
-            .values_list('id', flat=True))
-
-        # Sample 40 main items from pool
-        sample_size = min(40, len(main_ids))
-        sampled = rng.sample(main_ids, sample_size)
-        rng.shuffle(sampled)
-
-        # Intersperse attention checks at roughly even intervals
-        sequence = list(practice_ids)  # practice first (fixed order)
-        chunk_size = max(1, len(sampled) // (len(attention_ids) + 1))
-        attn_idx = 0
-        for i, phrase_id in enumerate(sampled):
-            sequence.append(phrase_id)
-            if (i + 1) % chunk_size == 0 and attn_idx < len(attention_ids):
-                sequence.append(attention_ids[attn_idx])
-                attn_idx += 1
-        # Append remaining attention checks
-        while attn_idx < len(attention_ids):
-            sequence.append(attention_ids[attn_idx])
-            attn_idx += 1
-
-        request.session['phrase_sequence'] = sequence
-        request.session['current_study1_item'] = 0
-
-
-CATEGORY_CHOICES = [
-    ('mission_values', "The company's mission, values, or social/environmental impact"),
-    ('treats_well', 'The company treats employees well'),
-    ('pay_benefits', 'Pay, benefits, or financial perks'),
-    ('job_tasks', 'Job tasks, duties, or responsibilities'),
-    ('job_requirements', 'Job requirements or qualifications'),
-]
-
-
-class Study1PracticeView(SurveyFlowMixin, TemplateView):
-    template_name = 'study1/practice.html'
-    step_name = 'study1_practice'
-
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['categories'] = CATEGORY_CHOICES
-        item_num = self.kwargs['item_num']
-        sequence = self.request.session.get('phrase_sequence', [])
-        if item_num < len(sequence):
-            phrase = Phrase.objects.get(id=sequence[item_num])
-            ctx['phrase'] = phrase
-            ctx['item_num'] = item_num
-            ctx['total_items'] = len(sequence)
-            ctx['is_practice'] = phrase.item_type == 'practice'
-        return ctx
-
-    def post(self, request, *args, **kwargs):
-        item_num = self.kwargs['item_num']
-        sequence = request.session.get('phrase_sequence', [])
         participant = self.get_participant()
-
-        if item_num < len(sequence):
-            phrase = Phrase.objects.get(id=sequence[item_num])
-
-            # Save response
-            response, _ = Study1Response.objects.get_or_create(
-                participant=participant, phrase=phrase,
-                defaults={'presentation_order': item_num + 1})
-            response.selected_mission_values = 'mission_values' in request.POST.getlist('categories')
-            response.selected_treats_well = 'treats_well' in request.POST.getlist('categories')
-            response.selected_pay_benefits = 'pay_benefits' in request.POST.getlist('categories')
-            response.selected_job_tasks = 'job_tasks' in request.POST.getlist('categories')
-            response.selected_job_requirements = 'job_requirements' in request.POST.getlist('categories')
-            response.selected_none_unsure = 'none_unsure' in request.POST.getlist('categories')
-            response.responded_at = timezone.now()
-
-            # Check correctness for attention checks
-            if phrase.item_type == 'attention':
-                correct_set = set(phrase.correct_categories)
-                selected_set = set(response.selected_categories)
-                response.is_correct = (correct_set == selected_set)
-                if response.is_correct:
-                    participant.attention_checks_passed += 1
-                else:
-                    participant.attention_checks_failed += 1
-                if participant.attention_checks_failed >= 2:
-                    participant.flagged_for_exclusion = True
-                participant.save()
-
-            response.save()
-
-        # Determine next item
-        next_num = item_num + 1
-        request.session['current_study1_item'] = next_num
-
-        if next_num >= len(sequence):
-            return redirect('core:study1_post_task')
-
-        next_phrase = Phrase.objects.get(id=sequence[next_num])
-        if next_phrase.item_type == 'practice':
-            return redirect('core:study1_practice', item_num=next_num)
-
-        # Show feedback for practice items before advancing
-        if item_num < len(sequence):
-            current_phrase = Phrase.objects.get(id=sequence[item_num])
-            if current_phrase.item_type == 'practice' and 'feedback_shown' not in request.POST:
-                # Re-render with feedback
-                return self.render_to_response(self.get_context_data(
-                    show_feedback=True, item_num=item_num))
-
-        return redirect('core:study1_classify', item_num=next_num)
-
-
-class Study1ClassifyView(SurveyFlowMixin, TemplateView):
-    template_name = 'study1/classify.html'
-    step_name = 'study1_classify'
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        item_num = self.kwargs['item_num']
-        sequence = self.request.session.get('phrase_sequence', [])
-        practice_count = Phrase.objects.filter(item_type='practice', is_active=True).count()
-
-        if item_num < len(sequence):
-            phrase = Phrase.objects.get(id=sequence[item_num])
-            ctx['phrase'] = phrase
-            ctx['item_num'] = item_num
-            ctx['display_num'] = item_num - practice_count + 1  # Don't count practice in display
-            ctx['total_classify'] = len(sequence) - practice_count
-            ctx['total_items'] = len(sequence)
-            ctx['progress_pct'] = int((item_num / len(sequence)) * 100)
-        return ctx
-
-    def post(self, request, *args, **kwargs):
-        item_num = self.kwargs['item_num']
-        sequence = request.session.get('phrase_sequence', [])
-        participant = self.get_participant()
-
-        if item_num < len(sequence):
-            phrase = Phrase.objects.get(id=sequence[item_num])
-            categories = request.POST.getlist('categories')
-
-            response, _ = Study1Response.objects.get_or_create(
-                participant=participant, phrase=phrase,
-                defaults={'presentation_order': item_num + 1})
-            response.selected_mission_values = 'mission_values' in categories
-            response.selected_treats_well = 'treats_well' in categories
-            response.selected_pay_benefits = 'pay_benefits' in categories
-            response.selected_job_tasks = 'job_tasks' in categories
-            response.selected_job_requirements = 'job_requirements' in categories
-            response.selected_none_unsure = 'none_unsure' in categories
-            response.responded_at = timezone.now()
-
-            if phrase.item_type == 'attention':
-                correct_set = set(phrase.correct_categories)
-                selected_set = set(response.selected_categories)
-                response.is_correct = (correct_set == selected_set)
-                if response.is_correct:
-                    participant.attention_checks_passed += 1
-                else:
-                    participant.attention_checks_failed += 1
-                if participant.attention_checks_failed >= 2:
-                    participant.flagged_for_exclusion = True
-                participant.save()
-
-            response.save()
-
-        next_num = item_num + 1
-        request.session['current_study1_item'] = next_num
-
-        if next_num >= len(sequence):
-            return redirect('core:study1_post_task')
-        return redirect('core:study1_classify', item_num=next_num)
-
-
-class Study1PostTaskView(SurveyFlowMixin, TemplateView):
-    template_name = 'study1/post_task.html'
-    step_name = 'study1_post_task'
-
-    def post(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        Study1PostTask.objects.create(
-            participant=participant,
-            confidence=int(request.POST.get('confidence', 4)),
-            confusion_text=request.POST.get('confusion_text', ''),
-            familiarity=int(request.POST.get('familiarity', 4)),
-        )
-        if participant.session_type == 'combined':
-            return redirect('core:transition')
-        return redirect('core:demographics')
-
-
-# ---------------------------------------------------------------------------
-# Transition (combined session)
-# ---------------------------------------------------------------------------
-
-class TransitionView(SurveyFlowMixin, TemplateView):
-    template_name = 'transition.html'
-    step_name = 'transition'
-
-
-# ---------------------------------------------------------------------------
-# Study 2
-# ---------------------------------------------------------------------------
-
-class Study2InstructionsView(SurveyFlowMixin, TemplateView):
-    template_name = 'study2/instructions.html'
-    step_name = 'study2_instructions'
-
-    def get(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        if participant and 'posting_sequence' not in request.session:
-            self._init_posting_sequence(participant, request)
-        participant.status = 'in_study2'
-        participant.save()
-        return super().get(request, *args, **kwargs)
-
-    def _init_posting_sequence(self, participant, request):
-        seed = random.randint(1, 999999)
-        participant.posting_order_seed = seed
-        participant.save()
-        rng = random.Random(seed)
-
-        posting_ids = list(
-            JobPosting.objects.values_list('id', flat=True))
-        rng.shuffle(posting_ids)
-
-        request.session['posting_sequence'] = posting_ids
-        request.session['current_posting'] = 0
-
-
-class Study2PostingPageView(SurveyFlowMixin, TemplateView):
-    template_name = 'study2/posting.html'
-    step_name = 'study2_posting'
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        posting_num = self.kwargs['posting_num']
-        sequence = self.request.session.get('posting_sequence', [])
-
-        if posting_num < len(sequence):
-            posting = JobPosting.objects.get(id=sequence[posting_num])
-            ctx['posting'] = posting
-            ctx['posting_num'] = posting_num
-            ctx['total_postings'] = len(sequence)
-            ctx['progress_pct'] = int(((posting_num + 1) / len(sequence)) * 100)
-        return ctx
-
-    def post(self, request, *args, **kwargs):
-        posting_num = self.kwargs['posting_num']
-        sequence = request.session.get('posting_sequence', [])
-        participant = self.get_participant()
-
-        if posting_num < len(sequence):
-            posting = JobPosting.objects.get(id=sequence[posting_num])
-            PostingViewRecord.objects.get_or_create(
-                participant=participant, posting=posting,
-                defaults={
-                    'presentation_order': posting_num + 1,
-                    'viewed_at': timezone.now(),
-                })
-
-        next_num = posting_num + 1
-        request.session['current_posting'] = next_num
-
-        if next_num >= len(sequence):
-            return redirect('core:manipulation_checks')
-        return redirect('core:study2_posting', posting_num=next_num)
-
-
-class ManipulationChecksView(SurveyFlowMixin, TemplateView):
-    template_name = 'study2/manipulation_checks.html'
-    step_name = 'manipulation_checks'
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['companies'] = list(
-            JobPosting.objects.values_list('company_name', flat=True))
+        posting_ids = participant.get_posting_order()
+        ctx['postings'] = [Posting.objects.get(id=pid) for pid in posting_ids]
+        ctx['participant'] = participant
+        ctx['is_study3'] = participant.study_assignment == 'study3'
         return ctx
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
-        Study2ManipulationCheck.objects.create(
-            participant=participant,
-            most_mission=request.POST.get('most_mission', ''),
-            most_workplace=request.POST.get('most_workplace', ''),
-            highest_salary=request.POST.get('highest_salary', ''),
-            job_title_check=request.POST.get('job_title_check', ''),
-        )
-        return redirect('core:post_ranking')
+        # Both study paths go to rankings for now (Study 2)
+        # Study 3/4 competition tasks will be added before this later
+        return redirect('core:study2_ranking', dimension_num=1)
 
+
+# ---------------------------------------------------------------------------
+# Study 2: Ranking Task (7 dimensions)
+# ---------------------------------------------------------------------------
 
 RANKING_DIMENSIONS = [
-    'attractiveness', 'sincerity', 'employee_treatment',
-    'accept_lower_pay', 'instrumentality',
+    {
+        'slug': 'perceived_pay',
+        'label': 'Perceived Pay',
+        'prompt': 'Which of these employers do you think pays more? '
+                  'Drag the postings to rank them from highest expected pay (1) to lowest (4).',
+        'wages_always_hidden': True,
+    },
+    {
+        'slug': 'employer_quality',
+        'label': 'Employer Quality',
+        'prompt': 'Which of these do you think would be a better employer? '
+                  'Rank from best (1) to worst (4).',
+        'wages_always_hidden': False,
+    },
+    {
+        'slug': 'challenging_rewarding',
+        'label': 'Challenging & Rewarding Work',
+        'prompt': 'Where do you think the work would be most challenging and rewarding? '
+                  'Rank from most (1) to least (4).',
+        'wages_always_hidden': False,
+    },
+    {
+        'slug': 'workplace_culture',
+        'label': 'Workplace Culture',
+        'prompt': 'Which of these do you think has the best workplace culture? '
+                  'Rank from best (1) to worst (4).',
+        'wages_always_hidden': False,
+    },
+    {
+        'slug': 'belief_alignment',
+        'label': 'Belief-Work Alignment',
+        'prompt': "At which company would an employee's personal beliefs and goals "
+                  "most influence their experience working there? "
+                  "Rank from most influence (1) to least (4).",
+        'wages_always_hidden': False,
+    },
+    {
+        'slug': 'mission_identity',
+        'label': 'Mission / Identity Clarity',
+        'prompt': 'Which organization has the clearest mission or identity? '
+                  'Rank from clearest (1) to least clear (6).',
+        'wages_always_hidden': False,
+    },
+    {
+        'slug': 'overall_desirability',
+        'label': 'Overall Desirability',
+        'prompt': 'Where would you most want to work? '
+                  'Rank from most desirable (1) to least desirable (4).',
+        'wages_always_hidden': False,
+    },
 ]
 
-RANKING_PROMPTS = {
-    'attractiveness': 'Rank these job postings from the one you would most want to apply to (1) to the one you would least want to apply to (6).',
-    'sincerity': 'Rank these companies from the one that seems most sincere about what it says in the posting (1) to the one that seems least sincere (6).',
-    'employee_treatment': 'Rank these companies from the one you think treats its employees the best (1) to the one you think treats its employees the worst (6).',
-    'accept_lower_pay': 'If you had to choose, which job would you be willing to accept the lowest salary for? Rank from the job you would accept the lowest salary for (1) to the job you would need the highest salary to accept (6).',
-    'instrumentality': 'Which company seems to be using its stated values or workplace claims mainly as a recruitment tool, rather than a genuine commitment? Rank from the one that seems most like a recruitment tool (1) to the one that seems most genuine (6).',
-}
+
+class RankingInstructionsView(SurveyFlowMixin, TemplateView):
+    template_name = 'study2/instructions.html'
+
+    def get(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        self.update_status(participant, 'stage1')
+        return super().get(request, *args, **kwargs)
 
 
-class Study2RankingView(SurveyFlowMixin, TemplateView):
+class RankingDimensionView(SurveyFlowMixin, TemplateView):
     template_name = 'study2/ranking.html'
-    step_name = 'study2_ranking'
+
+    def get_dimension(self, dimension_num):
+        idx = dimension_num - 1
+        if 0 <= idx < len(RANKING_DIMENSIONS):
+            return RANKING_DIMENSIONS[idx]
+        return None
+
+    def get_wage_display(self, participant, dimension):
+        if dimension['wages_always_hidden']:
+            return 'hidden'
+        if participant.wage_arm == 'A':
+            return 'visible'
+        return 'hidden'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        dimension = self.kwargs['dimension']
-        sequence = self.request.session.get('posting_sequence', [])
+        participant = self.get_participant()
+        dimension_num = kwargs['dimension_num']
+        dimension = self.get_dimension(dimension_num)
 
-        ctx['dimension'] = dimension
-        ctx['prompt'] = RANKING_PROMPTS.get(dimension, '')
-        ctx['dimension_num'] = RANKING_DIMENSIONS.index(dimension) + 1
-        ctx['total_dimensions'] = len(RANKING_DIMENSIONS)
+        posting_ids = participant.get_posting_order()
+        postings = [Posting.objects.get(id=pid) for pid in posting_ids]
 
-        # Get full posting objects in the order participant saw them
-        postings = []
-        for pid in sequence:
-            postings.append(JobPosting.objects.get(id=pid))
+        wage_display = self.get_wage_display(participant, dimension)
+
+        # Annotate each posting with its salary text for this participant
+        high_signals = participant.get_high_wage_signals()
+        for posting in postings:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+
         ctx['postings'] = postings
-        ctx['companies'] = [p.company_name for p in postings]
+        ctx['participant'] = participant
+        ctx['dimension'] = dimension
+        ctx['dimension_num'] = dimension_num
+        ctx['total_dimensions'] = len(RANKING_DIMENSIONS)
+        ctx['wage_display'] = wage_display
+        ctx['is_first_dimension'] = (dimension_num == 1)
         return ctx
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
-        dimension = self.kwargs['dimension']
+        dimension_num = kwargs['dimension_num']
+        dimension = self.get_dimension(dimension_num)
 
-        # ranking_order comes as comma-separated company names
-        ranking_str = request.POST.get('ranking_order', '')
-        ranking_order = [name.strip() for name in ranking_str.split(',') if name.strip()]
+        ranking_order_str = request.POST.get('ranking_order', '')
+        ranking_order = [x.strip() for x in ranking_order_str.split(',') if x.strip()]
 
-        Study2Ranking.objects.update_or_create(
-            participant=participant, dimension=dimension,
-            defaults={'ranking_order': ranking_order})
+        RankingResponse.objects.update_or_create(
+            participant=participant,
+            dimension=dimension['slug'],
+            defaults={
+                'dimension_order': dimension_num,
+                'ranking_order': ranking_order,
+            }
+        )
 
-        # Next dimension
-        current_idx = RANKING_DIMENSIONS.index(dimension)
-        if current_idx + 1 < len(RANKING_DIMENSIONS):
-            next_dim = RANKING_DIMENSIONS[current_idx + 1]
-            return redirect('core:study2_ranking', dimension=next_dim)
-        return redirect('core:manipulation_checks')
+        if dimension_num < len(RANKING_DIMENSIONS):
+            return redirect('core:study2_ranking', dimension_num=dimension_num + 1)
+
+        # After all rankings, go to study-specific card sort transition
+        if participant.study_assignment == 'study3':
+            return redirect('core:hm_card_sort_transition')
+        return redirect('core:card_sort_transition')
 
 
-class PostRankingView(SurveyFlowMixin, TemplateView):
-    template_name = 'study2/post_ranking.html'
-    step_name = 'post_ranking'
+# ---------------------------------------------------------------------------
+# Study 2: Card Sort & Competition (Stages 2-3)
+# ---------------------------------------------------------------------------
+
+class CardSortTransitionView(SurveyFlowMixin, TemplateView):
+    template_name = 'study2/card_sort_transition.html'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         participant = self.get_participant()
-        # Get top-ranked company from attractiveness dimension
-        try:
-            ranking = Study2Ranking.objects.get(
-                participant=participant, dimension='attractiveness')
-            ctx['top_company'] = ranking.ranking_order[0] if ranking.ranking_order else ''
-        except Study2Ranking.DoesNotExist:
-            ctx['top_company'] = ''
+        posting = participant.card_sort_posting
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
         return ctx
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
-        top_company = request.POST.get('top_company', '')
+        self.update_status(participant, 'stage2')
+        return redirect('core:card_sort')
 
-        min_salary = request.POST.get('min_acceptable_salary')
+
+class CardSortView(SurveyFlowMixin, TemplateView):
+    template_name = 'study2/card_sort.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+
+        # Randomize card order using participant seed
+        cards = list(CardSortCard.objects.all())
+        rng = random.Random(participant.posting_order_seed)
+        rng.shuffle(cards)
+
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['cards'] = cards
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        cards_selected = request.POST.get('cards_selected', '')
+        selection_order = request.POST.get('selection_order', '')
+        response_time = request.POST.get('response_time_ms', '')
+
+        cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
+        order_list = [c.strip() for c in selection_order.split(',') if c.strip()]
+
         try:
-            min_salary = int(min_salary) if min_salary else None
+            response_time_ms = int(response_time) if response_time else None
         except ValueError:
-            min_salary = None
+            response_time_ms = None
 
-        Study2PostRanking.objects.create(
+        CardSortResponse.objects.update_or_create(
             participant=participant,
-            top_company=top_company,
-            explanation_text=request.POST.get('explanation_text', ''),
-            min_acceptable_salary=min_salary,
-            po_fit_values=int(request.POST.get('po_fit_values', 0)) or None,
-            po_fit_belong=int(request.POST.get('po_fit_belong', 0)) or None,
-            po_fit_care=int(request.POST.get('po_fit_care', 0)) or None,
+            stage='card_sort',
+            defaults={
+                'posting': posting,
+                'cards_selected': cards_list,
+                'selection_order': order_list,
+                'response_time_ms': response_time_ms,
+            }
         )
-        return redirect('core:individual_differences')
 
+        return redirect('core:competition')
+
+
+class CompetitionView(SurveyFlowMixin, TemplateView):
+    template_name = 'study2/competition.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+
+        # Get original card sort selections
+        original = CardSortResponse.objects.filter(
+            participant=participant, stage='card_sort').first()
+        original_card_ids = original.cards_selected if original else []
+
+        # Load card objects for the original selection
+        original_cards = []
+        if original_card_ids:
+            card_map = {c.card_id: c for c in CardSortCard.objects.all()}
+            original_cards = [card_map[cid] for cid in original_card_ids if cid in card_map]
+
+        # Randomize card order (different seed offset for competition)
+        cards = list(CardSortCard.objects.all())
+        rng = random.Random((participant.posting_order_seed or 0) + 7)
+        rng.shuffle(cards)
+
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['cards'] = cards
+        ctx['original_cards'] = original_cards
+        ctx['original_card_ids_json'] = json.dumps(original_card_ids)
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        keep_original = request.POST.get('keep_original') == 'true'
+
+        if keep_original:
+            # Copy original selections
+            original = CardSortResponse.objects.filter(
+                participant=participant, stage='card_sort').first()
+            cards_list = original.cards_selected if original else []
+            order_list = original.selection_order if original else []
+        else:
+            cards_selected = request.POST.get('cards_selected', '')
+            selection_order = request.POST.get('selection_order', '')
+            cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
+            order_list = [c.strip() for c in selection_order.split(',') if c.strip()]
+
+        response_time = request.POST.get('response_time_ms', '')
+        try:
+            response_time_ms = int(response_time) if response_time else None
+        except ValueError:
+            response_time_ms = None
+
+        CardSortResponse.objects.update_or_create(
+            participant=participant,
+            stage='competition',
+            defaults={
+                'posting': posting,
+                'cards_selected': cards_list,
+                'selection_order': order_list,
+                'keep_original': keep_original,
+                'response_time_ms': response_time_ms,
+            }
+        )
+
+        self.update_status(participant, 'stage3')
+        return redirect('core:bucket_sort_transition')
+
+
+# ---------------------------------------------------------------------------
+# Study 3: Hiring Manager Card Sort & Competition
+# ---------------------------------------------------------------------------
+
+class HMCardSortTransitionView(SurveyFlowMixin, TemplateView):
+    template_name = 'study3/card_sort_transition.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        self.update_status(participant, 'stage2')
+        return redirect('core:hm_card_sort')
+
+
+class HMCardSortView(SurveyFlowMixin, TemplateView):
+    template_name = 'study3/card_sort.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+
+        cards = list(HiringManagerCard.objects.all())
+        rng = random.Random(participant.posting_order_seed)
+        rng.shuffle(cards)
+
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['cards'] = cards
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        cards_selected = request.POST.get('cards_selected', '')
+        selection_order = request.POST.get('selection_order', '')
+        response_time = request.POST.get('response_time_ms', '')
+
+        cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
+        order_list = [c.strip() for c in selection_order.split(',') if c.strip()]
+
+        try:
+            response_time_ms = int(response_time) if response_time else None
+        except ValueError:
+            response_time_ms = None
+
+        HiringManagerResponse.objects.update_or_create(
+            participant=participant,
+            stage='card_sort',
+            defaults={
+                'posting': posting,
+                'cards_selected': cards_list,
+                'selection_order': order_list,
+                'response_time_ms': response_time_ms,
+            }
+        )
+
+        return redirect('core:hm_competition')
+
+
+class HMCompetitionView(SurveyFlowMixin, TemplateView):
+    template_name = 'study3/competition.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        if posting:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
+
+        # Get original card sort selections
+        original = HiringManagerResponse.objects.filter(
+            participant=participant, stage='card_sort').first()
+        original_card_ids = original.cards_selected if original else []
+
+        original_cards = []
+        if original_card_ids:
+            card_map = {c.card_id: c for c in HiringManagerCard.objects.all()}
+            original_cards = [card_map[cid] for cid in original_card_ids if cid in card_map]
+
+        # Randomize card order (different seed offset for competition)
+        cards = list(HiringManagerCard.objects.all())
+        rng = random.Random((participant.posting_order_seed or 0) + 7)
+        rng.shuffle(cards)
+
+        ctx['participant'] = participant
+        ctx['posting'] = posting
+        ctx['cards'] = cards
+        ctx['original_cards'] = original_cards
+        ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        posting = participant.card_sort_posting
+
+        would_change = request.POST.get('would_change') == 'yes'
+
+        if would_change:
+            cards_selected = request.POST.get('cards_selected', '')
+            cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
+        else:
+            cards_list = []
+
+        response_time = request.POST.get('response_time_ms', '')
+        try:
+            response_time_ms = int(response_time) if response_time else None
+        except ValueError:
+            response_time_ms = None
+
+        HiringManagerResponse.objects.update_or_create(
+            participant=participant,
+            stage='competition',
+            defaults={
+                'posting': posting,
+                'cards_selected': cards_list,
+                'selection_order': cards_list,  # only 1 card, so order = selection
+                'would_change': would_change,
+                'response_time_ms': response_time_ms,
+            }
+        )
+
+        self.update_status(participant, 'stage3')
+        return redirect('core:bucket_sort_transition')
+
+
+# ---------------------------------------------------------------------------
+# Demographics & Individual Differences
+# ---------------------------------------------------------------------------
 
 class IndividualDifferencesView(SurveyFlowMixin, TemplateView):
-    template_name = 'study2/individual_differences.html'
-    step_name = 'individual_differences'
+    template_name = 'individual_differences.html'
+
+    def get(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        self.update_status(participant, 'individual_diffs')
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
@@ -552,19 +625,12 @@ class IndividualDifferencesView(SurveyFlowMixin, TemplateView):
         return redirect('core:demographics')
 
 
-# ---------------------------------------------------------------------------
-# Demographics & Debrief
-# ---------------------------------------------------------------------------
-
 class DemographicsView(SurveyFlowMixin, TemplateView):
     template_name = 'demographics.html'
-    step_name = 'demographics'
 
     def get(self, request, *args, **kwargs):
         participant = self.get_participant()
-        if participant:
-            participant.status = 'in_demographics'
-            participant.save()
+        self.update_status(participant, 'demographics')
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -598,97 +664,173 @@ class DemographicsView(SurveyFlowMixin, TemplateView):
         return redirect('core:debrief')
 
 
+# ---------------------------------------------------------------------------
+# Study 1: Bucket Sort Game
+# ---------------------------------------------------------------------------
+
+BUCKET_LABELS = {
+    'purpose': 'Organizational Purpose',
+    'good_employer': 'Good Employer',
+    'compensation': 'Compensation & Benefits',
+    'job_tasks': 'Job Tasks & Requirements',
+    'not_sure': 'Not Sure',
+}
+
+
+class BucketSortTransitionView(SurveyFlowMixin, TemplateView):
+    template_name = 'study1/transition.html'
+
+    def get(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        self.update_status(participant, 'stage4')
+        return super().get(request, *args, **kwargs)
+
+
+class BucketSortInstructionsView(SurveyFlowMixin, TemplateView):
+    template_name = 'study1/instructions.html'
+
+
+class BucketSortGameView(SurveyFlowMixin, TemplateView):
+    template_name = 'study1/game.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        participant = self.get_participant()
+
+        phrases = list(
+            BucketSortPhrase.objects.filter(is_active=True)
+            .values('phrase_id', 'phrase_text', 'difficulty', 'expected_bucket'))
+
+        seed = participant.posting_order_seed or random.randint(1, 999999)
+
+        ctx['phrases_json'] = json.dumps(phrases)
+        ctx['seed'] = seed
+        return ctx
+
+
+class BucketSortSubmitView(SurveyFlowMixin, View):
+    """AJAX endpoint that receives all game results as JSON."""
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        if not participant:
+            return JsonResponse({'error': 'No participant'}, status=400)
+
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+        results = data.get('results', [])
+        inconsistent = data.get('inconsistent', [])
+
+        # Build phrase lookup
+        phrase_map = {}
+        for p in BucketSortPhrase.objects.all():
+            phrase_map[p.phrase_id] = p
+
+        # Save all responses
+        response_objects = []
+        for r in results:
+            phrase = phrase_map.get(r.get('phraseId'))
+            if not phrase:
+                continue
+            response_objects.append(BucketSortResponse(
+                participant=participant,
+                phrase=phrase,
+                attempt=r.get('attempt', 1),
+                bucket_assigned=r.get('bucket', ''),
+                was_missed=r.get('wasMissed', False),
+                time_on_phrase_ms=r.get('timeOnPhraseMs'),
+                game_elapsed_ms=r.get('gameElapsedMs'),
+            ))
+        BucketSortResponse.objects.bulk_create(response_objects)
+
+        # Store inconsistent phrases in session for reconciliation
+        if inconsistent:
+            request.session['inconsistent_phrases'] = inconsistent
+            redirect_url = '/study1/reconciliation/'
+        else:
+            redirect_url = '/individual-differences/'
+
+        return JsonResponse({'redirect': redirect_url})
+
+
+class BucketSortReconciliationView(SurveyFlowMixin, TemplateView):
+    template_name = 'study1/reconciliation.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        inconsistent = self.request.session.get('inconsistent_phrases', [])
+
+        # Enrich with labels
+        for item in inconsistent:
+            buckets = item.get('buckets', [])
+            item['first_label'] = BUCKET_LABELS.get(buckets[0], buckets[0]) if len(buckets) > 0 else ''
+            item['second_label'] = BUCKET_LABELS.get(buckets[1], buckets[1]) if len(buckets) > 1 else ''
+            item['phrase_id'] = item.get('phraseId', '')
+            item['phrase_text'] = item.get('phraseText', '')
+
+        ctx['inconsistent_phrases'] = inconsistent
+        ctx['buckets'] = list(BUCKET_LABELS.items())
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        inconsistent = request.session.get('inconsistent_phrases', [])
+
+        phrase_map = {}
+        for p in BucketSortPhrase.objects.all():
+            phrase_map[p.phrase_id] = p
+
+        for item in inconsistent:
+            phrase_id = item.get('phraseId', '')
+            phrase = phrase_map.get(phrase_id)
+            if not phrase:
+                continue
+
+            resolution = request.POST.get(f'resolve_{phrase_id}', '')
+            final_bucket = request.POST.get(f'final_{phrase_id}', '')
+            buckets = item.get('buckets', [])
+
+            BucketSortReconciliation.objects.update_or_create(
+                participant=participant,
+                phrase=phrase,
+                defaults={
+                    'first_bucket': buckets[0] if len(buckets) > 0 else '',
+                    'second_bucket': buckets[1] if len(buckets) > 1 else '',
+                    'resolution': resolution,
+                    'final_bucket': final_bucket if resolution == 'mistake' else '',
+                })
+
+        # Clean up session
+        request.session.pop('inconsistent_phrases', None)
+        return redirect('core:individual_differences')
+
+
+# ---------------------------------------------------------------------------
+# Debrief & Withdrawal
+# ---------------------------------------------------------------------------
+
 class DebriefView(SurveyFlowMixin, TemplateView):
     template_name = 'debrief.html'
-    step_name = 'debrief'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         participant = self.get_participant()
         if participant:
-            ctx['session_type'] = participant.session_type
+            ctx['study_assignment'] = participant.study_assignment
             ctx['participant_code'] = participant.participant_code
+            ctx['completion_code'] = participant.completion_code
         return ctx
 
 
 class WithdrawView(SurveyFlowMixin, TemplateView):
     template_name = 'withdrawn.html'
-    step_name = 'withdraw'
+    requires_consent = False
 
     def get(self, request, *args, **kwargs):
         participant = self.get_participant()
         if participant:
-            participant.status = 'withdrawn'
-            participant.save()
+            self.update_status(participant, 'withdrawn')
         return super().get(request, *args, **kwargs)
-
-
-# ---------------------------------------------------------------------------
-# Researcher dashboard (staff only)
-# ---------------------------------------------------------------------------
-
-class DashboardView(TemplateView):
-    template_name = 'dashboard.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('core:landing')
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        from django.db.models import Avg, Count
-
-        participants = Participant.objects.all()
-        total = participants.count()
-        completed = participants.filter(status='completed').count()
-        in_progress = participants.exclude(
-            status__in=('completed', 'withdrawn')).count()
-        flagged = participants.filter(flagged_for_exclusion=True).count()
-
-        ctx['total_participants'] = total
-        ctx['completed_count'] = completed
-        ctx['in_progress_count'] = in_progress
-        ctx['flagged_count'] = flagged
-        ctx['completion_rate'] = round(completed / total * 100) if total else 0
-
-        type_counts = (participants.values('session_type')
-                       .annotate(count=Count('id')).order_by('session_type'))
-        ctx['session_type_counts'] = [
-            (dict(Participant.SESSION_TYPES).get(tc['session_type'], tc['session_type']),
-             tc['count']) for tc in type_counts]
-
-        agg = participants.aggregate(
-            avg_passed=Avg('attention_checks_passed'),
-            avg_failed=Avg('attention_checks_failed'))
-        ctx['avg_attention_passed'] = round(agg['avg_passed'] or 0, 1)
-        ctx['avg_attention_failed'] = round(agg['avg_failed'] or 0, 1)
-        ctx['exclusion_rate'] = round(flagged / total * 100) if total else 0
-        ctx['recent_participants'] = participants[:20]
-
-        return ctx
-
-
-class ExportDataView(View):
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            return redirect('core:landing')
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request, fmt='csv'):
-        import csv
-        from io import StringIO
-
-        output = StringIO()
-        writer = csv.writer(output)
-        writer.writerow([
-            'participant_code', 'session_type', 'status',
-            'started_at', 'completed_at', 'flagged_for_exclusion'])
-        for p in Participant.objects.all():
-            writer.writerow([
-                p.participant_code, p.session_type, p.status,
-                p.started_at, p.completed_at, p.flagged_for_exclusion])
-
-        response = HttpResponse(output.getvalue(), content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="participants.csv"'
-        return response

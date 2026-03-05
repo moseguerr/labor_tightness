@@ -73,3 +73,244 @@ input[type="radio"]:checked + div {
         min-height: 48px;
     }
 }
+
+
+/* ================================================================
+   Bucket Sort Game
+   ================================================================ */
+
+/* Game area — full viewport height minus header */
+.game-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 180px);
+    min-height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Score bar */
+.score-bar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.75rem 1rem;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #475569;
+    flex-shrink: 0;
+}
+.score-bar__item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.score-bar__value {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1e293b;
+    min-width: 1.5rem;
+    text-align: center;
+}
+.score-bar__timer {
+    font-variant-numeric: tabular-nums;
+    font-family: monospace;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* Fall area */
+.fall-area {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+/* Falling phrase card */
+.falling-phrase {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 2rem;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s;
+    display: none;
+    z-index: 10;
+    user-select: none;
+}
+/* Dual-phrase mode: offset left and right */
+.falling-phrase--left {
+    left: 30%;
+}
+.falling-phrase--right {
+    left: 70%;
+}
+/* Highlight the phrase that will be caught next (lowest) */
+.falling-phrase--target {
+    border-color: #3b82f6;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+.falling-phrase--active {
+    display: block;
+}
+.falling-phrase--caught {
+    animation: catchSwoosh 0.3s ease-out forwards;
+}
+.falling-phrase--missed {
+    animation: missFlash 0.4s ease-out forwards;
+}
+
+@keyframes catchSwoosh {
+    0% { transform: translateX(-50%) scale(1); opacity: 1; }
+    50% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(0.3); opacity: 0; }
+}
+
+@keyframes missFlash {
+    0% { transform: translateX(-50%); opacity: 1; border-color: #ef4444; }
+    100% { transform: translateX(-50%) translateY(30px); opacity: 0; }
+}
+
+
+/* Bucket container */
+.bucket-container {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #f1f5f9;
+    border-top: 2px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+/* Bucket zone buttons */
+.bucket-zone {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0.5rem;
+    border: 2px solid var(--bucket-color, #6b7280);
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.15s, background-color 0.15s;
+    min-height: 80px;
+}
+.bucket-zone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    background-color: color-mix(in srgb, var(--bucket-color) 8%, white);
+}
+.bucket-zone:active {
+    transform: translateY(0);
+}
+.bucket-zone--flash {
+    animation: bucketFlash 0.4s ease-out;
+}
+
+@keyframes bucketFlash {
+    0% { background-color: color-mix(in srgb, var(--bucket-color) 30%, white); transform: scale(1.03); }
+    100% { background-color: white; transform: scale(1); }
+}
+
+.bucket-zone__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bucket-color, #475569);
+    text-align: center;
+    line-height: 1.2;
+}
+.bucket-zone__key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin-top: 0.4rem;
+    border-radius: 4px;
+    background: #f1f5f9;
+    border: 1px solid #d1d5db;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #64748b;
+}
+.bucket-zone__tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 0.75rem;
+    background: #1e293b;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 400;
+    border-radius: 6px;
+    white-space: normal;
+    width: 200px;
+    text-align: center;
+    z-index: 20;
+    line-height: 1.3;
+}
+.bucket-zone:hover .bucket-zone__tooltip {
+    display: block;
+}
+
+/* Game overlay (countdown, game over) */
+.game-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    backdrop-filter: blur(4px);
+}
+.game-overlay__countdown {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #4a7c8a;
+    text-align: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+    .falling-phrase {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+    .bucket-zone {
+        padding: 0.6rem 0.25rem;
+        min-height: 60px;
+    }
+    .bucket-zone__label {
+        font-size: 0.7rem;
+    }
+    .bucket-zone__key {
+        display: none;
+    }
+    .bucket-zone__tooltip {
+        display: none !important;
+    }
+    .score-bar {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+}

@@ -1,0 +1,48 @@
+<!-- Posting card component.
+     Usage: include "components/posting_card.html" with posting=X wage_display="visible"|"hidden"
+     wage_display meanings:
+       "visible" = show actual salary range
+       "hidden"  = salary section omitted entirely
+-->
+<div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+    <!-- Company header -->
+    <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4">
+        <h3 class="text-lg font-bold text-white">{{ posting.company_name }}</h3>
+        <div class="flex items-center gap-3 text-primary-100 text-sm mt-1">
+            <span>{{ posting.job_title }}</span>
+            <span>&middot;</span>
+            <span>Major U.S. Metro Area</span>
+        </div>
+    </div>
+
+    <div class="px-6 py-5 space-y-4">
+        <!-- Company intro -->
+        <p class="text-sm text-slate-600 leading-relaxed">{{ posting.company_intro }}</p>
+
+        <!-- The Role -->
+        <div>
+            <h4 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-1">The Role</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">{{ posting.role_description }}</p>
+        </div>
+
+        <!-- Signal section -->
+        <div>
+            <h4 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-1">{{ posting.signal_section_title }}</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">{{ posting.signal_section_text }}</p>
+        </div>
+
+        <!-- Requirements -->
+        <div>
+            <h4 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-1">Requirements</h4>
+            <p class="text-sm text-slate-600 leading-relaxed">{{ posting.requirements_text }}</p>
+        </div>
+
+        <!-- Salary (only shown when visible) -->
+        {% if wage_display == "visible" %}
+        <div class="bg-gray-50 rounded-lg p-3 border border-gray-100">
+            <span class="text-sm font-semibold text-slate-700">Salary: </span>
+            <span class="text-sm font-bold text-slate-800">{% if posting.salary_text_for_participant %}{{ posting.salary_text_for_participant }}{% else %}{{ posting.salary_range_text }}{% endif %}/yr</span>
+        </div>
+        {% endif %}
+    </div>
+</div>

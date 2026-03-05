@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    /* Override base layout for full-width game */
+    main { padding: 0 !important; }
+    main > div { max-width: none !important; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="game-container" id="game-area">
+    {% csrf_token %}
+
+    <!-- Score bar -->
+    <div class="score-bar">
+        <div class="score-bar__item">
+            <span>Caught:</span>
+            <span class="score-bar__value" id="score-caught">0</span>
+        </div>
+        <div class="score-bar__item">
+            <span>Time:</span>
+            <span class="score-bar__timer" id="score-timer">4:00</span>
+        </div>
+        <div class="score-bar__item">
+            <span>Streak:</span>
+            <span class="score-bar__value" id="score-streak">0</span>
+        </div>
+    </div>
+
+    <!-- Fall area -->
+    <div class="fall-area">
+        <div class="falling-phrase" id="falling-phrase-0"></div>
+        <div class="falling-phrase" id="falling-phrase-1"></div>
+    </div>
+
+    <!-- Bucket container -->
+    <div class="bucket-container" id="bucket-container">
+        <!-- Buckets are rendered by JS -->
+    </div>
+
+    <!-- Overlay for countdown and game over -->
+    <div class="game-overlay" id="game-overlay" style="display: none;">
+        <div class="game-overlay__countdown" id="countdown"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/bucket_game.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        BucketGame.init({
+            phrases: {{ phrases_json|safe }},
+            seed: {{ seed }},
+            submitUrl: '{% url "core:bucket_sort_submit" %}',
+        });
+    });
+</script>
+{% endblock %}

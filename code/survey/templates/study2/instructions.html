@@ -2,40 +2,37 @@
 
 {% block content %}
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
-    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Part 2: Job Posting Evaluation</h1>
+    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Job Posting Evaluation</h1>
     <p class="text-sm text-slate-500 mb-6">Instructions</p>
 
     <div class="space-y-4 text-slate-600">
         <p>
-            In this part, you will see <strong>6 job postings</strong> for a Marketing Analyst position.
-            Each posting comes from a different (fictional) company.
+            You have just reviewed <strong>6 job postings</strong> from different (fictional) companies.
         </p>
         <p>
-            All 6 postings will be shown together on the same page. Your task is to
-            <strong>read them carefully</strong> and <strong>rank them</strong> on several dimensions
-            by dragging them into your preferred order.
+            Now you will <strong>rank these postings</strong> on several different dimensions
+            by dragging them into your preferred order. You will complete
+            <strong>7 ranking tasks</strong> in total, each asking you to consider
+            the postings from a different perspective.
         </p>
         <p>
-            After ranking, you will answer a few follow-up questions about the postings.
-        </p>
-        <p>
-            There are no right or wrong answers. We are interested in your honest impressions of
-            each posting.
+            There are no right or wrong answers. We are interested in your honest impressions
+            of each posting.
         </p>
 
         <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
             <p class="text-sm text-slate-700">
-                <strong>Tip:</strong> Read each posting thoroughly before you start ranking.
-                You can scroll up and down to compare postings as you drag them into order.
+                <strong>Tip:</strong> For each ranking, drag the posting you rank highest
+                to the top (position 1) and the one you rank lowest to the bottom (position 5).
             </p>
         </div>
     </div>
 
     <div class="mt-8">
-        <a href="{% url 'core:study2_ranking' dimension='attractiveness' %}"
+        <a href="{% url 'core:study2_ranking' dimension_num=1 %}"
            class="btn-primary inline-block bg-primary-500 hover:bg-primary-700 text-white
                   font-medium py-3 px-8 rounded-lg text-base">
-            Start Evaluating Postings
+            Start Ranking
         </a>
     </div>
 </div>

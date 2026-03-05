@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block progress_bar %}
+{% include "components/progress_bar.html" with section="Posting Review" current=1 total=2 %}
+{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+    <h2 class="text-lg font-semibold text-slate-800">Next Task: Strengthen Postings</h2>
+
+    {% if participant.wage_arm == "A" %}
+    <p class="text-sm text-slate-600 leading-relaxed">
+        Thank you for your rankings. Before the next task, we can now share some additional information:
+        <strong>salary ranges are available</strong> for each position.
+    </p>
+    <p class="text-sm text-slate-600 leading-relaxed">
+        In the next section, you will consider how you might improve these postings
+        to make them more attractive to strong candidates. Please take a moment to review
+        the posting below, including the salary information.
+    </p>
+
+    {% if posting %}
+    <div class="mt-4">
+        {% include "components/posting_card.html" with posting=posting wage_display="visible" %}
+    </div>
+    {% endif %}
+
+    <form method="post" id="transition-form">
+        {% csrf_token %}
+        <button type="submit" id="continue-btn"
+                class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                       font-medium py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed mt-4"
+                disabled>
+            Continue <span id="countdown">(30s)</span>
+        </button>
+    </form>
+
+    {% else %}
+    <p class="text-sm text-slate-600 leading-relaxed">
+        Thank you for your rankings. In the next section, you will think about how
+        you might improve these postings to make them more attractive to strong candidates.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit"
+                class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
+                       font-medium py-2.5 px-6 rounded-lg mt-4">
+            Continue
+        </button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if participant.wage_arm == "A" %}
+<script>
+(function() {
+    const btn = document.getElementById('continue-btn');
+    const countdown = document.getElementById('countdown');
+    let remaining = 30;
+    const timer = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+            clearInterval(timer);
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            countdown.textContent = '';
+        } else {
+            countdown.textContent = `(${remaining}s)`;
+        }
+    }, 1000);
+})();
+</script>
+{% endif %}
+{% endblock %}

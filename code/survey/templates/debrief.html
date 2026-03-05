@@ -13,54 +13,35 @@
     <h1 class="text-2xl font-semibold text-slate-800 mb-2">Thank You!</h1>
     <p class="text-slate-500 text-sm mb-8">You have completed the study.</p>
 
-    {% if participant_code %}
+    {% if completion_code %}
     <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-8 inline-block">
-        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Your Participant ID</p>
-        <p class="text-2xl font-mono font-bold text-primary-600">{{ participant_code }}</p>
+        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Completion Code</p>
+        <p class="text-2xl font-mono font-bold text-primary-600">{{ completion_code }}</p>
+        <p class="text-xs text-slate-400 mt-1">Please enter this code on Prolific to confirm your participation.</p>
     </div>
     {% endif %}
 
     <div class="prose prose-slate prose-sm max-w-none text-left space-y-4 text-slate-600">
         <h3 class="text-base font-semibold text-slate-700">About This Study</h3>
 
-        {% if session_type == 'study1' %}
-        <p>
-            The phrases you classified came from real U.S. job postings. We are studying how
-            employers communicate different types of information to job seekers — including statements
-            about organizational mission and purpose, employee treatment, compensation, job duties,
-            and qualifications.
-        </p>
-        <p>
-            Your classifications will help us validate a coding system that categorizes these
-            phrases automatically across millions of job postings. This research aims to understand
-            how employers use different types of language when competing for talent.
-        </p>
-
-        {% elif session_type == 'study2' %}
         <p>
             The job postings you evaluated were fictional, created specifically for this study.
-            We systematically varied three aspects of the postings: (1) whether the company emphasized
-            a social mission, (2) whether it emphasized being a great workplace, and (3) the salary offered.
+            We systematically varied aspects of the postings — including whether the company emphasized
+            a social mission, innovation, or being a great workplace, as well as the salary offered.
         </p>
+
+        {% if study_assignment == 'study2' %}
         <p>
             We are studying how these features — particularly claims about organizational purpose
             and mission — influence job seekers' evaluations. This research investigates whether
             organizational purpose claims function as genuine signals of employer quality or as
             substitutes for concrete benefits like salary.
         </p>
-
-        {% else %}
+        {% elif study_assignment == 'study3' %}
         <p>
-            In Part 1, the phrases you classified came from real U.S. job postings. We are studying
-            how employers communicate different types of information to job seekers. Your classifications
-            will help validate our automated coding system.
-        </p>
-        <p>
-            In Part 2, the job postings were fictional, created specifically for this study. We
-            systematically varied the company's framing (social mission vs. good workplace vs. neutral)
-            and salary level. We are studying how organizational purpose claims influence job seekers'
-            evaluations and whether these claims function as genuine signals or as substitutes for
-            concrete benefits.
+            We are studying how hiring managers perceive and evaluate different types of employer
+            branding in job postings. This research investigates how organizational purpose claims
+            compare to other framing strategies when attracting talent.
         </p>
         {% endif %}
 

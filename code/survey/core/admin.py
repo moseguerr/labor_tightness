@@ -1,58 +1,85 @@
 from django.contrib import admin
 from .models import (
-    Participant, Phrase, Study1Response, Study1PostTask,
-    JobPosting, PostingViewRecord, Study2ManipulationCheck,
-    Study2Ranking, Study2PostRanking, IndividualDifferences, Demographics,
+    Participant, Posting, Demographics, IndividualDifferences,
+    RankingResponse, CardSortCard, CardSortResponse,
+    HiringManagerCard, HiringManagerResponse,
+    BucketSortPhrase, BucketSortResponse, BucketSortReconciliation,
 )
 
 
 @admin.register(Participant)
 class ParticipantAdmin(admin.ModelAdmin):
     list_display = [
-        'participant_code', 'session_type', 'status',
-        'started_at', 'completed_at', 'flagged_for_exclusion',
+        'participant_code', 'study_assignment', 'wage_arm', 'occupation_pool',
+        'status', 'started_at', 'completed_at', 'flagged_for_exclusion',
     ]
-    list_filter = ['session_type', 'status', 'flagged_for_exclusion']
-    search_fields = ['participant_code', 'external_id']
+    list_filter = ['study_assignment', 'wage_arm', 'occupation_pool', 'status', 'flagged_for_exclusion']
+    search_fields = ['participant_code', 'prolific_id']
     readonly_fields = ['id', 'started_at']
 
 
-@admin.register(Phrase)
-class PhraseAdmin(admin.ModelAdmin):
-    list_display = ['phrase_text_short', 'item_type', 'irb_category', 'is_active']
-    list_filter = ['item_type', 'irb_category', 'is_active']
-
-    def phrase_text_short(self, obj):
-        return obj.phrase_text[:60]
-    phrase_text_short.short_description = 'Phrase'
-
-
-@admin.register(Study1Response)
-class Study1ResponseAdmin(admin.ModelAdmin):
+@admin.register(Posting)
+class PostingAdmin(admin.ModelAdmin):
     list_display = [
-        'participant', 'phrase', 'presentation_order', 'is_correct',
+        'occupation_pool', 'company_name', 'signal_type',
+        'salary_high_text', 'salary_low_text',
     ]
-    list_filter = ['is_correct']
-    raw_id_fields = ['participant', 'phrase']
+    list_filter = ['occupation_pool', 'signal_type']
 
 
-@admin.register(JobPosting)
-class JobPostingAdmin(admin.ModelAdmin):
-    list_display = ['condition_label', 'company_name', 'framing', 'salary_level', 'salary_amount']
-    list_filter = ['framing', 'salary_level']
+admin.site.register(Demographics)
+admin.site.register(IndividualDifferences)
 
 
-@admin.register(Study2Ranking)
-class Study2RankingAdmin(admin.ModelAdmin):
-    list_display = ['participant', 'dimension']
+@admin.register(RankingResponse)
+class RankingResponseAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'dimension', 'dimension_order', 'ranking_order', 'timestamp']
     list_filter = ['dimension']
     raw_id_fields = ['participant']
 
 
-# Simple registrations for the rest
-admin.site.register(Study1PostTask)
-admin.site.register(PostingViewRecord)
-admin.site.register(Study2ManipulationCheck)
-admin.site.register(Study2PostRanking)
-admin.site.register(IndividualDifferences)
-admin.site.register(Demographics)
+@admin.register(CardSortCard)
+class CardSortCardAdmin(admin.ModelAdmin):
+    list_display = ['card_id', 'card_type', 'card_text', 'display_order']
+    list_filter = ['card_type']
+
+
+@admin.register(CardSortResponse)
+class CardSortResponseAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'posting', 'stage', 'cards_selected', 'keep_original', 'timestamp']
+    list_filter = ['stage', 'keep_original']
+    raw_id_fields = ['participant', 'posting']
+
+
+@admin.register(HiringManagerCard)
+class HiringManagerCardAdmin(admin.ModelAdmin):
+    list_display = ['card_id', 'card_type', 'card_text', 'display_order']
+    list_filter = ['card_type']
+
+
+@admin.register(HiringManagerResponse)
+class HiringManagerResponseAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'posting', 'stage', 'cards_selected', 'would_change', 'timestamp']
+    list_filter = ['stage', 'would_change']
+    raw_id_fields = ['participant', 'posting']
+
+
+@admin.register(BucketSortPhrase)
+class BucketSortPhraseAdmin(admin.ModelAdmin):
+    list_display = ['phrase_id', 'phrase_text', 'expected_bucket', 'difficulty', 'is_active']
+    list_filter = ['difficulty', 'expected_bucket', 'is_active']
+    search_fields = ['phrase_text']
+
+
+@admin.register(BucketSortResponse)
+class BucketSortResponseAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'phrase', 'attempt', 'bucket_assigned', 'was_missed', 'time_on_phrase_ms']
+    list_filter = ['was_missed', 'attempt']
+    raw_id_fields = ['participant', 'phrase']
+
+
+@admin.register(BucketSortReconciliation)
+class BucketSortReconciliationAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'phrase', 'first_bucket', 'second_bucket', 'resolution']
+    list_filter = ['resolution']
+    raw_id_fields = ['participant', 'phrase']

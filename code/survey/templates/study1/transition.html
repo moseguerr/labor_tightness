@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto text-center">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-4">One Final Short Task</h1>
+
+    <div class="space-y-4 text-slate-600">
+        <p>
+            Before we wrap up, we have a quick sorting game for you.
+        </p>
+        <p>
+            You will see short phrases that employers sometimes use in job postings.
+            Your task is to sort them into categories as quickly as you can.
+        </p>
+        <p class="text-sm text-slate-500">
+            This should take about 5 minutes.
+        </p>
+    </div>
+
+    <div class="mt-8">
+        <a href="{% url 'core:bucket_sort_instructions' %}"
+           class="btn-primary inline-block bg-primary-500 hover:bg-primary-700 text-white
+                  font-medium py-3 px-8 rounded-lg text-base">
+            Continue
+        </a>
+    </div>
+</div>
+{% endblock %}

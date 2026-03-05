@@ -4,46 +4,53 @@ from . import views
 app_name = 'core'
 
 urlpatterns = [
-    # Entry point
+    # Entry
     path('', views.LandingView.as_view(), name='landing'),
     path('consent/', views.ConsentView.as_view(), name='consent'),
 
-    # Study 1
-    path('study1/instructions/', views.Study1InstructionsView.as_view(),
-         name='study1_instructions'),
-    path('study1/practice/<int:item_num>/', views.Study1PracticeView.as_view(),
-         name='study1_practice'),
-    path('study1/classify/<int:item_num>/', views.Study1ClassifyView.as_view(),
-         name='study1_classify'),
-    path('study1/post-task/', views.Study1PostTaskView.as_view(),
-         name='study1_post_task'),
+    # Posting reading (shared)
+    path('read/', views.ReadPostingsView.as_view(), name='read_postings'),
 
-    # Transition (combined session only)
-    path('transition/', views.TransitionView.as_view(), name='transition'),
-
-    # Study 2
-    path('study2/instructions/', views.Study2InstructionsView.as_view(),
-         name='study2_instructions'),
-    path('study2/posting/<int:posting_num>/', views.Study2PostingPageView.as_view(),
-         name='study2_posting'),
-    path('study2/manipulation-checks/', views.ManipulationChecksView.as_view(),
-         name='manipulation_checks'),
-    path('study2/ranking/<str:dimension>/', views.Study2RankingView.as_view(),
+    # Study 2: Ranking Task
+    path('study2/instructions/', views.RankingInstructionsView.as_view(),
+         name='ranking_instructions'),
+    path('study2/rank/<int:dimension_num>/', views.RankingDimensionView.as_view(),
          name='study2_ranking'),
-    path('study2/post-ranking/', views.PostRankingView.as_view(),
-         name='post_ranking'),
-    path('study2/individual-differences/', views.IndividualDifferencesView.as_view(),
-         name='individual_differences'),
 
-    # Demographics & Debrief
+    # Study 2: Card Sort & Competition
+    path('study2/card-sort/transition/', views.CardSortTransitionView.as_view(),
+         name='card_sort_transition'),
+    path('study2/card-sort/', views.CardSortView.as_view(),
+         name='card_sort'),
+    path('study2/competition/', views.CompetitionView.as_view(),
+         name='competition'),
+
+    # Study 3: Hiring Manager Card Sort & Competition
+    path('study3/card-sort/transition/', views.HMCardSortTransitionView.as_view(),
+         name='hm_card_sort_transition'),
+    path('study3/card-sort/', views.HMCardSortView.as_view(),
+         name='hm_card_sort'),
+    path('study3/competition/', views.HMCompetitionView.as_view(),
+         name='hm_competition'),
+
+    # Study 1: Bucket Sort Game
+    path('study1/transition/', views.BucketSortTransitionView.as_view(),
+         name='bucket_sort_transition'),
+    path('study1/instructions/', views.BucketSortInstructionsView.as_view(),
+         name='bucket_sort_instructions'),
+    path('study1/game/', views.BucketSortGameView.as_view(),
+         name='bucket_sort_game'),
+    path('study1/game/submit/', views.BucketSortSubmitView.as_view(),
+         name='bucket_sort_submit'),
+    path('study1/reconciliation/', views.BucketSortReconciliationView.as_view(),
+         name='bucket_sort_reconciliation'),
+
+    # Wrap-up (shared)
+    path('individual-differences/', views.IndividualDifferencesView.as_view(),
+         name='individual_differences'),
     path('demographics/', views.DemographicsView.as_view(), name='demographics'),
     path('debrief/', views.DebriefView.as_view(), name='debrief'),
 
     # Withdrawal
     path('withdraw/', views.WithdrawView.as_view(), name='withdraw'),
-
-    # Researcher dashboard (staff only)
-    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
-    path('dashboard/export/<str:fmt>/', views.ExportDataView.as_view(),
-         name='export_data'),
 ]

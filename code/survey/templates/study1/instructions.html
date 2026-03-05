@@ -1,41 +1,75 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10">
-    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Part 1: Phrase Classification</h1>
-    <p class="text-sm text-slate-500 mb-6">Instructions</p>
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 max-w-2xl mx-auto">
+    <h1 class="text-2xl font-semibold text-slate-800 mb-2">Phrase Sorting Game</h1>
+    <p class="text-sm text-slate-500 mb-6">How it works</p>
 
     <div class="space-y-4 text-slate-600">
         <p>
-            In this task, you will see phrases that come from real job postings in the United States.
+            Phrases will fall from the top of the screen. Click the bucket where you think
+            each phrase belongs before it reaches the bottom.
         </p>
+
         <p>
-            For each phrase, please check <strong>ALL</strong> categories you think it fits into.
-            Some phrases may fit more than one category — that is completely fine. If a phrase does
-            not seem to fit any category, select "None of these / I'm not sure."
+            <strong>Sort as many as you can in 5 minutes.</strong>
+            The phrases will speed up as the game goes on. If you miss one, it will
+            come back around later.
         </p>
-        <p>
-            There are no trick questions. We want your honest judgment about what each phrase is
-            communicating to a job seeker.
-        </p>
-        <p>
-            You will start with <strong>a few practice items</strong> to get familiar with the
-            categories. After the practice round, you will begin the main task.
-        </p>
+
+        <div class="bg-slate-50 rounded-lg p-5 border border-slate-200">
+            <p class="text-sm font-semibold text-slate-700 mb-3">The five categories:</p>
+            <div class="space-y-4 text-sm">
+                <div class="flex gap-2">
+                    <span class="inline-block w-3 h-3 rounded mt-1 flex-shrink-0" style="background: #4a7c8a;"></span>
+                    <div>
+                        <strong class="text-slate-700">Organizational Purpose</strong>
+                        <span class="text-slate-500"> &mdash; Some employers describe what they stand for beyond making money &mdash; what motivates them, what they are trying to build or change, and why that matters. This shapes how the organization operates and motivates internally and how it engages with the world outside. When a firm&rsquo;s purpose resonates with you, the work feels meaningful because it reflects something you genuinely care about.</span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="inline-block w-3 h-3 rounded mt-1 flex-shrink-0" style="background: #6a8a4a;"></span>
+                    <div>
+                        <strong class="text-slate-700">Good Employer</strong>
+                        <span class="text-slate-500"> &mdash; Some employers describe the work environment they create for people inside it to make the experience of working there better. This can be independent of the organization&rsquo;s mission.</span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="inline-block w-3 h-3 rounded mt-1 flex-shrink-0" style="background: #8a6a4a;"></span>
+                    <div>
+                        <strong class="text-slate-700">Compensation &amp; Benefits</strong>
+                        <span class="text-slate-500"> &mdash; Some employers describe the return for your work &mdash; what you receive in exchange for your time and effort. The common thread is that these are forms of value the employer distributes to you as part of the employment exchange.</span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="inline-block w-3 h-3 rounded mt-1 flex-shrink-0" style="background: #7a4a8a;"></span>
+                    <div>
+                        <strong class="text-slate-700">Job Tasks &amp; Requirements</strong>
+                        <span class="text-slate-500"> &mdash; Some employers describe what the role actually involves &mdash; the responsibilities, skills required, and what the work looks like day to day. This language is about the job itself rather than the employer.</span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <span class="inline-block w-3 h-3 rounded mt-1 flex-shrink-0" style="background: #6b7280;"></span>
+                    <div>
+                        <strong class="text-slate-700">Not Sure</strong>
+                        <span class="text-slate-500"> &mdash; Use this bucket if a phrase could reasonably belong in more than one category, or if you cannot tell what it is communicating. There is no penalty for using it.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
             <p class="text-sm text-slate-700">
-                <strong>Tip:</strong> A reference panel with category definitions will stay visible
-                on the side of your screen throughout the task. You can refer to it at any time.
+                <strong>Tip:</strong> You can also use keyboard keys <kbd class="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs font-mono">1</kbd> through <kbd class="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs font-mono">5</kbd> to sort faster. There are no wrong answers &mdash; we want your honest instinct.
             </p>
         </div>
     </div>
 
-    <div class="mt-8">
-        <a href="{% url 'core:study1_practice' item_num=0 %}"
+    <div class="mt-8 text-center">
+        <a href="{% url 'core:bucket_sort_game' %}"
            class="btn-primary inline-block bg-primary-500 hover:bg-primary-700 text-white
                   font-medium py-3 px-8 rounded-lg text-base">
-            Start Practice Round
+            Start Game
         </a>
     </div>
 </div>

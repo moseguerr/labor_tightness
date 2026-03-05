@@ -1,35 +1,61 @@
 import uuid
+import random
+import string
 from django.db import models
-from django.utils import timezone
 
 
 class Participant(models.Model):
-    """One record per participant session. Anonymous — no names collected."""
+    """One record per participant session."""
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     participant_code = models.CharField(
-        max_length=16, unique=True,
+        max_length=16, unique=True, blank=True,
         help_text="Auto-generated anonymous ID (e.g. P0001)")
-    external_id = models.CharField(
+    prolific_id = models.CharField(
         max_length=64, blank=True, db_index=True,
-        help_text="Optional external ID (for future Prolific integration)")
+        help_text="Prolific PID from URL params")
 
-    SESSION_TYPES = [
-        ('study1', 'Study 1 Only'),
-        ('study2', 'Study 2 Only'),
-        ('combined', 'Combined Session'),
+    STUDY_CHOICES = [
+        ('study2', 'Study 2 — Job Seeker'),
+        ('study3', 'Study 3 — Hiring Manager'),
     ]
-    session_type = models.CharField(max_length=10, choices=SESSION_TYPES)
+    study_assignment = models.CharField(max_length=6, choices=STUDY_CHOICES)
+
+    ARM_CHOICES = [
+        ('A', 'Arm A — Wages Visible'),
+        ('B', 'Arm B — Wages Hidden'),
+    ]
+    wage_arm = models.CharField(max_length=1, choices=ARM_CHOICES)
+
+    OCCUPATION_CHOICES = [
+        ('business_analyst', 'Business Analyst'),
+        ('financial_analyst', 'Financial Analyst'),
+        ('marketing_analyst', 'Marketing Analyst'),
+    ]
+    occupation_pool = models.CharField(
+        max_length=20, choices=OCCUPATION_CHOICES, blank=True,
+        help_text="Which occupation pool this participant sees")
+
+    # Wage counterbalancing: which 2 of the 4 signal types get high wages.
+    # Stored as comma-separated signal types, e.g. "purpose_innovation,neutral"
+    wage_counterbalance = models.CharField(
+        max_length=60, blank=True,
+        help_text="Signal types assigned high wages (comma-separated)")
 
     STATUS_CHOICES = [
+        ('created', 'Created'),
         ('consented', 'Consented'),
-        ('in_study1', 'In Study 1'),
-        ('in_study2', 'In Study 2'),
-        ('in_demographics', 'In Demographics'),
+        ('reading', 'Reading Postings'),
+        ('stage1', 'Stage 1 — Rankings'),
+        ('stage2', 'Stage 2 — Card Sort'),
+        ('stage3', 'Stage 3 — Competition'),
+        ('stage4', 'Stage 4 — Bucket Sort'),
+        ('individual_diffs', 'Individual Differences'),
+        ('demographics', 'Demographics'),
         ('completed', 'Completed'),
         ('withdrawn', 'Withdrawn'),
     ]
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='consented')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='created')
 
     consented = models.BooleanField(default=False)
     consent_timestamp = models.DateTimeField(null=True, blank=True)
@@ -37,9 +63,12 @@ class Participant(models.Model):
     started_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
 
-    # Randomization seeds for reproducibility
-    phrase_seed = models.IntegerField(null=True, blank=True)
     posting_order_seed = models.IntegerField(null=True, blank=True)
+
+    card_sort_posting = models.ForeignKey(
+        'Posting', null=True, blank=True, on_delete=models.SET_NULL,
+        related_name='card_sort_participants',
+        help_text="Which posting this participant does the card sort on")
 
     # Quality flags
     attention_checks_passed = models.IntegerField(default=0)
@@ -53,11 +82,11 @@ class Participant(models.Model):
         ordering = ['-started_at']
         indexes = [
             models.Index(fields=['status']),
-            models.Index(fields=['started_at']),
+            models.Index(fields=['study_assignment', 'wage_arm']),
         ]
 
     def __str__(self):
-        return f"{self.participant_code} ({self.session_type}) - {self.status}"
+        return f"{self.participant_code} ({self.study_assignment}/{self.wage_arm}) — {self.status}"
 
     @property
     def duration_seconds(self):
@@ -67,232 +96,127 @@ class Participant(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.participant_code:
-            # Auto-generate sequential code
-            last = Participant.objects.order_by('-participant_code').first()
-            if last and last.participant_code.startswith('P'):
+            self.participant_code = self._generate_code()
+        if not self.completion_code:
+            self.completion_code = self._generate_completion_code()
+        super().save(*args, **kwargs)
+
+    def _generate_code(self):
+        for _ in range(10):
+            last = (Participant.objects
+                    .filter(participant_code__startswith='P')
+                    .order_by('-participant_code').first())
+            if last:
                 try:
                     num = int(last.participant_code[1:]) + 1
                 except ValueError:
                     num = 1
             else:
                 num = 1
-            self.participant_code = f"P{num:04d}"
-        super().save(*args, **kwargs)
+            code = f"P{num:04d}"
+            if not Participant.objects.filter(participant_code=code).exists():
+                return code
+        suffix = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        return f"P{suffix}"
+
+    def _generate_completion_code(self):
+        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+
+    def get_posting_order(self):
+        """Return posting IDs in this participant's randomized order."""
+        rng = random.Random(self.posting_order_seed)
+        ids = list(
+            Posting.objects
+            .filter(occupation_pool=self.occupation_pool)
+            .values_list('id', flat=True)
+        )
+        rng.shuffle(ids)
+        return ids
+
+    def get_high_wage_signals(self):
+        """Return set of signal types assigned high wages for this participant."""
+        if not self.wage_counterbalance:
+            return set()
+        return set(s.strip() for s in self.wage_counterbalance.split(',') if s.strip())
 
 
-class Phrase(models.Model):
-    """A phrase stimulus for Study 1. Loaded from phrases_raw.json."""
+class Posting(models.Model):
+    """Fictional job postings for the ranking task. 4 per occupation pool × 3 pools = 12 total."""
 
-    ITEM_TYPES = [
-        ('main', 'Main Item'),
-        ('practice', 'Practice Item'),
-        ('attention', 'Attention Check'),
-    ]
-
-    phrase_text = models.TextField(help_text="The bolded phrase shown to participant")
-    context_text = models.TextField(help_text="1-2 sentence job posting context")
-    item_type = models.CharField(max_length=10, choices=ITEM_TYPES, default='main')
-
-    # Source metadata (from extraction)
-    dict_category = models.CharField(max_length=64, blank=True)
-    dict_subcategory = models.CharField(max_length=128, blank=True)
-    irb_category = models.CharField(
-        max_length=32, blank=True,
-        help_text="Expected correct IRB category")
-
-    # For practice and attention checks
-    correct_categories = models.JSONField(
-        default=list, blank=True,
-        help_text="List of correct category slugs")
-    feedback_text = models.TextField(
-        blank=True, help_text="Feedback shown after practice items")
-
-    is_active = models.BooleanField(default=True)
-    is_ambiguous = models.BooleanField(default=False)
-    display_order = models.IntegerField(
-        default=0, help_text="Order within practice/attention sets")
-
-    class Meta:
-        ordering = ['item_type', 'display_order']
-
-    def __str__(self):
-        return f"[{self.item_type}] {self.phrase_text[:50]}"
-
-
-class Study1Response(models.Model):
-    """One row per phrase classification by a participant."""
-
-    participant = models.ForeignKey(
-        Participant, on_delete=models.CASCADE, related_name='study1_responses')
-    phrase = models.ForeignKey(
-        Phrase, on_delete=models.CASCADE, related_name='responses')
-    presentation_order = models.IntegerField(
-        help_text="Position in this participant's sequence (1-indexed)")
-
-    # Which categories the participant checked (multi-select)
-    selected_mission_values = models.BooleanField(default=False)
-    selected_treats_well = models.BooleanField(default=False)
-    selected_pay_benefits = models.BooleanField(default=False)
-    selected_job_tasks = models.BooleanField(default=False)
-    selected_job_requirements = models.BooleanField(default=False)
-    selected_none_unsure = models.BooleanField(default=False)
-
-    displayed_at = models.DateTimeField(null=True, blank=True)
-    responded_at = models.DateTimeField(null=True, blank=True)
-    is_correct = models.BooleanField(null=True, blank=True)
-
-    class Meta:
-        unique_together = ['participant', 'phrase']
-        ordering = ['participant', 'presentation_order']
-
-    def __str__(self):
-        return f"{self.participant.participant_code} -> {self.phrase.phrase_text[:30]}"
-
-    @property
-    def time_spent_seconds(self):
-        if self.responded_at and self.displayed_at:
-            return (self.responded_at - self.displayed_at).total_seconds()
-        return None
-
-    @property
-    def selected_categories(self):
-        selected = []
-        if self.selected_mission_values:
-            selected.append('mission_values')
-        if self.selected_treats_well:
-            selected.append('treats_well')
-        if self.selected_pay_benefits:
-            selected.append('pay_benefits')
-        if self.selected_job_tasks:
-            selected.append('job_tasks')
-        if self.selected_job_requirements:
-            selected.append('job_requirements')
-        if self.selected_none_unsure:
-            selected.append('none_unsure')
-        return selected
-
-
-class Study1PostTask(models.Model):
-    """Post-task questions after Study 1 classification."""
-
-    participant = models.OneToOneField(
-        Participant, on_delete=models.CASCADE, related_name='study1_post_task')
-    confidence = models.IntegerField(help_text="1-7: How confident in classifications")
-    confusion_text = models.TextField(
-        blank=True, help_text="Open text: categories confusing or hard to tell apart")
-    familiarity = models.IntegerField(help_text="1-7: How familiar with reading job postings")
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-class JobPosting(models.Model):
-    """The 6 fictional job postings for Study 2. Fixed IRB content."""
-
-    FRAMING_CHOICES = [
-        ('purpose', 'Purpose / Mission-driven'),
+    SIGNAL_CHOICES = [
+        ('purpose_innovation', 'Purpose — Innovation'),
+        ('purpose_social', 'Purpose — Social'),
         ('good_employer', 'Good Employer'),
-        ('neutral', 'Neutral / Control'),
+        ('neutral', 'Neutral'),
     ]
-    SALARY_CHOICES = [
-        ('high', 'High ($78,000)'),
-        ('low', 'Low ($52,000)'),
+    OCCUPATION_POOL_CHOICES = [
+        ('business_analyst', 'Business Analyst'),
+        ('financial_analyst', 'Financial Analyst'),
+        ('marketing_analyst', 'Marketing Analyst'),
     ]
 
-    condition_label = models.CharField(
-        max_length=1, help_text="A-F condition label from IRB design matrix")
+    occupation_pool = models.CharField(
+        max_length=20, choices=OCCUPATION_POOL_CHOICES,
+        help_text="Which occupation pool this posting belongs to")
     company_name = models.CharField(max_length=100)
-    company_tagline = models.CharField(
-        max_length=200, blank=True, help_text="Italicized subtitle under company name")
-    framing = models.CharField(max_length=15, choices=FRAMING_CHOICES)
-    salary_level = models.CharField(max_length=4, choices=SALARY_CHOICES)
-    salary_amount = models.IntegerField(help_text="Annual salary in dollars")
-    job_title = models.CharField(max_length=100, default="Marketing Analyst")
-    location = models.CharField(max_length=100, default="Washington, DC metro area")
+    job_title = models.CharField(max_length=100)
+    signal_type = models.CharField(max_length=20, choices=SIGNAL_CHOICES)
 
-    responsibilities = models.JSONField(
-        default=list, help_text="List of responsibility bullet points")
-    company_description = models.TextField(
+    # Salary ranges for high/low wage conditions (determined per participant)
+    salary_high_text = models.CharField(
+        max_length=50, help_text="Salary text when assigned high wages")
+    salary_high_low = models.IntegerField(help_text="Min of high salary range")
+    salary_high_high = models.IntegerField(help_text="Max of high salary range")
+    salary_low_text = models.CharField(
+        max_length=50, help_text="Salary text when assigned low wages")
+    salary_low_low = models.IntegerField(help_text="Min of low salary range")
+    salary_low_high = models.IntegerField(help_text="Max of low salary range")
+
+    company_intro = models.TextField(
+        help_text="Neutral company description paragraph")
+    role_description = models.TextField(
+        help_text="'The Role' section text")
+    signal_section_title = models.CharField(
+        max_length=50,
+        help_text="e.g. 'Who We Are', 'Our Mission', 'Working at Crestline'")
+    signal_section_text = models.TextField(
         help_text="The framing paragraph (purpose/good-employer/neutral)")
-    benefits_text = models.TextField(help_text="Benefits line")
+    requirements_text = models.TextField()
 
     class Meta:
-        ordering = ['condition_label']
+        ordering = ['occupation_pool', 'signal_type']
+        unique_together = ['occupation_pool', 'signal_type']
 
     def __str__(self):
-        return f"[{self.condition_label}] {self.company_name} ({self.framing}/{self.salary_level})"
+        return f"{self.company_name} ({self.occupation_pool}/{self.signal_type})"
+
+    def get_salary_text(self, participant):
+        """Return the salary range text based on participant's wage counterbalance."""
+        high_signals = participant.get_high_wage_signals()
+        if self.signal_type in high_signals:
+            return self.salary_high_text
+        return self.salary_low_text
 
 
-class PostingViewRecord(models.Model):
-    """Records that a participant viewed a specific posting."""
-
-    participant = models.ForeignKey(
-        Participant, on_delete=models.CASCADE, related_name='posting_views')
-    posting = models.ForeignKey(
-        JobPosting, on_delete=models.CASCADE, related_name='views')
-    presentation_order = models.IntegerField(
-        help_text="Order this posting was shown (1-6)")
-    viewed_at = models.DateTimeField(null=True, blank=True)
-    time_spent_seconds = models.FloatField(null=True, blank=True)
-
-    class Meta:
-        unique_together = ['participant', 'posting']
-        ordering = ['participant', 'presentation_order']
-
-
-class Study2ManipulationCheck(models.Model):
-    """4 manipulation check questions after viewing all 6 postings."""
+class Demographics(models.Model):
+    """Standard demographics. All fields optional per IRB."""
 
     participant = models.OneToOneField(
-        Participant, on_delete=models.CASCADE, related_name='manipulation_checks')
-    most_mission = models.CharField(max_length=100)
-    most_workplace = models.CharField(max_length=100)
-    highest_salary = models.CharField(max_length=100)
-    job_title_check = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-
-class Study2Ranking(models.Model):
-    """One row per ranking dimension per participant."""
-
-    DIMENSION_CHOICES = [
-        ('attractiveness', 'Application Attractiveness'),
-        ('sincerity', 'Perceived Sincerity'),
-        ('employee_treatment', 'Employee Treatment'),
-        ('accept_lower_pay', 'Willingness to Accept Lower Pay'),
-        ('instrumentality', 'Perceived Instrumentality'),
-    ]
-
-    participant = models.ForeignKey(
-        Participant, on_delete=models.CASCADE, related_name='rankings')
-    dimension = models.CharField(max_length=30, choices=DIMENSION_CHOICES)
-    ranking_order = models.JSONField(
-        help_text="Ordered list of company names, position 0 = rank 1")
+        Participant, on_delete=models.CASCADE, related_name='demographics')
+    age = models.IntegerField(null=True, blank=True)
+    gender = models.CharField(max_length=50, blank=True)
+    gender_self_describe = models.CharField(max_length=100, blank=True)
+    education = models.CharField(max_length=100, blank=True)
+    employment_status = models.CharField(max_length=100, blank=True)
+    employment_other = models.CharField(max_length=200, blank=True)
+    industry = models.CharField(max_length=100, blank=True)
+    industry_other = models.CharField(max_length=200, blank=True)
+    work_experience_years = models.IntegerField(null=True, blank=True)
+    last_job_search = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ['participant', 'dimension']
-
-
-class Study2PostRanking(models.Model):
-    """Post-ranking follow-up questions about the top-ranked company."""
-
-    participant = models.OneToOneField(
-        Participant, on_delete=models.CASCADE, related_name='post_ranking')
-    top_company = models.CharField(
-        max_length=100, help_text="Auto-filled from attractiveness rank #1")
-    explanation_text = models.TextField(
-        blank=True, help_text="Why this posting stood out")
-    min_acceptable_salary = models.IntegerField(
-        null=True, blank=True,
-        help_text="Minimum salary to accept at top-ranked company")
-
-    # Person-Organization Fit (3 items, 7-point Likert)
-    po_fit_values = models.IntegerField(
-        null=True, blank=True, help_text="1-7: Personal values aligned")
-    po_fit_belong = models.IntegerField(
-        null=True, blank=True, help_text="1-7: Would fit in well")
-    po_fit_care = models.IntegerField(
-        null=True, blank=True, help_text="1-7: Reflects what I care about")
-    created_at = models.DateTimeField(auto_now_add=True)
+        verbose_name_plural = "Demographics"
 
 
 class IndividualDifferences(models.Model):
@@ -339,22 +263,238 @@ class IndividualDifferences(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Demographics(models.Model):
-    """Standard demographics collected at the end. All optional per IRB."""
+# ---------------------------------------------------------------------------
+# Study 2: Ranking Task
+# ---------------------------------------------------------------------------
 
-    participant = models.OneToOneField(
-        Participant, on_delete=models.CASCADE, related_name='demographics')
-    age = models.IntegerField(null=True, blank=True)
-    gender = models.CharField(max_length=50, blank=True)
-    gender_self_describe = models.CharField(max_length=100, blank=True)
-    education = models.CharField(max_length=100, blank=True)
-    employment_status = models.CharField(max_length=100, blank=True)
-    employment_other = models.CharField(max_length=200, blank=True)
-    industry = models.CharField(max_length=100, blank=True)
-    industry_other = models.CharField(max_length=200, blank=True)
-    work_experience_years = models.IntegerField(null=True, blank=True)
-    last_job_search = models.CharField(max_length=50, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+class RankingResponse(models.Model):
+    """One row per participant × dimension ranking."""
+
+    DIMENSION_CHOICES = [
+        ('perceived_pay', 'Perceived Pay'),
+        ('employer_quality', 'Employer Quality'),
+        ('challenging_rewarding', 'Challenging & Rewarding Work'),
+        ('workplace_culture', 'Workplace Culture'),
+        ('belief_alignment', 'Belief-Work Alignment'),
+        ('mission_identity', 'Mission/Identity Clarity'),
+        ('overall_desirability', 'Overall Desirability'),
+    ]
+
+    participant = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name='ranking_responses')
+    dimension = models.CharField(max_length=25, choices=DIMENSION_CHOICES)
+    dimension_order = models.IntegerField(help_text="Presentation order (1-7)")
+    ranking_order = models.JSONField(
+        help_text="List of signal_types in rank order, e.g. ['purpose_innovation','neutral',...]")
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = "Demographics"
+        unique_together = ['participant', 'dimension']
+        ordering = ['participant', 'dimension_order']
+
+    def __str__(self):
+        return f"{self.participant.participant_code} — {self.dimension} #{self.dimension_order}: {self.ranking_order}"
+
+
+# ---------------------------------------------------------------------------
+# Study 2: Card Sort & Competition
+# ---------------------------------------------------------------------------
+
+class CardSortCard(models.Model):
+    """A cover-letter statement for the card sort task."""
+
+    TYPE_CHOICES = [
+        ('I', 'Identity'),
+        ('G', 'Good-Employer'),
+        ('C', 'Competence'),
+    ]
+
+    card_id = models.CharField(max_length=4, unique=True, help_text="I1, G1, C1, etc.")
+    card_type = models.CharField(max_length=1, choices=TYPE_CHOICES)
+    card_text = models.CharField(max_length=300)
+    display_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f"[{self.card_id}] {self.card_text[:60]}"
+
+
+class CardSortResponse(models.Model):
+    """One row per participant × stage (card_sort or competition)."""
+
+    STAGE_CHOICES = [
+        ('card_sort', 'Card Sort'),
+        ('competition', 'Competition'),
+    ]
+
+    participant = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name='card_sort_responses')
+    posting = models.ForeignKey(
+        Posting, on_delete=models.CASCADE, related_name='card_sort_responses')
+    stage = models.CharField(max_length=15, choices=STAGE_CHOICES)
+    cards_selected = models.JSONField(
+        help_text="List of card_ids selected, e.g. ['I1','C3','G2']")
+    selection_order = models.JSONField(
+        default=list, blank=True,
+        help_text="Order in which cards were clicked")
+    keep_original = models.BooleanField(
+        default=False,
+        help_text="Competition stage: participant kept original selection")
+    response_time_ms = models.IntegerField(null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['participant', 'stage']
+
+    def __str__(self):
+        action = 'KEPT' if self.keep_original else ','.join(self.cards_selected)
+        return f"{self.participant.participant_code} — {self.stage}: {action}"
+
+
+# ---------------------------------------------------------------------------
+# Study 3: Hiring Manager Card Sort & Competition
+# ---------------------------------------------------------------------------
+
+class HiringManagerCard(models.Model):
+    """A posting-improvement card for the hiring manager card sort (Study 3)."""
+
+    TYPE_CHOICES = [
+        ('P', 'Purpose'),
+        ('G', 'Good-Employer'),
+        ('W', 'Wage'),
+        ('T', 'Task'),
+    ]
+
+    card_id = models.CharField(max_length=4, unique=True, help_text="HP1, HG1, HW1, HT1, etc.")
+    card_type = models.CharField(max_length=1, choices=TYPE_CHOICES)
+    card_text = models.CharField(max_length=300)
+    display_order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['display_order']
+
+    def __str__(self):
+        return f"[{self.card_id}] {self.card_text[:60]}"
+
+
+class HiringManagerResponse(models.Model):
+    """One row per participant × stage for the hiring manager task (Study 3)."""
+
+    STAGE_CHOICES = [
+        ('card_sort', 'Card Sort'),
+        ('competition', 'Competition'),
+    ]
+
+    participant = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name='hm_responses')
+    posting = models.ForeignKey(
+        Posting, on_delete=models.CASCADE, related_name='hm_responses')
+    stage = models.CharField(max_length=15, choices=STAGE_CHOICES)
+    cards_selected = models.JSONField(
+        help_text="card_sort: list of 3 card_ids; competition: list of 0-1 card_ids")
+    selection_order = models.JSONField(
+        default=list, blank=True,
+        help_text="Order in which cards were clicked")
+    would_change = models.BooleanField(
+        null=True, blank=True,
+        help_text="Competition stage: did the participant choose to change? (yes/no)")
+    response_time_ms = models.IntegerField(null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['participant', 'stage']
+
+    def __str__(self):
+        if self.stage == 'competition' and not self.would_change:
+            return f"{self.participant.participant_code} — hm_{self.stage}: NO CHANGE"
+        return f"{self.participant.participant_code} — hm_{self.stage}: {','.join(self.cards_selected)}"
+
+
+# ---------------------------------------------------------------------------
+# Study 1: Bucket Sort Game
+# ---------------------------------------------------------------------------
+
+class BucketSortPhrase(models.Model):
+    """A phrase stimulus for the bucket sort game (Study 1 / Stage 4)."""
+
+    DIFFICULTY_CHOICES = [
+        ('easy', 'Easy'),
+        ('medium', 'Medium'),
+        ('hard', 'Hard'),
+    ]
+    BUCKET_CHOICES = [
+        ('purpose', 'Organizational purpose'),
+        ('good_employer', 'Good employer'),
+        ('compensation', 'Compensation & benefits'),
+        ('job_tasks', 'Job tasks'),
+    ]
+
+    phrase_id = models.CharField(max_length=4, unique=True, help_text="S1-S32")
+    phrase_text = models.CharField(max_length=200)
+    expected_bucket = models.CharField(max_length=20, choices=BUCKET_CHOICES)
+    difficulty = models.CharField(max_length=6, choices=DIFFICULTY_CHOICES)
+    boundary_pair = models.CharField(
+        max_length=40, blank=True,
+        help_text="e.g. 'purpose/good_employer'")
+    source = models.CharField(max_length=200, blank=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['phrase_id']
+
+    def __str__(self):
+        return f"[{self.phrase_id}] {self.phrase_text} ({self.difficulty})"
+
+
+class BucketSortResponse(models.Model):
+    """One row per phrase catch/miss in the bucket sort game."""
+
+    participant = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name='bucket_sort_responses')
+    phrase = models.ForeignKey(
+        BucketSortPhrase, on_delete=models.CASCADE, related_name='responses')
+    attempt = models.IntegerField(default=1, help_text="1st, 2nd, 3rd appearance")
+    bucket_assigned = models.CharField(
+        max_length=20, blank=True, help_text="Which bucket (empty if missed)")
+    was_missed = models.BooleanField(default=False)
+    time_on_phrase_ms = models.IntegerField(
+        null=True, blank=True, help_text="ms from appearance to catch")
+    game_elapsed_ms = models.IntegerField(
+        null=True, blank=True, help_text="ms since game start")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['participant', 'game_elapsed_ms']
+
+    def __str__(self):
+        action = self.bucket_assigned or 'MISSED'
+        return f"{self.participant.participant_code} -> {self.phrase.phrase_id} #{self.attempt}: {action}"
+
+
+class BucketSortReconciliation(models.Model):
+    """Post-game reconciliation for phrases classified differently across attempts."""
+
+    RESOLUTION_CHOICES = [
+        ('mistake', 'It was a mistake'),
+        ('fits_both', 'It fits both categories'),
+    ]
+
+    participant = models.ForeignKey(
+        Participant, on_delete=models.CASCADE, related_name='bucket_reconciliations')
+    phrase = models.ForeignKey(
+        BucketSortPhrase, on_delete=models.CASCADE, related_name='reconciliations')
+    first_bucket = models.CharField(max_length=20)
+    second_bucket = models.CharField(max_length=20)
+    resolution = models.CharField(max_length=10, choices=RESOLUTION_CHOICES)
+    final_bucket = models.CharField(
+        max_length=20, blank=True,
+        help_text="If mistake, which bucket is correct")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['participant', 'phrase']
+
+    def __str__(self):
+        return f"{self.participant.participant_code} -> {self.phrase.phrase_id}: {self.resolution}"
