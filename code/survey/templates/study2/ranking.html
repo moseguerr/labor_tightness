@@ -52,8 +52,8 @@
 {% if pay_reveal %}
 <!-- Wage reveal banner -->
 <div class="rounded-xl border p-4 mb-4" style="background: #d1fae520; border-color: #10b98140;">
-    <p class="text-sm font-semibold" style="color: #065f46;">You were right!</p>
-    <p class="text-xs mt-1" style="color: #047857;">
+    <p class="text-base font-semibold" style="color: #065f46;">You were right!</p>
+    <p class="text-sm mt-1" style="color: #047857;">
         The salary ranges are now shown on each posting.
     </p>
 </div>
@@ -106,11 +106,6 @@
                 <div>
                     <h4 class="font-semibold text-slate-700 uppercase tracking-wide text-[10px] mb-0.5">{{ posting.signal_section_title }}</h4>
                     <p>{{ posting.signal_section_text }}</p>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold text-slate-700 uppercase tracking-wide text-[10px] mb-0.5">Requirements</h4>
-                    <p>{{ posting.requirements_text }}</p>
                 </div>
 
                 <!-- Salary (only shown when wages are visible for this dimension) -->

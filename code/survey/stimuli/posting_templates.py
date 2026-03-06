@@ -21,20 +21,27 @@ Signal type definitions:
   - neutral: Factual, administrative details only (control)
 """
 
-# Wage levels: high and low per occupation
-# These are realistic salary ranges from Lightcast data for each SOC
+# Wage levels: 4 tiers per occupation, assigned based on participant's
+# perceived-pay ranking (rank 1 = tier 1 = highest, rank 4 = tier 4 = lowest).
+# Realistic salary ranges from Lightcast data for each SOC.
 WAGE_RANGES = {
     'business_analyst': {
-        'high': {'text': '$88,000 - $105,000', 'low': 88000, 'high_val': 105000},
-        'low':  {'text': '$52,000 - $64,000',  'low': 52000, 'high_val': 64000},
+        1: {'text': '$88,000 - $105,000', 'low': 88000, 'high_val': 105000},
+        2: {'text': '$75,000 - $90,000',  'low': 75000, 'high_val': 90000},
+        3: {'text': '$62,000 - $75,000',  'low': 62000, 'high_val': 75000},
+        4: {'text': '$52,000 - $64,000',  'low': 52000, 'high_val': 64000},
     },
     'financial_analyst': {
-        'high': {'text': '$85,000 - $100,000', 'low': 85000, 'high_val': 100000},
-        'low':  {'text': '$50,000 - $62,000',  'low': 50000, 'high_val': 62000},
+        1: {'text': '$85,000 - $100,000', 'low': 85000, 'high_val': 100000},
+        2: {'text': '$72,000 - $86,000',  'low': 72000, 'high_val': 86000},
+        3: {'text': '$60,000 - $72,000',  'low': 60000, 'high_val': 72000},
+        4: {'text': '$50,000 - $62,000',  'low': 50000, 'high_val': 62000},
     },
     'marketing_analyst': {
-        'high': {'text': '$78,000 - $92,000',  'low': 78000, 'high_val': 92000},
-        'low':  {'text': '$45,000 - $55,000',  'low': 45000, 'high_val': 55000},
+        1: {'text': '$78,000 - $92,000',  'low': 78000, 'high_val': 92000},
+        2: {'text': '$66,000 - $78,000',  'low': 66000, 'high_val': 78000},
+        3: {'text': '$55,000 - $66,000',  'low': 55000, 'high_val': 66000},
+        4: {'text': '$45,000 - $55,000',  'low': 45000, 'high_val': 55000},
     },
 }
 

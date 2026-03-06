@@ -10,11 +10,11 @@ from .models import (
 @admin.register(Participant)
 class ParticipantAdmin(admin.ModelAdmin):
     list_display = [
-        'participant_code', 'study_assignment', 'wage_arm', 'occupation_pool',
+        'participant_code', 'user_id', 'study_assignment', 'wage_arm', 'occupation_pool',
         'status', 'started_at', 'completed_at', 'flagged_for_exclusion',
     ]
     list_filter = ['study_assignment', 'wage_arm', 'occupation_pool', 'status', 'flagged_for_exclusion']
-    search_fields = ['participant_code', 'prolific_id']
+    search_fields = ['participant_code', 'user_id', 'prolific_id']
     readonly_fields = ['id', 'started_at']
 
 
@@ -22,7 +22,6 @@ class ParticipantAdmin(admin.ModelAdmin):
 class PostingAdmin(admin.ModelAdmin):
     list_display = [
         'occupation_pool', 'company_name', 'signal_type',
-        'salary_high_text', 'salary_low_text',
     ]
     list_filter = ['occupation_pool', 'signal_type']
 

@@ -13,37 +13,17 @@
     <h1 class="text-2xl font-semibold text-slate-800 mb-2">Thank You!</h1>
     <p class="text-slate-500 text-sm mb-8">You have completed the study.</p>
 
-    {% if completion_code %}
-    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-8 inline-block">
-        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Completion Code</p>
-        <p class="text-2xl font-mono font-bold text-primary-600">{{ completion_code }}</p>
-        <p class="text-xs text-slate-400 mt-1">Please enter this code on Prolific to confirm your participation.</p>
-    </div>
-    {% endif %}
-
     <div class="prose prose-slate prose-sm max-w-none text-left space-y-4 text-slate-600">
         <h3 class="text-base font-semibold text-slate-700">About This Study</h3>
 
         <p>
-            The job postings you evaluated were fictional, created specifically for this study.
-            We systematically varied aspects of the postings — including whether the company emphasized
-            a social mission, innovation, or being a great workplace, as well as the salary offered.
+            We are studying different types of employer branding in job postings and how they are
+            interpreted by hiring managers and job seekers. The job postings you evaluated were
+            fictional, constructed based on common characteristics of real ones, specifically for
+            this study. We systematically varied aspects of the postings — including whether the
+            company emphasized a social mission, innovation, or being a great workplace, as well
+            as the salary offered.
         </p>
-
-        {% if study_assignment == 'study2' %}
-        <p>
-            We are studying how these features — particularly claims about organizational purpose
-            and mission — influence job seekers' evaluations. This research investigates whether
-            organizational purpose claims function as genuine signals of employer quality or as
-            substitutes for concrete benefits like salary.
-        </p>
-        {% elif study_assignment == 'study3' %}
-        <p>
-            We are studying how hiring managers perceive and evaluate different types of employer
-            branding in job postings. This research investigates how organizational purpose claims
-            compare to other framing strategies when attracting talent.
-        </p>
-        {% endif %}
 
         <h3 class="text-base font-semibold text-slate-700">Confidentiality</h3>
         <p>
@@ -54,9 +34,7 @@
         <h3 class="text-base font-semibold text-slate-700">Questions?</h3>
         <p>
             If you have any questions about this study, please contact the Principal Investigator,
-            Mariana Oseguera, at
-            <a href="mailto:m.oseguera@georgetown.edu" class="text-primary-600 hover:text-primary-700">
-                m.oseguera@georgetown.edu</a>.
+            Professor Mariana Oseguera.
         </p>
     </div>
 

@@ -13,7 +13,7 @@ from core.models import Posting, BucketSortPhrase, CardSortCard, HiringManagerCa
 # Import posting templates from stimuli directory
 STIMULI_DIR = Path(__file__).resolve().parent.parent.parent.parent / 'stimuli'
 sys.path.insert(0, str(STIMULI_DIR))
-from posting_templates import POSTINGS, WAGE_RANGES
+from posting_templates import POSTINGS
 
 
 # 90 bucket sort phrases — refined category definitions, balanced coverage
@@ -174,7 +174,6 @@ class Command(BaseCommand):
     def _load_postings(self):
         created = 0
         for pool_name, pool_postings in POSTINGS.items():
-            wages = WAGE_RANGES[pool_name]
             for post_data in pool_postings:
                 _, was_created = Posting.objects.update_or_create(
                     occupation_pool=pool_name,
@@ -187,12 +186,6 @@ class Command(BaseCommand):
                         'signal_section_title': post_data['signal_section_title'],
                         'signal_section_text': post_data['signal_section_text'],
                         'requirements_text': post_data['requirements_text'],
-                        'salary_high_text': wages['high']['text'],
-                        'salary_high_low': wages['high']['low'],
-                        'salary_high_high': wages['high']['high_val'],
-                        'salary_low_text': wages['low']['text'],
-                        'salary_low_low': wages['low']['low'],
-                        'salary_low_high': wages['low']['high_val'],
                     },
                 )
                 if was_created:

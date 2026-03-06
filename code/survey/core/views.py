@@ -1,6 +1,7 @@
 import json
 import random
 import time
+import uuid
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
@@ -56,7 +57,19 @@ class LandingView(SurveyFlowMixin, TemplateView):
     template_name = 'landing.html'
     requires_participant = False
 
+    @staticmethod
+    def _generate_user_id():
+        """Generate a unique 8-character alphanumeric user ID."""
+        import string as _string
+        for _ in range(20):
+            uid = ''.join(random.choices(_string.ascii_uppercase + _string.digits, k=8))
+            if not Participant.objects.filter(user_id=uid).exists():
+                return uid
+        return uuid.uuid4().hex[:12].upper()
+
     def post(self, request, *args, **kwargs):
+        user_id = self._generate_user_id()
+
         # Randomly assign participant to study2 (job seeker) or study3 (hiring manager)
         study = random.choice(['study2', 'study3'])
 
@@ -69,18 +82,13 @@ class LandingView(SurveyFlowMixin, TemplateView):
             'business_analyst', 'financial_analyst', 'marketing_analyst',
         ])
 
-        # Wage counterbalancing: randomly pick 2 of 4 signal types to get high wages
-        signal_types = ['purpose_innovation', 'purpose_social', 'good_employer', 'neutral']
-        high_wage_signals = random.sample(signal_types, 2)
-        wage_counterbalance = ','.join(high_wage_signals)
-
         participant = Participant(
+            user_id=user_id,
             study_assignment=study,
             wage_arm=wage_arm,
             prolific_id=prolific_id,
             posting_order_seed=posting_order_seed,
             occupation_pool=occupation_pool,
-            wage_counterbalance=wage_counterbalance,
             user_agent=request.META.get('HTTP_USER_AGENT', ''),
         )
         participant.save()
@@ -216,26 +224,23 @@ class RankingDimensionView(SurveyFlowMixin, TemplateView):
 
         wage_display = self.get_wage_display(participant, dimension)
 
-        # Annotate each posting with its salary text for this participant
-        for posting in postings:
-            posting.salary_text_for_participant = posting.get_salary_text(participant)
-
         # After perceived_pay (dim 1), reorder by participant's pay ranking
-        # and always reveal wages
+        # and reveal wages that match their ranking (rank 1 = highest salary)
         pay_reveal = False
         if dimension_num == 2:
-            pay_ranking = RankingResponse.objects.filter(
-                participant=participant, dimension='perceived_pay'
-            ).first()
-            if pay_ranking and pay_ranking.ranking_order:
-                signal_order = pay_ranking.ranking_order
+            pay_ranking = participant.get_pay_ranking()
+            if pay_ranking:
                 signal_to_posting = {p.signal_type: p for p in postings}
-                reordered = [signal_to_posting[s] for s in signal_order
+                reordered = [signal_to_posting[s] for s in pay_ranking
                              if s in signal_to_posting]
                 if len(reordered) == len(postings):
                     postings = reordered
                 pay_reveal = True
                 wage_display = 'visible'
+
+        # Annotate each posting with its salary text (None if no ranking yet)
+        for posting in postings:
+            posting.salary_text_for_participant = posting.get_salary_text(participant)
 
         ctx['postings'] = postings
         ctx['participant'] = participant

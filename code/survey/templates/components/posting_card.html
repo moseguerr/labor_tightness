@@ -31,17 +31,11 @@
             <p class="text-sm text-slate-600 leading-relaxed">{{ posting.signal_section_text }}</p>
         </div>
 
-        <!-- Requirements -->
-        <div>
-            <h4 class="text-sm font-semibold text-slate-800 uppercase tracking-wide mb-1">Requirements</h4>
-            <p class="text-sm text-slate-600 leading-relaxed">{{ posting.requirements_text }}</p>
-        </div>
-
         <!-- Salary (only shown when visible) -->
         {% if wage_display == "visible" %}
         <div class="bg-gray-50 rounded-lg p-3 border border-gray-100">
             <span class="text-sm font-semibold text-slate-700">Salary: </span>
-            <span class="text-sm font-bold text-slate-800">{% if posting.salary_text_for_participant %}{{ posting.salary_text_for_participant }}{% else %}{{ posting.salary_range_text }}{% endif %}/yr</span>
+            <span class="text-sm font-bold text-slate-800">{{ posting.salary_text_for_participant }}/yr</span>
         </div>
         {% endif %}
     </div>

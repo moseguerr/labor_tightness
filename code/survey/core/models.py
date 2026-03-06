@@ -4,6 +4,7 @@ import string
 from django.db import models
 
 
+
 class Participant(models.Model):
     """One record per participant session."""
 
@@ -11,6 +12,9 @@ class Participant(models.Model):
     participant_code = models.CharField(
         max_length=16, unique=True, blank=True,
         help_text="Auto-generated anonymous ID (e.g. P0001)")
+    user_id = models.CharField(
+        max_length=64, unique=True, db_index=True, default='',
+        help_text="User-entered ID — each ID can only be used once")
     prolific_id = models.CharField(
         max_length=64, blank=True, db_index=True,
         help_text="Prolific PID from URL params")
@@ -36,11 +40,8 @@ class Participant(models.Model):
         max_length=20, choices=OCCUPATION_CHOICES, blank=True,
         help_text="Which occupation pool this participant sees")
 
-    # Wage counterbalancing: which 2 of the 4 signal types get high wages.
-    # Stored as comma-separated signal types, e.g. "purpose_innovation,neutral"
-    wage_counterbalance = models.CharField(
-        max_length=60, blank=True,
-        help_text="Signal types assigned high wages (comma-separated)")
+    # Salaries are determined by participant's perceived_pay ranking (dim 1)
+    # — no longer using random wage counterbalancing
 
     STATUS_CHOICES = [
         ('created', 'Created'),
@@ -133,11 +134,15 @@ class Participant(models.Model):
         rng.shuffle(ids)
         return ids
 
-    def get_high_wage_signals(self):
-        """Return set of signal types assigned high wages for this participant."""
-        if not self.wage_counterbalance:
-            return set()
-        return set(s.strip() for s in self.wage_counterbalance.split(',') if s.strip())
+    def get_pay_ranking(self):
+        """Return list of signal_types ordered by perceived pay (highest first).
+
+        Returns None if perceived_pay ranking hasn't been submitted yet.
+        """
+        ranking = self.ranking_responses.filter(dimension='perceived_pay').first()
+        if ranking and ranking.ranking_order:
+            return ranking.ranking_order
+        return None
 
 
 class Posting(models.Model):
@@ -162,15 +167,8 @@ class Posting(models.Model):
     job_title = models.CharField(max_length=100)
     signal_type = models.CharField(max_length=20, choices=SIGNAL_CHOICES)
 
-    # Salary ranges for high/low wage conditions (determined per participant)
-    salary_high_text = models.CharField(
-        max_length=50, help_text="Salary text when assigned high wages")
-    salary_high_low = models.IntegerField(help_text="Min of high salary range")
-    salary_high_high = models.IntegerField(help_text="Max of high salary range")
-    salary_low_text = models.CharField(
-        max_length=50, help_text="Salary text when assigned low wages")
-    salary_low_low = models.IntegerField(help_text="Min of low salary range")
-    salary_low_high = models.IntegerField(help_text="Max of low salary range")
+    # Salary tiers stored per occupation in posting_templates.WAGE_RANGES
+    # Actual salary shown depends on participant's perceived_pay ranking
 
     company_intro = models.TextField(
         help_text="Neutral company description paragraph")
@@ -190,12 +188,34 @@ class Posting(models.Model):
     def __str__(self):
         return f"{self.company_name} ({self.occupation_pool}/{self.signal_type})"
 
+    # 4 salary tiers per occupation, assigned by participant's perceived_pay ranking
+    WAGE_TIERS = {
+        'business_analyst': {
+            1: '$88,000 - $105,000', 2: '$75,000 - $90,000',
+            3: '$62,000 - $75,000',  4: '$52,000 - $64,000',
+        },
+        'financial_analyst': {
+            1: '$85,000 - $100,000', 2: '$72,000 - $86,000',
+            3: '$60,000 - $72,000',  4: '$50,000 - $62,000',
+        },
+        'marketing_analyst': {
+            1: '$78,000 - $92,000',  2: '$66,000 - $78,000',
+            3: '$55,000 - $66,000',  4: '$45,000 - $55,000',
+        },
+    }
+
     def get_salary_text(self, participant):
-        """Return the salary range text based on participant's wage counterbalance."""
-        high_signals = participant.get_high_wage_signals()
-        if self.signal_type in high_signals:
-            return self.salary_high_text
-        return self.salary_low_text
+        """Return salary range text based on participant's perceived_pay ranking.
+
+        The posting ranked #1 (highest pay) gets tier 1 (highest salary),
+        #2 gets tier 2, etc. Returns None if no ranking exists yet.
+        """
+        pay_ranking = participant.get_pay_ranking()
+        if not pay_ranking or self.signal_type not in pay_ranking:
+            return None
+        rank = pay_ranking.index(self.signal_type) + 1  # 1-based
+        tiers = self.WAGE_TIERS.get(self.occupation_pool, {})
+        return tiers.get(rank)
 
 
 class Demographics(models.Model):
