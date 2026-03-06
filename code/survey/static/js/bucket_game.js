@@ -10,7 +10,7 @@
     'use strict';
 
     // -- Configuration --------------------------------------------------------
-    const GAME_DURATION_MS = 4 * 60 * 1000; // 4 minutes
+    var GAME_DURATION_MS = 4 * 60 * 1000; // default 4 minutes, overridden by config
     const FALL_START_MS = 3500;
     const FALL_END_MS = 1200;
     const MAX_ATTEMPTS = 3;
@@ -218,7 +218,8 @@
 
         // Start fall animation
         var fallDuration = getFallDuration();
-        var startY = -60;
+        // Stagger: second slot starts higher so they don't overlap vertically
+        var startY = isDual && slotIdx === 1 ? -160 : -60;
         var endY = gameArea.offsetHeight - 80;
         var startTime = performance.now();
 
@@ -482,6 +483,9 @@
 
     function init(config) {
         submitUrl = config.submitUrl;
+        if (config.gameDuration) {
+            GAME_DURATION_MS = config.gameDuration * 1000;
+        }
         var seed = config.seed || Math.floor(Math.random() * 999999);
 
         gameArea = document.getElementById('game-area');
@@ -490,6 +494,11 @@
         scoreEl = document.getElementById('score-caught');
         timerEl = document.getElementById('score-timer');
         streakEl = document.getElementById('score-streak');
+
+        // Set initial timer display
+        var initMins = Math.floor(GAME_DURATION_MS / 60000);
+        var initSecs = Math.floor((GAME_DURATION_MS % 60000) / 1000);
+        timerEl.textContent = initMins + ':' + (initSecs < 10 ? '0' : '') + initSecs;
         bucketContainer = document.getElementById('bucket-container');
         gameOverlay = document.getElementById('game-overlay');
         countdownEl = document.getElementById('countdown');

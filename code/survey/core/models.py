@@ -199,20 +199,24 @@ class Posting(models.Model):
 
 
 class Demographics(models.Model):
-    """Standard demographics. All fields optional per IRB."""
+    """Standard demographics for undergraduate sample. All fields optional per IRB."""
 
     participant = models.OneToOneField(
         Participant, on_delete=models.CASCADE, related_name='demographics')
     age = models.IntegerField(null=True, blank=True)
     gender = models.CharField(max_length=50, blank=True)
-    gender_self_describe = models.CharField(max_length=100, blank=True)
-    education = models.CharField(max_length=100, blank=True)
-    employment_status = models.CharField(max_length=100, blank=True)
-    employment_other = models.CharField(max_length=200, blank=True)
-    industry = models.CharField(max_length=100, blank=True)
-    industry_other = models.CharField(max_length=200, blank=True)
-    work_experience_years = models.IntegerField(null=True, blank=True)
-    last_job_search = models.CharField(max_length=50, blank=True)
+    gender_other = models.CharField(max_length=100, blank=True)
+    race = models.CharField(max_length=50, blank=True)
+    race_other = models.CharField(max_length=100, blank=True)
+    parents_income = models.CharField(max_length=50, blank=True)
+    high_school_state = models.CharField(max_length=100, blank=True)
+    neighborhood = models.CharField(max_length=20, blank=True)
+    major = models.CharField(max_length=100, blank=True)
+    major_other = models.CharField(max_length=200, blank=True)
+    year_in_program = models.CharField(max_length=20, blank=True)
+    has_part_time_job = models.CharField(max_length=10, blank=True)
+    english_first_language = models.CharField(max_length=10, blank=True)
+    first_language = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -272,20 +276,20 @@ class RankingResponse(models.Model):
 
     DIMENSION_CHOICES = [
         ('perceived_pay', 'Perceived Pay'),
-        ('employer_quality', 'Employer Quality'),
-        ('challenging_rewarding', 'Challenging & Rewarding Work'),
-        ('workplace_culture', 'Workplace Culture'),
-        ('belief_alignment', 'Belief-Work Alignment'),
         ('mission_identity', 'Mission/Identity Clarity'),
+        ('belief_alignment', 'Belief-Work Alignment'),
+        ('employer_quality', 'Employer Quality'),
         ('overall_desirability', 'Overall Desirability'),
     ]
 
     participant = models.ForeignKey(
         Participant, on_delete=models.CASCADE, related_name='ranking_responses')
     dimension = models.CharField(max_length=25, choices=DIMENSION_CHOICES)
-    dimension_order = models.IntegerField(help_text="Presentation order (1-7)")
+    dimension_order = models.IntegerField(help_text="Presentation order (1-5)")
     ranking_order = models.JSONField(
         help_text="List of signal_types in rank order, e.g. ['purpose_innovation','neutral',...]")
+    response_time_seconds = models.FloatField(null=True, blank=True,
+        help_text="Seconds from page load to submit")
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:

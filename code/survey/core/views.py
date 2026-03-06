@@ -1,5 +1,6 @@
 import json
 import random
+import time
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
@@ -55,15 +56,9 @@ class LandingView(SurveyFlowMixin, TemplateView):
     template_name = 'landing.html'
     requires_participant = False
 
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        ctx['preselected_study'] = self.request.GET.get('study', '')
-        return ctx
-
     def post(self, request, *args, **kwargs):
-        study = request.POST.get('study_assignment')
-        if study not in ('study2', 'study3'):
-            return self.get(request, *args, **kwargs)
+        # Randomly assign participant to study2 (job seeker) or study3 (hiring manager)
+        study = random.choice(['study2', 'study3'])
 
         prolific_id = request.GET.get('PROLIFIC_PID', '')
         wage_arm = random.choice(['A', 'B'])
@@ -90,13 +85,8 @@ class LandingView(SurveyFlowMixin, TemplateView):
         )
         participant.save()
 
-        # Assign random posting for card sort (1 of 4 in their pool)
-        pool_postings = list(Posting.objects.filter(occupation_pool=occupation_pool))
-        if pool_postings:
-            participant.card_sort_posting = random.choice(pool_postings)
-            participant.save(update_fields=['card_sort_posting'])
-
         request.session['participant_id'] = str(participant.id)
+        request.session['session_start_time'] = time.time()
         return redirect('core:consent')
 
 
@@ -138,7 +128,6 @@ class ReadPostingsView(SurveyFlowMixin, TemplateView):
         posting_ids = participant.get_posting_order()
         ctx['postings'] = [Posting.objects.get(id=pid) for pid in posting_ids]
         ctx['participant'] = participant
-        ctx['is_study3'] = participant.study_assignment == 'study3'
         return ctx
 
     def post(self, request, *args, **kwargs):
@@ -155,52 +144,38 @@ class ReadPostingsView(SurveyFlowMixin, TemplateView):
 RANKING_DIMENSIONS = [
     {
         'slug': 'perceived_pay',
-        'label': 'Perceived Pay',
-        'prompt': 'Which of these employers do you think pays more? '
-                  'Drag the postings to rank them from highest expected pay (1) to lowest (4).',
+        'prompt': 'Which of these employers do you think pays the most?',
+        'anchor_high': 'highest',
+        'anchor_low': 'lowest pay',
         'wages_always_hidden': True,
     },
     {
-        'slug': 'employer_quality',
-        'label': 'Employer Quality',
-        'prompt': 'Which of these do you think would be a better employer? '
-                  'Rank from best (1) to worst (4).',
-        'wages_always_hidden': False,
-    },
-    {
-        'slug': 'challenging_rewarding',
-        'label': 'Challenging & Rewarding Work',
-        'prompt': 'Where do you think the work would be most challenging and rewarding? '
-                  'Rank from most (1) to least (4).',
-        'wages_always_hidden': False,
-    },
-    {
-        'slug': 'workplace_culture',
-        'label': 'Workplace Culture',
-        'prompt': 'Which of these do you think has the best workplace culture? '
-                  'Rank from best (1) to worst (4).',
+        'slug': 'mission_identity',
+        'prompt': 'Which organization has the clearest mission or identity?',
+        'anchor_high': 'highest',
+        'anchor_low': 'least clear',
         'wages_always_hidden': False,
     },
     {
         'slug': 'belief_alignment',
-        'label': 'Belief-Work Alignment',
         'prompt': "At which company would an employee's personal beliefs and goals "
-                  "most influence their experience working there? "
-                  "Rank from most influence (1) to least (4).",
+                  "most influence their experience working there?",
+        'anchor_high': 'highest',
+        'anchor_low': 'least influence',
         'wages_always_hidden': False,
     },
     {
-        'slug': 'mission_identity',
-        'label': 'Mission / Identity Clarity',
-        'prompt': 'Which organization has the clearest mission or identity? '
-                  'Rank from clearest (1) to least clear (6).',
+        'slug': 'employer_quality',
+        'prompt': 'Which of these do you think would be a better employer?',
+        'anchor_high': 'highest',
+        'anchor_low': 'worst',
         'wages_always_hidden': False,
     },
     {
         'slug': 'overall_desirability',
-        'label': 'Overall Desirability',
-        'prompt': 'Where would you most want to work? '
-                  'Rank from most desirable (1) to least desirable (4).',
+        'prompt': 'Where would you most want to work?',
+        'anchor_high': 'highest',
+        'anchor_low': 'least desirable',
         'wages_always_hidden': False,
     },
 ]
@@ -227,9 +202,8 @@ class RankingDimensionView(SurveyFlowMixin, TemplateView):
     def get_wage_display(self, participant, dimension):
         if dimension['wages_always_hidden']:
             return 'hidden'
-        if participant.wage_arm == 'A':
-            return 'visible'
-        return 'hidden'
+        # Wages visible for everyone on all dimensions after perceived pay
+        return 'visible'
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -243,9 +217,25 @@ class RankingDimensionView(SurveyFlowMixin, TemplateView):
         wage_display = self.get_wage_display(participant, dimension)
 
         # Annotate each posting with its salary text for this participant
-        high_signals = participant.get_high_wage_signals()
         for posting in postings:
             posting.salary_text_for_participant = posting.get_salary_text(participant)
+
+        # After perceived_pay (dim 1), reorder by participant's pay ranking
+        # and always reveal wages
+        pay_reveal = False
+        if dimension_num == 2:
+            pay_ranking = RankingResponse.objects.filter(
+                participant=participant, dimension='perceived_pay'
+            ).first()
+            if pay_ranking and pay_ranking.ranking_order:
+                signal_order = pay_ranking.ranking_order
+                signal_to_posting = {p.signal_type: p for p in postings}
+                reordered = [signal_to_posting[s] for s in signal_order
+                             if s in signal_to_posting]
+                if len(reordered) == len(postings):
+                    postings = reordered
+                pay_reveal = True
+                wage_display = 'visible'
 
         ctx['postings'] = postings
         ctx['participant'] = participant
@@ -253,7 +243,7 @@ class RankingDimensionView(SurveyFlowMixin, TemplateView):
         ctx['dimension_num'] = dimension_num
         ctx['total_dimensions'] = len(RANKING_DIMENSIONS)
         ctx['wage_display'] = wage_display
-        ctx['is_first_dimension'] = (dimension_num == 1)
+        ctx['pay_reveal'] = pay_reveal
         return ctx
 
     def post(self, request, *args, **kwargs):
@@ -264,17 +254,34 @@ class RankingDimensionView(SurveyFlowMixin, TemplateView):
         ranking_order_str = request.POST.get('ranking_order', '')
         ranking_order = [x.strip() for x in ranking_order_str.split(',') if x.strip()]
 
+        try:
+            response_time = float(request.POST.get('response_time_seconds', 0))
+        except (ValueError, TypeError):
+            response_time = None
+
         RankingResponse.objects.update_or_create(
             participant=participant,
             dimension=dimension['slug'],
             defaults={
                 'dimension_order': dimension_num,
                 'ranking_order': ranking_order,
+                'response_time_seconds': response_time,
             }
         )
 
         if dimension_num < len(RANKING_DIMENSIONS):
             return redirect('core:study2_ranking', dimension_num=dimension_num + 1)
+
+        # Set card_sort_posting to the #1 ranked posting on overall desirability
+        if ranking_order:
+            top_signal = ranking_order[0]
+            top_posting = Posting.objects.filter(
+                occupation_pool=participant.occupation_pool,
+                signal_type=top_signal,
+            ).first()
+            if top_posting:
+                participant.card_sort_posting = top_posting
+                participant.save(update_fields=['card_sort_posting'])
 
         # After all rankings, go to study-specific card sort transition
         if participant.study_assignment == 'study3':
@@ -322,9 +329,19 @@ class CardSortView(SurveyFlowMixin, TemplateView):
         rng = random.Random(participant.posting_order_seed)
         rng.shuffle(cards)
 
+        # Determine card color index (1-based position in posting order)
+        card_num = 1
+        if posting:
+            posting_order = participant.get_posting_order()
+            try:
+                card_num = posting_order.index(posting.id) + 1
+            except ValueError:
+                pass
+
         ctx['participant'] = participant
         ctx['posting'] = posting
         ctx['cards'] = cards
+        ctx['card_num'] = card_num
         ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
         return ctx
 
@@ -385,9 +402,19 @@ class CompetitionView(SurveyFlowMixin, TemplateView):
         rng = random.Random((participant.posting_order_seed or 0) + 7)
         rng.shuffle(cards)
 
+        # Determine card color index (1-based position in posting order)
+        card_num = 1
+        if posting:
+            posting_order = participant.get_posting_order()
+            try:
+                card_num = posting_order.index(posting.id) + 1
+            except ValueError:
+                pass
+
         ctx['participant'] = participant
         ctx['posting'] = posting
         ctx['cards'] = cards
+        ctx['card_num'] = card_num
         ctx['original_cards'] = original_cards
         ctx['original_card_ids_json'] = json.dumps(original_card_ids)
         ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
@@ -472,9 +499,19 @@ class HMCardSortView(SurveyFlowMixin, TemplateView):
         rng = random.Random(participant.posting_order_seed)
         rng.shuffle(cards)
 
+        # Determine card color index (1-based position in posting order)
+        card_num = 1
+        if posting:
+            posting_order = participant.get_posting_order()
+            try:
+                card_num = posting_order.index(posting.id) + 1
+            except ValueError:
+                pass
+
         ctx['participant'] = participant
         ctx['posting'] = posting
         ctx['cards'] = cards
+        ctx['card_num'] = card_num
         ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
         return ctx
 
@@ -534,10 +571,21 @@ class HMCompetitionView(SurveyFlowMixin, TemplateView):
         rng = random.Random((participant.posting_order_seed or 0) + 7)
         rng.shuffle(cards)
 
+        # Determine card color index (1-based position in posting order)
+        card_num = 1
+        if posting:
+            posting_order = participant.get_posting_order()
+            try:
+                card_num = posting_order.index(posting.id) + 1
+            except ValueError:
+                pass
+
         ctx['participant'] = participant
         ctx['posting'] = posting
         ctx['cards'] = cards
+        ctx['card_num'] = card_num
         ctx['original_cards'] = original_cards
+        ctx['original_card_ids_json'] = json.dumps(original_card_ids)
         ctx['wage_display'] = 'visible' if participant.wage_arm == 'A' else 'hidden'
         return ctx
 
@@ -547,11 +595,10 @@ class HMCompetitionView(SurveyFlowMixin, TemplateView):
 
         would_change = request.POST.get('would_change') == 'yes'
 
-        if would_change:
-            cards_selected = request.POST.get('cards_selected', '')
-            cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
-        else:
-            cards_list = []
+        cards_selected = request.POST.get('cards_selected', '')
+        selection_order = request.POST.get('selection_order', '')
+        cards_list = [c.strip() for c in cards_selected.split(',') if c.strip()]
+        order_list = [c.strip() for c in selection_order.split(',') if c.strip()]
 
         response_time = request.POST.get('response_time_ms', '')
         try:
@@ -565,7 +612,7 @@ class HMCompetitionView(SurveyFlowMixin, TemplateView):
             defaults={
                 'posting': posting,
                 'cards_selected': cards_list,
-                'selection_order': cards_list,  # only 1 card, so order = selection
+                'selection_order': order_list,
                 'would_change': would_change,
                 'response_time_ms': response_time_ms,
             }
@@ -648,14 +695,18 @@ class DemographicsView(SurveyFlowMixin, TemplateView):
             participant=participant,
             age=safe_int('age'),
             gender=P.get('gender', ''),
-            gender_self_describe=P.get('gender_self_describe', ''),
-            education=P.get('education', ''),
-            employment_status=P.get('employment_status', ''),
-            employment_other=P.get('employment_other', ''),
-            industry=P.get('industry', ''),
-            industry_other=P.get('industry_other', ''),
-            work_experience_years=safe_int('work_experience_years'),
-            last_job_search=P.get('last_job_search', ''),
+            gender_other=P.get('gender_other', ''),
+            race=P.get('race', ''),
+            race_other=P.get('race_other', ''),
+            parents_income=P.get('parents_income', ''),
+            high_school_state=P.get('high_school_state', ''),
+            neighborhood=P.get('neighborhood', ''),
+            major=P.get('major', ''),
+            major_other=P.get('major_other', ''),
+            year_in_program=P.get('year_in_program', ''),
+            has_part_time_job=P.get('has_part_time_job', ''),
+            english_first_language=P.get('english_first_language', ''),
+            first_language=P.get('first_language', ''),
         )
 
         participant.status = 'completed'
@@ -703,8 +754,17 @@ class BucketSortGameView(SurveyFlowMixin, TemplateView):
 
         seed = participant.posting_order_seed or random.randint(1, 999999)
 
+        # Dynamic game duration: fit within 19-minute session, reserve 2 min for demographics + end
+        session_start = self.request.session.get('session_start_time')
+        if session_start:
+            elapsed = time.time() - session_start
+            game_duration = min(240, max(60, (19 * 60) - elapsed - 120))
+        else:
+            game_duration = 240  # fallback: 4 minutes
+
         ctx['phrases_json'] = json.dumps(phrases)
         ctx['seed'] = seed
+        ctx['game_duration'] = int(game_duration)
         return ctx
 
 
@@ -751,7 +811,7 @@ class BucketSortSubmitView(SurveyFlowMixin, View):
             request.session['inconsistent_phrases'] = inconsistent
             redirect_url = '/study1/reconciliation/'
         else:
-            redirect_url = '/individual-differences/'
+            redirect_url = '/demographics/'
 
         return JsonResponse({'redirect': redirect_url})
 
@@ -805,7 +865,7 @@ class BucketSortReconciliationView(SurveyFlowMixin, TemplateView):
 
         # Clean up session
         request.session.pop('inconsistent_phrases', None)
-        return redirect('core:individual_differences')
+        return redirect('core:demographics')
 
 
 # ---------------------------------------------------------------------------

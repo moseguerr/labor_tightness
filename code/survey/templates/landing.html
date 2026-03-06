@@ -4,51 +4,21 @@
 <div class="max-w-xl mx-auto">
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10">
         <h1 class="text-2xl font-semibold text-slate-800 mb-2">Welcome</h1>
+        <p class="text-slate-600 mb-6">
+            Thank you for participating in this research study. You will be reading and
+            evaluating job postings. The study takes approximately 19 minutes.
+        </p>
         <p class="text-slate-600 mb-8">
-            Thank you for participating in this research study. Before we begin, please confirm
-            which session you will be completing today.
+            Click the button below to begin.
         </p>
 
-        <form method="post" class="space-y-4">
+        <form method="post">
             {% csrf_token %}
-
-            <label class="block cursor-pointer">
-                <input type="radio" name="study_assignment" value="study2"
-                       class="sr-only peer"
-                       {% if preselected_study == '2' %}checked{% endif %}>
-                <div class="p-4 rounded-lg border-2 border-gray-200
-                            peer-checked:border-primary-500 peer-checked:bg-primary-50
-                            hover:border-gray-300 transition-colors">
-                    <p class="font-medium text-slate-700">Job Seeker Session</p>
-                    <p class="text-sm text-slate-500 mt-1">
-                        Read and evaluate job postings from a job seeker's perspective.
-                        Approximately 25 minutes.
-                    </p>
-                </div>
-            </label>
-
-            <label class="block cursor-pointer">
-                <input type="radio" name="study_assignment" value="study3"
-                       class="sr-only peer"
-                       {% if preselected_study == '3' %}checked{% endif %}>
-                <div class="p-4 rounded-lg border-2 border-gray-200
-                            peer-checked:border-primary-500 peer-checked:bg-primary-50
-                            hover:border-gray-300 transition-colors">
-                    <p class="font-medium text-slate-700">Hiring Manager Session</p>
-                    <p class="text-sm text-slate-500 mt-1">
-                        Review and improve job postings from a hiring manager's perspective.
-                        Approximately 25 minutes.
-                    </p>
-                </div>
-            </label>
-
-            <div class="pt-4">
-                <button type="submit"
-                        class="btn-primary w-full bg-primary-500 hover:bg-primary-700 text-white
-                               font-medium py-3 px-6 rounded-lg text-base">
-                    Begin Study
-                </button>
-            </div>
+            <button type="submit"
+                    class="btn-primary w-full bg-primary-500 hover:bg-primary-700 text-white
+                           font-medium py-3 px-6 rounded-lg text-base">
+                Begin Study
+            </button>
         </form>
     </div>
 </div>

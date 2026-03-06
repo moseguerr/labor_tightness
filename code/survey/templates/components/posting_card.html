@@ -6,7 +6,7 @@
 -->
 <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
     <!-- Company header -->
-    <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-4">
+    <div class="posting-header {% if card_num %}card-color-{{ card_num }}{% else %}bg-gradient-to-r from-primary-500 to-primary-600{% endif %} px-6 py-4">
         <h3 class="text-lg font-bold text-white">{{ posting.company_name }}</h3>
         <div class="flex items-center gap-3 text-primary-100 text-sm mt-1">
             <span>{{ posting.job_title }}</span>

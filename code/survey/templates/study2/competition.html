@@ -38,37 +38,28 @@
         font-size: 0.75rem;
         font-weight: 700;
     }
+    .card-color-1 { background: linear-gradient(135deg, #8D98A7, #7a8796); }
+    .card-color-2 { background: linear-gradient(135deg, #DCCCBB, #c9b9a8); color: #1e293b; }
+    .card-color-3 { background: linear-gradient(135deg, #EAB464, #d9a353); color: #1e293b; }
+    .card-color-4 { background: linear-gradient(135deg, #A7754D, #96643c); }
 </style>
 {% endblock %}
 
 {% block content %}
 <!-- Competition prompt -->
-<div class="bg-amber-50 rounded-xl border border-amber-200 p-5 mb-5">
+<div class="rounded-xl border p-5 mb-5" style="background: #BA7BA120; border-color: #BA7BA140;">
     <div class="flex items-start gap-3">
-        <svg class="w-6 h-6 text-amber-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 flex-shrink-0 mt-0.5" style="color: #BA7BA1;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
         </svg>
         <div>
-            <h2 class="text-base font-semibold text-amber-800 mb-1">Competition Update</h2>
-            <p class="text-sm text-amber-700 leading-relaxed">
+            <h2 class="text-base font-semibold mb-1" style="color: #7a4e6e;">Competition Update</h2>
+            <p class="text-sm leading-relaxed" style="color: #6b4560;">
                 You notice that <strong>over 100 candidates</strong> have already applied for this
-                position at <strong>{{ posting.company_name }}</strong>. Knowing this, would you change
-                which elements you emphasize in your cover letter?
+                position at <strong>{{ posting.company_name }}</strong>. Would you make any changes
+                to your previous selection? If not, please select the same ones again.
             </p>
         </div>
-    </div>
-</div>
-
-<!-- Original selection summary -->
-<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-5">
-    <h3 class="text-sm font-semibold text-slate-700 mb-2">Your original selection:</h3>
-    <div class="space-y-1.5">
-        {% for card in original_cards %}
-        <div class="text-sm text-slate-600 flex items-start gap-2">
-            <span class="text-primary-500 font-bold">{{ forloop.counter }}.</span>
-            <span>{{ card.card_text }}</span>
-        </div>
-        {% endfor %}
     </div>
 </div>
 
@@ -76,7 +67,7 @@
     <!-- Posting (left, 2 cols) -->
     <div class="lg:col-span-2">
         <div class="sticky top-4">
-            {% include "components/posting_card.html" with posting=posting wage_display=wage_display %}
+            {% include "components/posting_card.html" with posting=posting wage_display=wage_display card_num=card_num %}
         </div>
     </div>
 
@@ -112,18 +103,14 @@
                 {% endfor %}
             </div>
 
-            <div class="mt-5 flex flex-col sm:flex-row gap-3">
+            <div class="mt-5">
                 <button type="submit" id="submit-btn"
                         class="btn-primary bg-primary-500 hover:bg-primary-700 text-white
                                font-medium py-2.5 px-6 rounded-lg opacity-50 cursor-not-allowed"
                         disabled>
-                    Submit Revised Selection
+                    Continue
                 </button>
-                <button type="button" id="keep-original-btn"
-                        class="border border-gray-300 text-slate-600 hover:bg-gray-50
-                               font-medium py-2.5 px-6 rounded-lg text-sm">
-                    Keep My Original Selection
-                </button>
+                <p class="text-xs text-slate-400 mt-1">Select at least 1 statement to continue.</p>
             </div>
         </form>
     </div>
@@ -134,13 +121,13 @@
 <script>
 (function() {
     const MAX = 3;
+    const originalIds = {{ original_card_ids_json|safe }};
     const selected = [];
     const selectionOrder = [];
     const startTime = Date.now();
     const tiles = document.querySelectorAll('.card-tile');
     const countEl = document.getElementById('selection-count');
     const submitBtn = document.getElementById('submit-btn');
-    const keepBtn = document.getElementById('keep-original-btn');
     const form = document.getElementById('competition-form');
     const cardsInput = document.getElementById('cards-selected-input');
     const orderInput = document.getElementById('selection-order-input');
@@ -209,13 +196,10 @@
         cardsInput.value = selected.join(',');
         orderInput.value = selectionOrder.join(',');
         timeInput.value = Date.now() - startTime;
-        keepInput.value = 'false';
-    });
-
-    keepBtn.addEventListener('click', () => {
-        keepInput.value = 'true';
-        timeInput.value = Date.now() - startTime;
-        form.submit();
+        // Detect if selection is unchanged
+        const same = selected.length === originalIds.length &&
+                     selected.every((id, i) => id === originalIds[i]);
+        keepInput.value = same ? 'true' : 'false';
     });
 
     updateUI();

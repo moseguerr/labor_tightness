@@ -162,7 +162,21 @@ input[type="radio"]:checked + div {
 /* Highlight the phrase that will be caught next (lowest) */
 .falling-phrase--target {
     border-color: #3b82f6;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    border-width: 3px;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+}
+.falling-phrase--target::before {
+    content: '\25B6';
+    position: absolute;
+    left: -28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3b82f6;
+    font-size: 1.1rem;
+}
+/* Dim the non-target phrase in dual mode */
+.falling-phrase--active:not(.falling-phrase--target) {
+    opacity: 0.5;
 }
 .falling-phrase--active {
     display: block;

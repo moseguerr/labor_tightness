@@ -46,8 +46,6 @@ urlpatterns = [
          name='bucket_sort_reconciliation'),
 
     # Wrap-up (shared)
-    path('individual-differences/', views.IndividualDifferencesView.as_view(),
-         name='individual_differences'),
     path('demographics/', views.DemographicsView.as_view(), name='demographics'),
     path('debrief/', views.DebriefView.as_view(), name='debrief'),
 

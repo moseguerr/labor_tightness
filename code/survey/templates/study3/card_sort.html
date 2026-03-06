@@ -38,18 +38,21 @@
         font-size: 0.75rem;
         font-weight: 700;
     }
+    .card-color-1 { background: linear-gradient(135deg, #8D98A7, #7a8796); }
+    .card-color-2 { background: linear-gradient(135deg, #DCCCBB, #c9b9a8); color: #1e293b; }
+    .card-color-3 { background: linear-gradient(135deg, #EAB464, #d9a353); color: #1e293b; }
+    .card-color-4 { background: linear-gradient(135deg, #A7754D, #96643c); }
 </style>
 {% endblock %}
 
 {% block content %}
 <!-- Instruction -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-5">
-    <h2 class="text-lg font-semibold text-slate-800 mb-2">Strengthen This Posting</h2>
     <p class="text-sm text-slate-600 leading-relaxed">
-        Imagine you are a hiring manager reviewing the posting below. Your goal is to make it
+        Imagine you are a <strong>hiring manager</strong> looking to fill a role on your team.
+        You have been asked to review the job posting below and suggest improvements to make it
         more attractive to strong candidates. From the options listed, select the
-        <strong>3 things</strong> you would most want to add or strengthen in this posting
-        for <strong>{{ posting.company_name }}</strong>.
+        <strong>3 things</strong> you would most want to add or strengthen.
     </p>
 </div>
 
@@ -57,7 +60,7 @@
     <!-- Posting (left, 2 cols) -->
     <div class="lg:col-span-2">
         <div class="sticky top-4">
-            {% include "components/posting_card.html" with posting=posting wage_display=wage_display %}
+            {% include "components/posting_card.html" with posting=posting wage_display=wage_display card_num=card_num %}
         </div>
     </div>
 

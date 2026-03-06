@@ -37,7 +37,7 @@ BUCKET_SORT_PHRASES = [
     {'phrase_id': 'S16', 'phrase_text': 'oversee daily operations', 'expected_bucket': 'job_tasks', 'difficulty': 'easy', 'boundary_pair': '', 'source': 'dictionary: job_tasks / management'},
     # MEDIUM (28)
     {'phrase_id': 'S17', 'phrase_text': 'pioneering advancements', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / innovation'},
-    {'phrase_id': 'S18', 'phrase_text': 'raise the bar', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / innovation'},
+    {'phrase_id': 'S18', 'phrase_text': 'raise the bar to solve the most interesting questions', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / innovation'},
     {'phrase_id': 'S19', 'phrase_text': 'breakthrough technologies', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / innovation'},
     {'phrase_id': 'S20', 'phrase_text': 'designing the future', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / innovation'},
     {'phrase_id': 'S21', 'phrase_text': 'shared values', 'expected_bucket': 'purpose', 'difficulty': 'medium', 'boundary_pair': '', 'source': 'dictionary: meaningful_work / societal values'},
@@ -79,7 +79,9 @@ BUCKET_SORT_PHRASES = [
     {'phrase_id': 'S56', 'phrase_text': 'driving progress', 'expected_bucket': 'purpose', 'difficulty': 'hard', 'boundary_pair': 'purpose/job_tasks', 'source': 'dictionary: meaningful_work / innovation'},
     {'phrase_id': 'S57', 'phrase_text': 'building the technology of the future', 'expected_bucket': 'purpose', 'difficulty': 'hard', 'boundary_pair': 'purpose/job_tasks', 'source': 'user-provided: non-social purpose'},
     {'phrase_id': 'S58', 'phrase_text': 'technology driven innovation', 'expected_bucket': 'purpose', 'difficulty': 'hard', 'boundary_pair': 'purpose/job_tasks', 'source': 'dictionary: meaningful_work / innovation'},
-    {'phrase_id': 'S59', 'phrase_text': 'total rewards', 'expected_bucket': 'compensation', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'compensation industry term'},
+    {'phrase_id': 'S59', 'phrase_text': 'paid parental leave', 'expected_bucket': 'compensation', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'pecuniary / benefits + good employer signal'},
+    {'phrase_id': 'S59b', 'phrase_text': 'profit sharing', 'expected_bucket': 'compensation', 'difficulty': 'hard', 'boundary_pair': 'compensation/purpose', 'source': 'pecuniary / variable pay + organizational alignment'},
+    {'phrase_id': 'S59c', 'phrase_text': 'sabbatical program', 'expected_bucket': 'good_employer', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'job_design / work-life balance + pecuniary'},
     {'phrase_id': 'S60', 'phrase_text': 'employee wellness programs', 'expected_bucket': 'good_employer', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'dictionary: job_design / work-life balance + pecuniary'},
     {'phrase_id': 'S61', 'phrase_text': 'wellness benefits', 'expected_bucket': 'compensation', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'dictionary: pecuniary / additional'},
     {'phrase_id': 'S62', 'phrase_text': 'professional development budget', 'expected_bucket': 'compensation', 'difficulty': 'hard', 'boundary_pair': 'good_employer/compensation', 'source': 'dictionary: pecuniary / tuition + career_development'},
@@ -116,18 +118,18 @@ BUCKET_SORT_PHRASES = [
 
 
 CARD_SORT_CARDS = [
-    {'card_id': 'I1', 'card_type': 'I', 'card_text': 'My passion for this organization\'s mission and what it is working to achieve', 'display_order': 1},
-    {'card_id': 'I2', 'card_type': 'I', 'card_text': 'My alignment with this company\'s values and the kind of work they stand for', 'display_order': 2},
-    {'card_id': 'I3', 'card_type': 'I', 'card_text': 'My belief in what this organization is building and my desire to be part of it', 'display_order': 3},
-    {'card_id': 'I4', 'card_type': 'I', 'card_text': 'My fit with how this team thinks and operates', 'display_order': 4},
+    # Identity/Purpose — Innovation (2)
+    {'card_id': 'I1', 'card_type': 'I', 'card_text': 'My excitement about contributing to innovative, cutting-edge work', 'display_order': 1},
+    {'card_id': 'I2', 'card_type': 'I', 'card_text': 'My desire to be part of an organization that is building the future', 'display_order': 2},
+    # Identity/Purpose — Social (2)
+    {'card_id': 'I3', 'card_type': 'I', 'card_text': 'My commitment to this organization\'s social mission and the positive impact it makes', 'display_order': 3},
+    {'card_id': 'I4', 'card_type': 'I', 'card_text': 'My alignment with this company\'s values around making a difference in society', 'display_order': 4},
+    # Good Employer (2)
     {'card_id': 'G1', 'card_type': 'G', 'card_text': 'My long-term commitment to growing within an organization that invests in its people', 'display_order': 5},
     {'card_id': 'G2', 'card_type': 'G', 'card_text': 'My appreciation for environments that support professional development and work-life balance', 'display_order': 6},
-    {'card_id': 'G3', 'card_type': 'G', 'card_text': 'My interest in the specific development opportunities and resources this firm offers', 'display_order': 7},
-    {'card_id': 'C1', 'card_type': 'C', 'card_text': 'My technical skills and analytical background relevant to this role', 'display_order': 8},
-    {'card_id': 'C2', 'card_type': 'C', 'card_text': 'My track record of delivering results in similar positions', 'display_order': 9},
-    {'card_id': 'C3', 'card_type': 'C', 'card_text': 'My academic achievements and relevant coursework', 'display_order': 10},
-    {'card_id': 'C4', 'card_type': 'C', 'card_text': 'My leadership experience and ability to work across functions', 'display_order': 11},
-    {'card_id': 'C5', 'card_type': 'C', 'card_text': 'My ability to contribute immediately given my prior experience', 'display_order': 12},
+    # Competence (2)
+    {'card_id': 'C1', 'card_type': 'C', 'card_text': 'My technical skills and relevant experience for this role', 'display_order': 7},
+    {'card_id': 'C2', 'card_type': 'C', 'card_text': 'My track record of delivering results in similar positions', 'display_order': 8},
 ]
 
 

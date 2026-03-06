@@ -21,7 +21,7 @@
         </div>
         <div class="score-bar__item">
             <span>Time:</span>
-            <span class="score-bar__timer" id="score-timer">4:00</span>
+            <span class="score-bar__timer" id="score-timer">--:--</span>
         </div>
         <div class="score-bar__item">
             <span>Streak:</span>
@@ -55,6 +55,7 @@
             phrases: {{ phrases_json|safe }},
             seed: {{ seed }},
             submitUrl: '{% url "core:bucket_sort_submit" %}',
+            gameDuration: {{ game_duration }},
         });
     });
 </script>

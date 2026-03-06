@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content_width %}max-w-6xl{% endblock %}
+{% block content_width %}max-w-7xl{% endblock %}
 
 {% block progress_bar %}
 {% include "components/progress_bar.html" with section="Rankings" current=dimension_num total=total_dimensions %}
@@ -36,10 +36,29 @@
         color: #3d6873;
         font-weight: 700;
     }
+    /* Card header colors */
+    .card-color-1 { background: linear-gradient(135deg, #8D98A7, #7a8796); }
+    .card-color-2 { background: linear-gradient(135deg, #DCCCBB, #c9b9a8); }
+    .card-color-3 { background: linear-gradient(135deg, #EAB464, #d9a353); }
+    .card-color-4 { background: linear-gradient(135deg, #A7754D, #96643c); }
+    .card-color-2 h3, .card-color-2 span { color: #4a3f35; }
+    .card-color-2 .rank-number { color: #6b5d4f; }
+    .card-color-3 h3, .card-color-3 span { color: #4a3518; }
+    .card-color-3 .rank-number { color: #7a5e2e; }
 </style>
 {% endblock %}
 
 {% block content %}
+{% if pay_reveal %}
+<!-- Wage reveal banner -->
+<div class="rounded-xl border p-4 mb-4" style="background: #d1fae520; border-color: #10b98140;">
+    <p class="text-sm font-semibold" style="color: #065f46;">You were right!</p>
+    <p class="text-xs mt-1" style="color: #047857;">
+        The salary ranges are now shown on each posting.
+    </p>
+</div>
+{% endif %}
+
 <!-- Dimension prompt -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-5">
     <div class="flex items-center justify-between mb-2">
@@ -47,31 +66,26 @@
             Ranking {{ dimension_num }} of {{ total_dimensions }}
         </span>
     </div>
-    <h2 class="text-lg font-semibold text-slate-800 mb-1">{{ dimension.label }}</h2>
-    <p class="text-slate-600 text-sm leading-relaxed">{{ dimension.prompt }}</p>
-    {% if is_first_dimension %}
-    <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 mt-3">
-        <p class="text-xs text-slate-700">
-            <strong>How this works:</strong> Drag and drop the job postings below to rank them.
-            The top-left position is rank 1 (highest). You will complete {{ total_dimensions }}
-            rankings in total, each on a different dimension.
-        </p>
-    </div>
-    {% endif %}
+    <p class="text-base text-slate-800 font-medium leading-relaxed">{{ dimension.prompt }}</p>
+    <p class="text-xs text-slate-400 mt-1">
+        <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-primary-500 text-white text-[10px] font-bold align-middle">1</span>
+        = highest ranking
+    </p>
 </div>
 
 <!-- Draggable posting grid: 2x2 -->
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="ranking_order" id="ranking-order-input" value="">
+    <input type="hidden" name="response_time_seconds" id="response-time-input" value="">
 
-    <div id="ranking-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div id="ranking-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
         {% for posting in postings %}
         <div class="posting-drag-card bg-white rounded-xl border border-gray-200 overflow-hidden"
              data-condition="{{ posting.signal_type }}">
 
             <!-- Company header with rank -->
-            <div class="bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-2.5 flex items-center gap-2.5">
+            <div class="card-color-{{ forloop.counter }} px-3 py-2 flex items-center gap-2">
                 <span class="rank-number w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">
                     {{ forloop.counter }}
                 </span>
@@ -81,7 +95,7 @@
                 </div>
             </div>
 
-            <div class="px-4 py-3 space-y-2 text-xs text-slate-600 leading-relaxed max-h-[24rem] overflow-y-auto">
+            <div class="px-3 py-2 space-y-1.5 text-xs text-slate-600 leading-relaxed max-h-[24rem] overflow-y-auto">
                 <p>{{ posting.company_intro }}</p>
 
                 <div>
@@ -109,7 +123,7 @@
             </div>
 
             <!-- Drag handle indicator -->
-            <div class="px-4 py-1.5 bg-gray-50 border-t border-gray-100 text-center">
+            <div class="px-3 py-1 bg-gray-50 border-t border-gray-100 text-center">
                 <svg class="w-5 h-5 text-slate-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
                 </svg>
@@ -135,4 +149,14 @@
 {% block extra_js %}
 {% load static %}
 <script src="{% static 'js/ranking.js' %}"></script>
+<script>
+(function() {
+    var startTime = Date.now();
+    var form = document.querySelector('form[method="post"]');
+    form.addEventListener('submit', function() {
+        var elapsed = (Date.now() - startTime) / 1000;
+        document.getElementById('response-time-input').value = elapsed.toFixed(2);
+    });
+})();
+</script>
 {% endblock %}

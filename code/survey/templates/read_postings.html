@@ -1,31 +1,44 @@
 {% extends "base.html" %}
 
+{% block content_width %}max-w-7xl{% endblock %}
+
 {% block content %}
-<div class="max-w-3xl mx-auto">
+<div>
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 sm:p-10 mb-8">
         <h1 class="text-2xl font-semibold text-slate-800 mb-2">Review Job Postings</h1>
 
-        {% if is_study3 %}
         <p class="text-slate-600 mb-4">
-            Imagine you are a <strong>hiring manager</strong> reviewing these postings.
-            Read each one carefully — you will be asked to evaluate and compare them next.
-        </p>
-        {% else %}
-        <p class="text-slate-600 mb-4">
-            Imagine you are a <strong>job seeker</strong> looking for a new position.
+            Imagine you are a <strong>job seeker</strong> looking for a job as a
+            <strong>{{ participant.get_occupation_pool_display }}</strong>.
             Read each posting carefully — you will be asked to evaluate and compare them next.
         </p>
-        {% endif %}
-
-        <p class="text-sm text-slate-500">
-            There are {{ postings|length }} postings below. Please read all of them before continuing.
-        </p>
+        <div class="bg-blue-50 rounded-lg p-3 border border-blue-100 mt-3">
+            <p class="text-sm text-slate-700">
+                <strong>What's next:</strong> After reading, you will drag and drop the postings
+                to rank them on several dimensions.
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary-500 text-white text-xs font-bold align-middle">1</span>
+                = highest,
+                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary-500 text-white text-xs font-bold align-middle">4</span>
+                = lowest.
+            </p>
+        </div>
     </div>
 
-    <!-- Postings -->
-    <div class="space-y-6">
+    <style>
+        .card-color-1 { background: linear-gradient(135deg, #8D98A7, #7a8796); }
+        .card-color-2 { background: linear-gradient(135deg, #DCCCBB, #c9b9a8); }
+        .card-color-2 h3,
+        .card-color-2 span { color: #4a3f35; }
+        .card-color-3 { background: linear-gradient(135deg, #EAB464, #d9a353); }
+        .card-color-3 h3,
+        .card-color-3 span { color: #4a3518; }
+        .card-color-4 { background: linear-gradient(135deg, #A7754D, #96643c); }
+    </style>
+
+    <!-- Postings in 2x2 grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {% for posting in postings %}
-            {% include "components/posting_card.html" with posting=posting wage_display="hidden" %}
+            {% include "components/posting_card.html" with posting=posting wage_display="hidden" card_num=forloop.counter %}
         {% endfor %}
     </div>
 
