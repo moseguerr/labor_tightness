@@ -51,7 +51,6 @@ class Participant(models.Model):
         ('stage2', 'Stage 2 — Card Sort'),
         ('stage3', 'Stage 3 — Competition'),
         ('stage4', 'Stage 4 — Bucket Sort'),
-        ('individual_diffs', 'Individual Differences'),
         ('demographics', 'Demographics'),
         ('completed', 'Completed'),
         ('withdrawn', 'Withdrawn'),
@@ -243,46 +242,32 @@ class Demographics(models.Model):
         verbose_name_plural = "Demographics"
 
 
-class IndividualDifferences(models.Model):
-    """Job search values, CSR attitudes, corporate skepticism, and context."""
+class FinalQuestions(models.Model):
+    """Dream job preferences and income distribution self-placement."""
 
     participant = models.OneToOneField(
-        Participant, on_delete=models.CASCADE, related_name='individual_differences')
+        Participant, on_delete=models.CASCADE, related_name='final_questions')
 
-    # Job Search Values — 10 items, each 1-7
-    jsv_salary = models.IntegerField(null=True, blank=True)
-    jsv_benefits = models.IntegerField(null=True, blank=True)
-    jsv_mission = models.IntegerField(null=True, blank=True)
-    jsv_worklife = models.IntegerField(null=True, blank=True)
-    jsv_growth = models.IntegerField(null=True, blank=True)
-    jsv_security = models.IntegerField(null=True, blank=True)
-    jsv_impact = models.IntegerField(null=True, blank=True)
-    jsv_autonomy = models.IntegerField(null=True, blank=True)
-    jsv_coworkers = models.IntegerField(null=True, blank=True)
-    jsv_reputation = models.IntegerField(null=True, blank=True)
+    # Dream job
+    dream_job = models.TextField(blank=True)
 
-    # CSR Attitudes — 4 items, each 1-7
-    csr_responsibility = models.IntegerField(null=True, blank=True)
-    csr_lower_salary = models.IntegerField(null=True, blank=True)
-    csr_usually_mean_it = models.IntegerField(
-        null=True, blank=True, help_text="Reverse-scored")
-    csr_pay_attention = models.IntegerField(null=True, blank=True)
+    # Job preference weights (must sum to 100)
+    weight_matters_to_me = models.IntegerField(null=True, blank=True)
+    weight_not_worse = models.IntegerField(null=True, blank=True)
+    weight_outside_work = models.IntegerField(null=True, blank=True)
+    weight_talented_people = models.IntegerField(null=True, blank=True)
+    weight_successful_company = models.IntegerField(null=True, blank=True)
 
-    # Corporate Skepticism — 3 items, each 1-7
-    skep_improve_image = models.IntegerField(null=True, blank=True)
-    skep_grain_of_salt = models.IntegerField(null=True, blank=True)
-    skep_genuinely_motivated = models.IntegerField(
-        null=True, blank=True, help_text="Reverse-coded")
+    # Income distribution — growing up
+    income_growing_up_percentile = models.IntegerField(
+        null=True, blank=True, help_text="Percentile on 2010 CPS distribution")
 
-    # Political orientation
-    political_orientation = models.IntegerField(
-        null=True, blank=True,
-        help_text="1=Very liberal, 7=Very conservative, null=Prefer not to say")
-
-    # Employment/financial
-    household_income = models.CharField(max_length=50, blank=True)
-    job_search_urgency = models.IntegerField(null=True, blank=True, help_text="1-7")
-    job_satisfaction = models.IntegerField(null=True, blank=True, help_text="1-7")
+    # Income distribution — 20 years from now
+    income_future_year = models.CharField(
+        max_length=4, blank=True,
+        help_text="Which distribution year selected: 1970, 1990, or 2019")
+    income_future_percentile = models.IntegerField(
+        null=True, blank=True, help_text="Percentile on selected distribution")
 
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -39,9 +39,11 @@
     </div>
 
     <div class="mt-8 pt-6 border-t border-gray-200">
-        <p class="text-sm text-slate-500">
-            You may now close this browser window. Thank you for your participation!
-        </p>
+        <a href="{% url 'core:complete' %}"
+           class="inline-block bg-primary-500 hover:bg-primary-700 text-white
+                  font-medium py-3 px-8 rounded-lg text-base">
+            Continue
+        </a>
     </div>
 </div>
 {% endblock %}

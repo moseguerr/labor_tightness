@@ -1,0 +1,3844 @@
+[
+  {
+    "phrase": "socially conscious",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.48780786991119385,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3047638237476349,
+    "sim_gap": 0.18304404616355896,
+    "all_sims": {
+      "purpose": 0.48780786991119385,
+      "good_employer": 0.3047638237476349,
+      "compensation": 0.14798523485660553,
+      "job_tasks": 0.17407672107219696
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "ethical goals",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.46688777208328247,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4039846360683441,
+    "sim_gap": 0.06290313601493835,
+    "all_sims": {
+      "purpose": 0.46688777208328247,
+      "good_employer": 0.4039846360683441,
+      "compensation": 0.28750380873680115,
+      "job_tasks": 0.31404566764831543
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "purpose driven",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.5464881658554077,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4099629819393158,
+    "sim_gap": 0.13652518391609192,
+    "all_sims": {
+      "purpose": 0.5464881658554077,
+      "good_employer": 0.4024665355682373,
+      "compensation": 0.2913764715194702,
+      "job_tasks": 0.4099629819393158
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "social impact focus",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.6003474593162537,
+    "second_bucket": "good_employer",
+    "second_sim": 0.36304259300231934,
+    "sim_gap": 0.23730486631393433,
+    "all_sims": {
+      "purpose": 0.6003474593162537,
+      "good_employer": 0.36304259300231934,
+      "compensation": 0.28029483556747437,
+      "job_tasks": 0.26417702436447144
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "corporate mission",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.52884441614151,
+    "second_bucket": "good_employer",
+    "second_sim": 0.46759340167045593,
+    "sim_gap": 0.06125101447105408,
+    "all_sims": {
+      "purpose": 0.52884441614151,
+      "good_employer": 0.46759340167045593,
+      "compensation": 0.326896071434021,
+      "job_tasks": 0.4597705602645874
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "ethical organization",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.43737757205963135,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3789435029029846,
+    "sim_gap": 0.05843406915664673,
+    "all_sims": {
+      "purpose": 0.43737757205963135,
+      "good_employer": 0.3789435029029846,
+      "compensation": 0.2528691291809082,
+      "job_tasks": 0.30768224596977234
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "meaning of work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4857891798019409,
+    "second_bucket": "purpose",
+    "second_sim": 0.26882636547088623,
+    "sim_gap": 0.2169628143310547,
+    "all_sims": {
+      "purpose": 0.26882636547088623,
+      "good_employer": 0.4857891798019409,
+      "compensation": 0.2331329882144928,
+      "job_tasks": 0.22501766681671143
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "purpose at work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5720101594924927,
+    "second_bucket": "purpose",
+    "second_sim": 0.46144938468933105,
+    "sim_gap": 0.11056077480316162,
+    "all_sims": {
+      "purpose": 0.46144938468933105,
+      "good_employer": 0.5720101594924927,
+      "compensation": 0.33113664388656616,
+      "job_tasks": 0.38581863045692444
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "greater good",
+    "source_dict": "meaningful_work",
+    "source_subcat": "alignment with societal values",
+    "best_bucket": "purpose",
+    "best_sim": 0.4276268482208252,
+    "second_bucket": "compensation",
+    "second_sim": 0.3083915710449219,
+    "sim_gap": 0.11923527717590332,
+    "all_sims": {
+      "purpose": 0.4276268482208252,
+      "good_employer": 0.29782038927078247,
+      "compensation": 0.3083915710449219,
+      "job_tasks": 0.1729034036397934
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "make a difference",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.4700746238231659,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2985249161720276,
+    "sim_gap": 0.1715497076511383,
+    "all_sims": {
+      "purpose": 0.4700746238231659,
+      "good_employer": 0.2985249161720276,
+      "compensation": 0.2628742754459381,
+      "job_tasks": 0.22596555948257446
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "positively impact lives",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.529226541519165,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3424358069896698,
+    "sim_gap": 0.18679073452949524,
+    "all_sims": {
+      "purpose": 0.529226541519165,
+      "good_employer": 0.3424358069896698,
+      "compensation": 0.2777436375617981,
+      "job_tasks": 0.19373783469200134
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "lasting impact",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.5099163055419922,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3458276391029358,
+    "sim_gap": 0.1640886664390564,
+    "all_sims": {
+      "purpose": 0.5099163055419922,
+      "good_employer": 0.3458276391029358,
+      "compensation": 0.26379624009132385,
+      "job_tasks": 0.24132205545902252
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "rewarding work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5997440218925476,
+    "second_bucket": "compensation",
+    "second_sim": 0.5214282274246216,
+    "sim_gap": 0.07831579446792603,
+    "all_sims": {
+      "purpose": 0.48599812388420105,
+      "good_employer": 0.5997440218925476,
+      "compensation": 0.5214282274246216,
+      "job_tasks": 0.4177732765674591
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "better future",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.4991370737552643,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3811189830303192,
+    "sim_gap": 0.11801809072494507,
+    "all_sims": {
+      "purpose": 0.4991370737552643,
+      "good_employer": 0.3811189830303192,
+      "compensation": 0.3695651590824127,
+      "job_tasks": 0.28791001439094543
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "community building",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.5179194211959839,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4017847180366516,
+    "sim_gap": 0.11613470315933228,
+    "all_sims": {
+      "purpose": 0.5179194211959839,
+      "good_employer": 0.4017847180366516,
+      "compensation": 0.25445106625556946,
+      "job_tasks": 0.36316466331481934
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "create positive change",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.4110511541366577,
+    "second_bucket": "good_employer",
+    "second_sim": 0.276107519865036,
+    "sim_gap": 0.1349436342716217,
+    "all_sims": {
+      "purpose": 0.4110511541366577,
+      "good_employer": 0.276107519865036,
+      "compensation": 0.23786835372447968,
+      "job_tasks": 0.19788013398647308
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "impact driven work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.5001906752586365,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4504655599594116,
+    "sim_gap": 0.049725115299224854,
+    "all_sims": {
+      "purpose": 0.5001906752586365,
+      "good_employer": 0.4504655599594116,
+      "compensation": 0.2760525643825531,
+      "job_tasks": 0.4293718934059143
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "challenging and rewarding",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.47596368193626404,
+    "second_bucket": "good_employer",
+    "second_sim": 0.463229775428772,
+    "sim_gap": 0.012733906507492065,
+    "all_sims": {
+      "purpose": 0.47596368193626404,
+      "good_employer": 0.463229775428772,
+      "compensation": 0.3571884036064148,
+      "job_tasks": 0.3374665379524231
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "meaningful work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.5013973116874695,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4766980707645416,
+    "sim_gap": 0.024699240922927856,
+    "all_sims": {
+      "purpose": 0.5013973116874695,
+      "good_employer": 0.4766980707645416,
+      "compensation": 0.23613253235816956,
+      "job_tasks": 0.30734413862228394
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "innovative work",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "good_employer",
+    "best_sim": 0.563194751739502,
+    "second_bucket": "purpose",
+    "second_sim": 0.5550413131713867,
+    "sim_gap": 0.008153438568115234,
+    "all_sims": {
+      "purpose": 0.5550413131713867,
+      "good_employer": 0.563194751739502,
+      "compensation": 0.3184514045715332,
+      "job_tasks": 0.424689382314682
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "work with purpose",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "good_employer",
+    "best_sim": 0.548204243183136,
+    "second_bucket": "purpose",
+    "second_sim": 0.5424267053604126,
+    "sim_gap": 0.005777537822723389,
+    "all_sims": {
+      "purpose": 0.5424267053604126,
+      "good_employer": 0.548204243183136,
+      "compensation": 0.32847335934638977,
+      "job_tasks": 0.4148080348968506
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "make real impact",
+    "source_dict": "meaningful_work",
+    "source_subcat": "opportunities to make an impact",
+    "best_bucket": "purpose",
+    "best_sim": 0.5441733002662659,
+    "second_bucket": "good_employer",
+    "second_sim": 0.31609806418418884,
+    "sim_gap": 0.22807523608207703,
+    "all_sims": {
+      "purpose": 0.5441733002662659,
+      "good_employer": 0.31609806418418884,
+      "compensation": 0.23278149962425232,
+      "job_tasks": 0.28615671396255493
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "innovative ideas",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.5406341552734375,
+    "second_bucket": "good_employer",
+    "second_sim": 0.44056087732315063,
+    "sim_gap": 0.10007327795028687,
+    "all_sims": {
+      "purpose": 0.5406341552734375,
+      "good_employer": 0.44056087732315063,
+      "compensation": 0.24749551713466644,
+      "job_tasks": 0.40313559770584106
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "shaping future",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.6409040093421936,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4652438759803772,
+    "sim_gap": 0.1756601333618164,
+    "all_sims": {
+      "purpose": 0.6409040093421936,
+      "good_employer": 0.4652438759803772,
+      "compensation": 0.2667667269706726,
+      "job_tasks": 0.3720719814300537
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "disruptive innovation",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.5869979858398438,
+    "second_bucket": "good_employer",
+    "second_sim": 0.41984885931015015,
+    "sim_gap": 0.1671491265296936,
+    "all_sims": {
+      "purpose": 0.5869979858398438,
+      "good_employer": 0.41984885931015015,
+      "compensation": 0.23077021539211273,
+      "job_tasks": 0.31254419684410095
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "leading innovation",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.5838754773139954,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4396752715110779,
+    "sim_gap": 0.14420020580291748,
+    "all_sims": {
+      "purpose": 0.5838754773139954,
+      "good_employer": 0.4396752715110779,
+      "compensation": 0.24069839715957642,
+      "job_tasks": 0.43071502447128296
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "cutting edge technology",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.5117979049682617,
+    "second_bucket": "good_employer",
+    "second_sim": 0.38808131217956543,
+    "sim_gap": 0.12371659278869629,
+    "all_sims": {
+      "purpose": 0.5117979049682617,
+      "good_employer": 0.38808131217956543,
+      "compensation": 0.19871465861797333,
+      "job_tasks": 0.3498680889606476
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "transformative technologies",
+    "source_dict": "meaningful_work",
+    "source_subcat": "working on innovation",
+    "best_bucket": "purpose",
+    "best_sim": 0.4914519786834717,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3631507456302643,
+    "sim_gap": 0.1283012330532074,
+    "all_sims": {
+      "purpose": 0.4914519786834717,
+      "good_employer": 0.3631507456302643,
+      "compensation": 0.10663047432899475,
+      "job_tasks": 0.3046526312828064
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "addressing global challenges",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.5717514753341675,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3469311594963074,
+    "sim_gap": 0.2248203158378601,
+    "all_sims": {
+      "purpose": 0.5717514753341675,
+      "good_employer": 0.3010924756526947,
+      "compensation": 0.1382209062576294,
+      "job_tasks": 0.3469311594963074
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "sustainable development goals",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.48125597834587097,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3525555431842804,
+    "sim_gap": 0.12870043516159058,
+    "all_sims": {
+      "purpose": 0.48125597834587097,
+      "good_employer": 0.3525555431842804,
+      "compensation": 0.2696871757507324,
+      "job_tasks": 0.2535695731639862
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "global impact",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.5615951418876648,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.27305012941360474,
+    "sim_gap": 0.28854501247406006,
+    "all_sims": {
+      "purpose": 0.5615951418876648,
+      "good_employer": 0.2724531888961792,
+      "compensation": 0.22727040946483612,
+      "job_tasks": 0.27305012941360474
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "solving global problems",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.39689430594444275,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3832492530345917,
+    "sim_gap": 0.013645052909851074,
+    "all_sims": {
+      "purpose": 0.39689430594444275,
+      "good_employer": 0.27993813157081604,
+      "compensation": 0.12892059981822968,
+      "job_tasks": 0.3832492530345917
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "building resilient societies",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.5643017888069153,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3136026859283447,
+    "sim_gap": 0.25069910287857056,
+    "all_sims": {
+      "purpose": 0.5643017888069153,
+      "good_employer": 0.3136026859283447,
+      "compensation": 0.07099150866270065,
+      "job_tasks": 0.20435090363025665
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "advancing human development",
+    "source_dict": "meaningful_work",
+    "source_subcat": "roles tied to solving global challenges",
+    "best_bucket": "purpose",
+    "best_sim": 0.5221948623657227,
+    "second_bucket": "good_employer",
+    "second_sim": 0.35874781012535095,
+    "sim_gap": 0.1634470522403717,
+    "all_sims": {
+      "purpose": 0.5221948623657227,
+      "good_employer": 0.35874781012535095,
+      "compensation": 0.16780488193035126,
+      "job_tasks": 0.2614906132221222
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "open communication",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.42804068326950073,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3029552102088928,
+    "sim_gap": 0.1250854730606079,
+    "all_sims": {
+      "purpose": 0.42804068326950073,
+      "good_employer": 0.3029552102088928,
+      "compensation": 0.14388327300548553,
+      "job_tasks": 0.2600513994693756
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "respectful conflict resolution",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.38904133439064026,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.22822347283363342,
+    "sim_gap": 0.16081786155700684,
+    "all_sims": {
+      "purpose": 0.38904133439064026,
+      "good_employer": 0.1429598033428192,
+      "compensation": 0.054400864988565445,
+      "job_tasks": 0.22822347283363342
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "supportive environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.47735971212387085,
+    "second_bucket": "good_employer",
+    "second_sim": 0.40846937894821167,
+    "sim_gap": 0.06889033317565918,
+    "all_sims": {
+      "purpose": 0.47735971212387085,
+      "good_employer": 0.40846937894821167,
+      "compensation": 0.2875308394432068,
+      "job_tasks": 0.25706052780151367
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "encouraging expression",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.3790113925933838,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3015296459197998,
+    "sim_gap": 0.07748174667358398,
+    "all_sims": {
+      "purpose": 0.3790113925933838,
+      "good_employer": 0.3015296459197998,
+      "compensation": 0.2181214541196823,
+      "job_tasks": 0.18573766946792603
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "trust in leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.4108370840549469,
+    "second_bucket": "good_employer",
+    "second_sim": 0.36370202898979187,
+    "sim_gap": 0.04713505506515503,
+    "all_sims": {
+      "purpose": 0.4108370840549469,
+      "good_employer": 0.36370202898979187,
+      "compensation": 0.17196151614189148,
+      "job_tasks": 0.3529200553894043
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "warm and friendly culture",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.4570961892604828,
+    "second_bucket": "good_employer",
+    "second_sim": 0.27933865785598755,
+    "sim_gap": 0.17775753140449524,
+    "all_sims": {
+      "purpose": 0.4570961892604828,
+      "good_employer": 0.27933865785598755,
+      "compensation": 0.1723809540271759,
+      "job_tasks": 0.16722644865512848
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "inclusive feedback",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "purpose",
+    "best_sim": 0.40403425693511963,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.31682857871055603,
+    "sim_gap": 0.0872056782245636,
+    "all_sims": {
+      "purpose": 0.40403425693511963,
+      "good_employer": 0.2769814431667328,
+      "compensation": 0.3102757930755615,
+      "job_tasks": 0.31682857871055603
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee well being",
+    "source_dict": "organizational_culture",
+    "source_subcat": "psychological safety",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5364920496940613,
+    "second_bucket": "compensation",
+    "second_sim": 0.43640586733818054,
+    "sim_gap": 0.10008618235588074,
+    "all_sims": {
+      "purpose": 0.42073166370391846,
+      "good_employer": 0.5364920496940613,
+      "compensation": 0.43640586733818054,
+      "job_tasks": 0.3378697335720062
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "diversity in decision making",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.5134514570236206,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4470072090625763,
+    "sim_gap": 0.06644424796104431,
+    "all_sims": {
+      "purpose": 0.5134514570236206,
+      "good_employer": 0.4470072090625763,
+      "compensation": 0.2419290393590927,
+      "job_tasks": 0.37206345796585083
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "inclusive leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.5018353462219238,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4079653024673462,
+    "sim_gap": 0.09387004375457764,
+    "all_sims": {
+      "purpose": 0.5018353462219238,
+      "good_employer": 0.4079653024673462,
+      "compensation": 0.23955844342708588,
+      "job_tasks": 0.3565676212310791
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "representation in leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.42338818311691284,
+    "second_bucket": "purpose",
+    "second_sim": 0.4062514305114746,
+    "sim_gap": 0.017136752605438232,
+    "all_sims": {
+      "purpose": 0.4062514305114746,
+      "good_employer": 0.3879826068878174,
+      "compensation": 0.23510867357254028,
+      "job_tasks": 0.42338818311691284
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "valuing diverse opinions",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.4505215585231781,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3066827654838562,
+    "sim_gap": 0.1438387930393219,
+    "all_sims": {
+      "purpose": 0.4505215585231781,
+      "good_employer": 0.26468926668167114,
+      "compensation": 0.18228712677955627,
+      "job_tasks": 0.3066827654838562
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "cultural inclusivity",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.40947166085243225,
+    "second_bucket": "good_employer",
+    "second_sim": 0.1803331822156906,
+    "sim_gap": 0.22913847863674164,
+    "all_sims": {
+      "purpose": 0.40947166085243225,
+      "good_employer": 0.1803331822156906,
+      "compensation": 0.11923949420452118,
+      "job_tasks": 0.07905736565589905
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "multicultural environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.4680546224117279,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2618786096572876,
+    "sim_gap": 0.2061760127544403,
+    "all_sims": {
+      "purpose": 0.4680546224117279,
+      "good_employer": 0.2618786096572876,
+      "compensation": 0.1413138210773468,
+      "job_tasks": 0.1531718373298645
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "diverse voices",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.41154494881629944,
+    "second_bucket": "good_employer",
+    "second_sim": 0.29234614968299866,
+    "sim_gap": 0.11919879913330078,
+    "all_sims": {
+      "purpose": 0.41154494881629944,
+      "good_employer": 0.29234614968299866,
+      "compensation": 0.13551375269889832,
+      "job_tasks": 0.27878546714782715
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "equitable decision making",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.47016239166259766,
+    "second_bucket": "compensation",
+    "second_sim": 0.3981241285800934,
+    "sim_gap": 0.07203826308250427,
+    "all_sims": {
+      "purpose": 0.47016239166259766,
+      "good_employer": 0.3634909689426422,
+      "compensation": 0.3981241285800934,
+      "job_tasks": 0.32035019993782043
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "inclusive teams",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.42867884039878845,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.31134989857673645,
+    "sim_gap": 0.117328941822052,
+    "all_sims": {
+      "purpose": 0.42867884039878845,
+      "good_employer": 0.2900317907333374,
+      "compensation": 0.24864132702350616,
+      "job_tasks": 0.31134989857673645
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "inclusive work environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5741509199142456,
+    "second_bucket": "purpose",
+    "second_sim": 0.5070465207099915,
+    "sim_gap": 0.06710439920425415,
+    "all_sims": {
+      "purpose": 0.5070465207099915,
+      "good_employer": 0.5741509199142456,
+      "compensation": 0.3121279776096344,
+      "job_tasks": 0.38544973731040955
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "diverse perspectives",
+    "source_dict": "organizational_culture",
+    "source_subcat": "inclusion of diverse perspectives",
+    "best_bucket": "purpose",
+    "best_sim": 0.5364288687705994,
+    "second_bucket": "good_employer",
+    "second_sim": 0.39888066053390503,
+    "sim_gap": 0.13754820823669434,
+    "all_sims": {
+      "purpose": 0.5364288687705994,
+      "good_employer": 0.39888066053390503,
+      "compensation": 0.19312645494937897,
+      "job_tasks": 0.33050069212913513
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee recognition",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5048787593841553,
+    "second_bucket": "compensation",
+    "second_sim": 0.40425926446914673,
+    "sim_gap": 0.10061949491500854,
+    "all_sims": {
+      "purpose": 0.3356485664844513,
+      "good_employer": 0.5048787593841553,
+      "compensation": 0.40425926446914673,
+      "job_tasks": 0.38308510184288025
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "celebrating achievements",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "purpose",
+    "best_sim": 0.3931950628757477,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3321061134338379,
+    "sim_gap": 0.06108894944190979,
+    "all_sims": {
+      "purpose": 0.3931950628757477,
+      "good_employer": 0.3321061134338379,
+      "compensation": 0.3167101740837097,
+      "job_tasks": 0.17554543912410736
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "appreciation programs",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "compensation",
+    "best_sim": 0.5166031122207642,
+    "second_bucket": "good_employer",
+    "second_sim": 0.46014395356178284,
+    "sim_gap": 0.05645915865898132,
+    "all_sims": {
+      "purpose": 0.39824792742729187,
+      "good_employer": 0.46014395356178284,
+      "compensation": 0.5166031122207642,
+      "job_tasks": 0.31277182698249817
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "recognized and rewarded",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "compensation",
+    "best_sim": 0.40770742297172546,
+    "second_bucket": "purpose",
+    "second_sim": 0.3935129940509796,
+    "sim_gap": 0.01419442892074585,
+    "all_sims": {
+      "purpose": 0.3935129940509796,
+      "good_employer": 0.36038169264793396,
+      "compensation": 0.40770742297172546,
+      "job_tasks": 0.20850616693496704
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "reinvest in our employees",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5086350440979004,
+    "second_bucket": "purpose",
+    "second_sim": 0.43710577487945557,
+    "sim_gap": 0.07152926921844482,
+    "all_sims": {
+      "purpose": 0.43710577487945557,
+      "good_employer": 0.5086350440979004,
+      "compensation": 0.4157043695449829,
+      "job_tasks": 0.4221068322658539
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "promote from within",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "purpose",
+    "best_sim": 0.4210154116153717,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3720776438713074,
+    "sim_gap": 0.04893776774406433,
+    "all_sims": {
+      "purpose": 0.4210154116153717,
+      "good_employer": 0.3720776438713074,
+      "compensation": 0.2668536901473999,
+      "job_tasks": 0.357301265001297
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "employee appreciation",
+    "source_dict": "organizational_culture",
+    "source_subcat": "recognition and celebration",
+    "best_bucket": "compensation",
+    "best_sim": 0.5292718410491943,
+    "second_bucket": "good_employer",
+    "second_sim": 0.5075014233589172,
+    "sim_gap": 0.0217704176902771,
+    "all_sims": {
+      "purpose": 0.41119420528411865,
+      "good_employer": 0.5075014233589172,
+      "compensation": 0.5292718410491943,
+      "job_tasks": 0.33678221702575684
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "team collaboration",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.5384353399276733,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4703442454338074,
+    "sim_gap": 0.06809109449386597,
+    "all_sims": {
+      "purpose": 0.5384353399276733,
+      "good_employer": 0.40672779083251953,
+      "compensation": 0.2144838273525238,
+      "job_tasks": 0.4703442454338074
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "supportive teams",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.40305501222610474,
+    "second_bucket": "good_employer",
+    "second_sim": 0.33587944507598877,
+    "sim_gap": 0.06717556715011597,
+    "all_sims": {
+      "purpose": 0.40305501222610474,
+      "good_employer": 0.33587944507598877,
+      "compensation": 0.26820334792137146,
+      "job_tasks": 0.29429420828819275
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "peer support",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.4189797639846802,
+    "second_bucket": "good_employer",
+    "second_sim": 0.38348689675331116,
+    "sim_gap": 0.03549286723136902,
+    "all_sims": {
+      "purpose": 0.4189797639846802,
+      "good_employer": 0.38348689675331116,
+      "compensation": 0.3728051483631134,
+      "job_tasks": 0.31701624393463135
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "cross functional collaboration",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.4889522194862366,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.44999533891677856,
+    "sim_gap": 0.03895688056945801,
+    "all_sims": {
+      "purpose": 0.4889522194862366,
+      "good_employer": 0.3723965585231781,
+      "compensation": 0.2656022906303406,
+      "job_tasks": 0.44999533891677856
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "helpful colleagues",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.4696216881275177,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4339013695716858,
+    "sim_gap": 0.03572031855583191,
+    "all_sims": {
+      "purpose": 0.4696216881275177,
+      "good_employer": 0.4339013695716858,
+      "compensation": 0.27632513642311096,
+      "job_tasks": 0.36484843492507935
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "team oriented environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.49121761322021484,
+    "second_bucket": "purpose",
+    "second_sim": 0.42724770307540894,
+    "sim_gap": 0.06396991014480591,
+    "all_sims": {
+      "purpose": 0.42724770307540894,
+      "good_employer": 0.3893015682697296,
+      "compensation": 0.164915531873703,
+      "job_tasks": 0.49121761322021484
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "teamwork culture",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.49547332525253296,
+    "second_bucket": "good_employer",
+    "second_sim": 0.441972017288208,
+    "sim_gap": 0.05350130796432495,
+    "all_sims": {
+      "purpose": 0.49547332525253296,
+      "good_employer": 0.441972017288208,
+      "compensation": 0.1790556162595749,
+      "job_tasks": 0.39736223220825195
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "collaborative atmosphere",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.3644419312477112,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.29728880524635315,
+    "sim_gap": 0.06715312600135803,
+    "all_sims": {
+      "purpose": 0.3644419312477112,
+      "good_employer": 0.22439879179000854,
+      "compensation": 0.11282891780138016,
+      "job_tasks": 0.29728880524635315
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "team environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.4703811705112457,
+    "second_bucket": "purpose",
+    "second_sim": 0.4663172662258148,
+    "sim_gap": 0.004063904285430908,
+    "all_sims": {
+      "purpose": 0.4663172662258148,
+      "good_employer": 0.4191204011440277,
+      "compensation": 0.2102723866701126,
+      "job_tasks": 0.4703811705112457
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "employee involvement",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5153923034667969,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.47394174337387085,
+    "sim_gap": 0.041450560092926025,
+    "all_sims": {
+      "purpose": 0.420663446187973,
+      "good_employer": 0.5153923034667969,
+      "compensation": 0.3930375277996063,
+      "job_tasks": 0.47394174337387085
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "employees are key",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5152935981750488,
+    "second_bucket": "purpose",
+    "second_sim": 0.44427889585494995,
+    "sim_gap": 0.07101470232009888,
+    "all_sims": {
+      "purpose": 0.44427889585494995,
+      "good_employer": 0.5152935981750488,
+      "compensation": 0.3347815275192261,
+      "job_tasks": 0.40434685349464417
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employees are our greatest asset",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5528774261474609,
+    "second_bucket": "purpose",
+    "second_sim": 0.5356778502464294,
+    "sim_gap": 0.017199575901031494,
+    "all_sims": {
+      "purpose": 0.5356778502464294,
+      "good_employer": 0.5528774261474609,
+      "compensation": 0.4058815538883209,
+      "job_tasks": 0.41103941202163696
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "care of our people",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.5160378813743591,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2561638355255127,
+    "sim_gap": 0.25987404584884644,
+    "all_sims": {
+      "purpose": 0.5160378813743591,
+      "good_employer": 0.2561638355255127,
+      "compensation": 0.22761701047420502,
+      "job_tasks": 0.1981309950351715
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "collective problem solving",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.4392750859260559,
+    "second_bucket": "purpose",
+    "second_sim": 0.4177500605583191,
+    "sim_gap": 0.021525025367736816,
+    "all_sims": {
+      "purpose": 0.4177500605583191,
+      "good_employer": 0.2815374433994293,
+      "compensation": 0.17728041112422943,
+      "job_tasks": 0.4392750859260559
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "team building",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.5121117234230042,
+    "second_bucket": "purpose",
+    "second_sim": 0.4995197355747223,
+    "sim_gap": 0.01259198784828186,
+    "all_sims": {
+      "purpose": 0.4995197355747223,
+      "good_employer": 0.44366562366485596,
+      "compensation": 0.2661220133304596,
+      "job_tasks": 0.5121117234230042
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "collaborative work environment",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "good_employer",
+    "best_sim": 0.500080406665802,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4701196253299713,
+    "sim_gap": 0.02996078133583069,
+    "all_sims": {
+      "purpose": 0.4592664837837219,
+      "good_employer": 0.500080406665802,
+      "compensation": 0.17373308539390564,
+      "job_tasks": 0.4701196253299713
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "shared goals",
+    "source_dict": "organizational_culture",
+    "source_subcat": "collaborative environment",
+    "best_bucket": "purpose",
+    "best_sim": 0.4823892414569855,
+    "second_bucket": "compensation",
+    "second_sim": 0.4101012349128723,
+    "sim_gap": 0.07228800654411316,
+    "all_sims": {
+      "purpose": 0.4823892414569855,
+      "good_employer": 0.3756389915943146,
+      "compensation": 0.4101012349128723,
+      "job_tasks": 0.3646842837333679
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "transparent leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "purpose",
+    "best_sim": 0.4331974387168884,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.34968969225883484,
+    "sim_gap": 0.08350774645805359,
+    "all_sims": {
+      "purpose": 0.4331974387168884,
+      "good_employer": 0.34804701805114746,
+      "compensation": 0.1850740611553192,
+      "job_tasks": 0.34968969225883484
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "honest decision making",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "purpose",
+    "best_sim": 0.3691369593143463,
+    "second_bucket": "good_employer",
+    "second_sim": 0.32019615173339844,
+    "sim_gap": 0.048940807580947876,
+    "all_sims": {
+      "purpose": 0.3691369593143463,
+      "good_employer": 0.32019615173339844,
+      "compensation": 0.20995350182056427,
+      "job_tasks": 0.253935843706131
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "accessible management",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "good_employer",
+    "best_sim": 0.45048099756240845,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.439761221408844,
+    "sim_gap": 0.010719776153564453,
+    "all_sims": {
+      "purpose": 0.3953990638256073,
+      "good_employer": 0.45048099756240845,
+      "compensation": 0.2525924742221832,
+      "job_tasks": 0.439761221408844
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "ethical leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "good_employer",
+    "best_sim": 0.36972445249557495,
+    "second_bucket": "purpose",
+    "second_sim": 0.35698583722114563,
+    "sim_gap": 0.012738615274429321,
+    "all_sims": {
+      "purpose": 0.35698583722114563,
+      "good_employer": 0.36972445249557495,
+      "compensation": 0.19304847717285156,
+      "job_tasks": 0.3401496112346649
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "strong leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "purpose",
+    "best_sim": 0.47756096720695496,
+    "second_bucket": "good_employer",
+    "second_sim": 0.43132051825523376,
+    "sim_gap": 0.04624044895172119,
+    "all_sims": {
+      "purpose": 0.47756096720695496,
+      "good_employer": 0.43132051825523376,
+      "compensation": 0.25469154119491577,
+      "job_tasks": 0.38327929377555847
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "transparent decision making",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "purpose",
+    "best_sim": 0.4340841770172119,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3297470211982727,
+    "sim_gap": 0.10433715581893921,
+    "all_sims": {
+      "purpose": 0.4340841770172119,
+      "good_employer": 0.32351797819137573,
+      "compensation": 0.23423784971237183,
+      "job_tasks": 0.3297470211982727
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "accountable leadership",
+    "source_dict": "organizational_culture",
+    "source_subcat": "transparency in leadership",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.43746012449264526,
+    "second_bucket": "purpose",
+    "second_sim": 0.3952530026435852,
+    "sim_gap": 0.04220712184906006,
+    "all_sims": {
+      "purpose": 0.3952530026435852,
+      "good_employer": 0.3762238919734955,
+      "compensation": 0.25453051924705505,
+      "job_tasks": 0.43746012449264526
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "best companies to work",
+    "source_dict": "organizational_culture",
+    "source_subcat": "workplace recognition",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5328640937805176,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4147314131259918,
+    "sim_gap": 0.11813268065452576,
+    "all_sims": {
+      "purpose": 0.3514522314071655,
+      "good_employer": 0.5328640937805176,
+      "compensation": 0.3457268476486206,
+      "job_tasks": 0.4147314131259918
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "award winning workplace",
+    "source_dict": "organizational_culture",
+    "source_subcat": "workplace recognition",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5980520844459534,
+    "second_bucket": "purpose",
+    "second_sim": 0.5098567008972168,
+    "sim_gap": 0.08819538354873657,
+    "all_sims": {
+      "purpose": 0.5098567008972168,
+      "good_employer": 0.5980520844459534,
+      "compensation": 0.39555299282073975,
+      "job_tasks": 0.3923426866531372
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "recognized employer",
+    "source_dict": "organizational_culture",
+    "source_subcat": "workplace recognition",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4775620102882385,
+    "second_bucket": "compensation",
+    "second_sim": 0.38851431012153625,
+    "sim_gap": 0.08904770016670227,
+    "all_sims": {
+      "purpose": 0.3070269525051117,
+      "good_employer": 0.4775620102882385,
+      "compensation": 0.38851431012153625,
+      "job_tasks": 0.27449846267700195
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employer of choice",
+    "source_dict": "organizational_culture",
+    "source_subcat": "workplace recognition",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5345867872238159,
+    "second_bucket": "compensation",
+    "second_sim": 0.41663962602615356,
+    "sim_gap": 0.11794716119766235,
+    "all_sims": {
+      "purpose": 0.3349083662033081,
+      "good_employer": 0.5345867872238159,
+      "compensation": 0.41663962602615356,
+      "job_tasks": 0.3215460479259491
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "best places to work",
+    "source_dict": "organizational_culture",
+    "source_subcat": "workplace recognition",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5117688179016113,
+    "second_bucket": "purpose",
+    "second_sim": 0.27172428369522095,
+    "sim_gap": 0.24004453420639038,
+    "all_sims": {
+      "purpose": 0.27172428369522095,
+      "good_employer": 0.5117688179016113,
+      "compensation": 0.20722930133342743,
+      "job_tasks": 0.24771592020988464
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "environmentally friendly",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.35936370491981506,
+    "second_bucket": "good_employer",
+    "second_sim": 0.22617028653621674,
+    "sim_gap": 0.13319341838359833,
+    "all_sims": {
+      "purpose": 0.35936370491981506,
+      "good_employer": 0.22617028653621674,
+      "compensation": 0.17298626899719238,
+      "job_tasks": 0.11796397715806961
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "eco friendly",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.416513055562973,
+    "second_bucket": "good_employer",
+    "second_sim": 0.29464492201805115,
+    "sim_gap": 0.12186813354492188,
+    "all_sims": {
+      "purpose": 0.416513055562973,
+      "good_employer": 0.29464492201805115,
+      "compensation": 0.26957178115844727,
+      "job_tasks": 0.24177736043930054
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "green practices",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.4285348951816559,
+    "second_bucket": "good_employer",
+    "second_sim": 0.29951587319374084,
+    "sim_gap": 0.12901902198791504,
+    "all_sims": {
+      "purpose": 0.4285348951816559,
+      "good_employer": 0.29951587319374084,
+      "compensation": 0.16111014783382416,
+      "job_tasks": 0.24357329308986664
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "circular economy",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.35531342029571533,
+    "second_bucket": "compensation",
+    "second_sim": 0.30941107869148254,
+    "sim_gap": 0.04590234160423279,
+    "all_sims": {
+      "purpose": 0.35531342029571533,
+      "good_employer": 0.2869506776332855,
+      "compensation": 0.30941107869148254,
+      "job_tasks": 0.3078235685825348
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "sustainable development",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.5068550109863281,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3594946563243866,
+    "sim_gap": 0.14736035466194153,
+    "all_sims": {
+      "purpose": 0.5068550109863281,
+      "good_employer": 0.3594946563243866,
+      "compensation": 0.24748940765857697,
+      "job_tasks": 0.2484821379184723
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "sustainable growth",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.4442664682865143,
+    "second_bucket": "good_employer",
+    "second_sim": 0.30928701162338257,
+    "sim_gap": 0.1349794566631317,
+    "all_sims": {
+      "purpose": 0.4442664682865143,
+      "good_employer": 0.30928701162338257,
+      "compensation": 0.28725665807724,
+      "job_tasks": 0.19401566684246063
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "sustainable solutions",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "sustainability practices",
+    "best_bucket": "purpose",
+    "best_sim": 0.5299216508865356,
+    "second_bucket": "good_employer",
+    "second_sim": 0.36715227365493774,
+    "sim_gap": 0.1627693772315979,
+    "all_sims": {
+      "purpose": 0.5299216508865356,
+      "good_employer": 0.36715227365493774,
+      "compensation": 0.242350235581398,
+      "job_tasks": 0.3121093213558197
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "clean energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "renewable energy",
+    "best_bucket": "purpose",
+    "best_sim": 0.39385104179382324,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2843661904335022,
+    "sim_gap": 0.10948485136032104,
+    "all_sims": {
+      "purpose": 0.39385104179382324,
+      "good_employer": 0.2843661904335022,
+      "compensation": 0.23911568522453308,
+      "job_tasks": 0.15145325660705566
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "green energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcat": "renewable energy",
+    "best_bucket": "purpose",
+    "best_sim": 0.35365432500839233,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2538887858390808,
+    "sim_gap": 0.09976553916931152,
+    "all_sims": {
+      "purpose": 0.35365432500839233,
+      "good_employer": 0.2538887858390808,
+      "compensation": 0.2432851642370224,
+      "job_tasks": 0.12916815280914307
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "community outreach",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "purpose",
+    "best_sim": 0.48524296283721924,
+    "second_bucket": "good_employer",
+    "second_sim": 0.44200998544692993,
+    "sim_gap": 0.04323297739028931,
+    "all_sims": {
+      "purpose": 0.48524296283721924,
+      "good_employer": 0.44200998544692993,
+      "compensation": 0.31184983253479004,
+      "job_tasks": 0.31696221232414246
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "community engagement",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "purpose",
+    "best_sim": 0.510456383228302,
+    "second_bucket": "good_employer",
+    "second_sim": 0.36747944355010986,
+    "sim_gap": 0.14297693967819214,
+    "all_sims": {
+      "purpose": 0.510456383228302,
+      "good_employer": 0.36747944355010986,
+      "compensation": 0.2523229122161865,
+      "job_tasks": 0.3495819866657257
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "civic engagement",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "purpose",
+    "best_sim": 0.4557861387729645,
+    "second_bucket": "good_employer",
+    "second_sim": 0.29586631059646606,
+    "sim_gap": 0.1599198281764984,
+    "all_sims": {
+      "purpose": 0.4557861387729645,
+      "good_employer": 0.29586631059646606,
+      "compensation": 0.2272408902645111,
+      "job_tasks": 0.2624601125717163
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "community partnerships",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "purpose",
+    "best_sim": 0.5691400766372681,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4186355769634247,
+    "sim_gap": 0.15050449967384338,
+    "all_sims": {
+      "purpose": 0.5691400766372681,
+      "good_employer": 0.4186355769634247,
+      "compensation": 0.3613942861557007,
+      "job_tasks": 0.39918145537376404
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "volunteering programs",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4786294102668762,
+    "second_bucket": "purpose",
+    "second_sim": 0.3333314061164856,
+    "sim_gap": 0.14529800415039062,
+    "all_sims": {
+      "purpose": 0.3333314061164856,
+      "good_employer": 0.4786294102668762,
+      "compensation": 0.3151106834411621,
+      "job_tasks": 0.2910695970058441
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "community investment",
+    "source_dict": "social_initiatives",
+    "source_subcat": "community development",
+    "best_bucket": "purpose",
+    "best_sim": 0.4439502954483032,
+    "second_bucket": "compensation",
+    "second_sim": 0.43308791518211365,
+    "sim_gap": 0.010862380266189575,
+    "all_sims": {
+      "purpose": 0.4439502954483032,
+      "good_employer": 0.34578171372413635,
+      "compensation": 0.43308791518211365,
+      "job_tasks": 0.3366715908050537
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "gender equality",
+    "source_dict": "social_initiatives",
+    "source_subcat": "diversity equity inclusion",
+    "best_bucket": "purpose",
+    "best_sim": 0.3889734447002411,
+    "second_bucket": "good_employer",
+    "second_sim": 0.32330578565597534,
+    "sim_gap": 0.06566765904426575,
+    "all_sims": {
+      "purpose": 0.3889734447002411,
+      "good_employer": 0.32330578565597534,
+      "compensation": 0.31239020824432373,
+      "job_tasks": 0.16340048611164093
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "inclusive hiring",
+    "source_dict": "social_initiatives",
+    "source_subcat": "diversity equity inclusion",
+    "best_bucket": "good_employer",
+    "best_sim": 0.49184557795524597,
+    "second_bucket": "purpose",
+    "second_sim": 0.3654797077178955,
+    "sim_gap": 0.12636587023735046,
+    "all_sims": {
+      "purpose": 0.3654797077178955,
+      "good_employer": 0.49184557795524597,
+      "compensation": 0.3264369070529938,
+      "job_tasks": 0.33410540223121643
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "diverse workforce",
+    "source_dict": "social_initiatives",
+    "source_subcat": "diversity equity inclusion",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5322369337081909,
+    "second_bucket": "purpose",
+    "second_sim": 0.5195602178573608,
+    "sim_gap": 0.012676715850830078,
+    "all_sims": {
+      "purpose": 0.5195602178573608,
+      "good_employer": 0.5322369337081909,
+      "compensation": 0.2920897603034973,
+      "job_tasks": 0.39920899271965027
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "equity in workplace",
+    "source_dict": "social_initiatives",
+    "source_subcat": "diversity equity inclusion",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4636131227016449,
+    "second_bucket": "compensation",
+    "second_sim": 0.4263754189014435,
+    "sim_gap": 0.037237703800201416,
+    "all_sims": {
+      "purpose": 0.4044865667819977,
+      "good_employer": 0.4636131227016449,
+      "compensation": 0.4263754189014435,
+      "job_tasks": 0.35269659757614136
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "charitable contributions",
+    "source_dict": "social_initiatives",
+    "source_subcat": "philanthropy",
+    "best_bucket": "compensation",
+    "best_sim": 0.4735347330570221,
+    "second_bucket": "purpose",
+    "second_sim": 0.33099281787872314,
+    "sim_gap": 0.14254191517829895,
+    "all_sims": {
+      "purpose": 0.33099281787872314,
+      "good_employer": 0.27135980129241943,
+      "compensation": 0.4735347330570221,
+      "job_tasks": 0.1593787968158722
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "corporate giving",
+    "source_dict": "social_initiatives",
+    "source_subcat": "philanthropy",
+    "best_bucket": "purpose",
+    "best_sim": 0.45189160108566284,
+    "second_bucket": "compensation",
+    "second_sim": 0.4503062665462494,
+    "sim_gap": 0.0015853345394134521,
+    "all_sims": {
+      "purpose": 0.45189160108566284,
+      "good_employer": 0.40678396821022034,
+      "compensation": 0.4503062665462494,
+      "job_tasks": 0.3534955084323883
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "humanitarian aid",
+    "source_dict": "social_initiatives",
+    "source_subcat": "philanthropy",
+    "best_bucket": "purpose",
+    "best_sim": 0.3825409412384033,
+    "second_bucket": "compensation",
+    "second_sim": 0.32821255922317505,
+    "sim_gap": 0.05432838201522827,
+    "all_sims": {
+      "purpose": 0.3825409412384033,
+      "good_employer": 0.27444881200790405,
+      "compensation": 0.32821255922317505,
+      "job_tasks": 0.1459137201309204
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "philanthropic initiatives",
+    "source_dict": "social_initiatives",
+    "source_subcat": "philanthropy",
+    "best_bucket": "purpose",
+    "best_sim": 0.5494375228881836,
+    "second_bucket": "compensation",
+    "second_sim": 0.41500791907310486,
+    "sim_gap": 0.13442960381507874,
+    "all_sims": {
+      "purpose": 0.5494375228881836,
+      "good_employer": 0.39397361874580383,
+      "compensation": 0.41500791907310486,
+      "job_tasks": 0.3274024724960327
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee stock ownership",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.37631624937057495,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3042624890804291,
+    "sim_gap": 0.07205376029014587,
+    "all_sims": {
+      "purpose": 0.15674030780792236,
+      "good_employer": 0.3042624890804291,
+      "compensation": 0.37631624937057495,
+      "job_tasks": 0.23788098990917206
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "equity grants",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.5033637285232544,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.2546449899673462,
+    "sim_gap": 0.2487187385559082,
+    "all_sims": {
+      "purpose": 0.21900217235088348,
+      "good_employer": 0.2537361681461334,
+      "compensation": 0.5033637285232544,
+      "job_tasks": 0.2546449899673462
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "company shares",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.3686579167842865,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.2529568672180176,
+    "sim_gap": 0.11570104956626892,
+    "all_sims": {
+      "purpose": 0.17521201074123383,
+      "good_employer": 0.19804346561431885,
+      "compensation": 0.3686579167842865,
+      "job_tasks": 0.2529568672180176
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "long term incentives",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.575411319732666,
+    "second_bucket": "good_employer",
+    "second_sim": 0.48135286569595337,
+    "sim_gap": 0.09405845403671265,
+    "all_sims": {
+      "purpose": 0.3695729076862335,
+      "good_employer": 0.48135286569595337,
+      "compensation": 0.575411319732666,
+      "job_tasks": 0.39120012521743774
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "equity packages",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.42890751361846924,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3394903540611267,
+    "sim_gap": 0.08941715955734253,
+    "all_sims": {
+      "purpose": 0.2777891159057617,
+      "good_employer": 0.22256885468959808,
+      "compensation": 0.42890751361846924,
+      "job_tasks": 0.3394903540611267
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "stock purchase plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.35382381081581116,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.25725218653678894,
+    "sim_gap": 0.09657162427902222,
+    "all_sims": {
+      "purpose": 0.054193031042814255,
+      "good_employer": 0.10684703290462494,
+      "compensation": 0.35382381081581116,
+      "job_tasks": 0.25725218653678894
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee stock",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.46216896176338196,
+    "second_bucket": "good_employer",
+    "second_sim": 0.36462458968162537,
+    "sim_gap": 0.09754437208175659,
+    "all_sims": {
+      "purpose": 0.17665649950504303,
+      "good_employer": 0.36462458968162537,
+      "compensation": 0.46216896176338196,
+      "job_tasks": 0.30225569009780884
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "stock appreciation rights",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.4057368040084839,
+    "second_bucket": "good_employer",
+    "second_sim": 0.17555147409439087,
+    "sim_gap": 0.23018532991409302,
+    "all_sims": {
+      "purpose": 0.17344602942466736,
+      "good_employer": 0.17555147409439087,
+      "compensation": 0.4057368040084839,
+      "job_tasks": 0.1259920746088028
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "performance based equity",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.461972177028656,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3599638044834137,
+    "sim_gap": 0.10200837254524231,
+    "all_sims": {
+      "purpose": 0.3204314112663269,
+      "good_employer": 0.30654221773147583,
+      "compensation": 0.461972177028656,
+      "job_tasks": 0.3599638044834137
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee share purchase plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "compensation",
+    "best_sim": 0.46827778220176697,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.35397401452064514,
+    "sim_gap": 0.11430376768112183,
+    "all_sims": {
+      "purpose": 0.16291242837905884,
+      "good_employer": 0.28646719455718994,
+      "compensation": 0.46827778220176697,
+      "job_tasks": 0.35397401452064514
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee owned",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "stock options or equity grants",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4437747895717621,
+    "second_bucket": "compensation",
+    "second_sim": 0.40383434295654297,
+    "sim_gap": 0.039940446615219116,
+    "all_sims": {
+      "purpose": 0.3235752284526825,
+      "good_employer": 0.4437747895717621,
+      "compensation": 0.40383434295654297,
+      "job_tasks": 0.3123229444026947
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "savings plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "retirement plans",
+    "best_bucket": "compensation",
+    "best_sim": 0.4109892249107361,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3105568587779999,
+    "sim_gap": 0.1004323661327362,
+    "all_sims": {
+      "purpose": 0.24968074262142181,
+      "good_employer": 0.27015531063079834,
+      "compensation": 0.4109892249107361,
+      "job_tasks": 0.3105568587779999
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "retirement benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "retirement plans",
+    "best_bucket": "compensation",
+    "best_sim": 0.5051372647285461,
+    "second_bucket": "good_employer",
+    "second_sim": 0.37504011392593384,
+    "sim_gap": 0.1300971508026123,
+    "all_sims": {
+      "purpose": 0.2288607954978943,
+      "good_employer": 0.37504011392593384,
+      "compensation": 0.5051372647285461,
+      "job_tasks": 0.1560738980770111
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "defined benefit plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "retirement plans",
+    "best_bucket": "compensation",
+    "best_sim": 0.5781856775283813,
+    "second_bucket": "good_employer",
+    "second_sim": 0.37459641695022583,
+    "sim_gap": 0.20358926057815552,
+    "all_sims": {
+      "purpose": 0.3251633942127228,
+      "good_employer": 0.37459641695022583,
+      "compensation": 0.5781856775283813,
+      "job_tasks": 0.3383418321609497
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "defined contribution plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "retirement plans",
+    "best_bucket": "compensation",
+    "best_sim": 0.4037132263183594,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3840770125389099,
+    "sim_gap": 0.019636213779449463,
+    "all_sims": {
+      "purpose": 0.303615927696228,
+      "good_employer": 0.28668031096458435,
+      "compensation": 0.4037132263183594,
+      "job_tasks": 0.3840770125389099
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "deferred compensation plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "retirement plans",
+    "best_bucket": "compensation",
+    "best_sim": 0.4880501925945282,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.2964542508125305,
+    "sim_gap": 0.19159594178199768,
+    "all_sims": {
+      "purpose": 0.12045343220233917,
+      "good_employer": 0.2637036144733429,
+      "compensation": 0.4880501925945282,
+      "job_tasks": 0.2964542508125305
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "vision insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "insurance benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.3924083411693573,
+    "second_bucket": "good_employer",
+    "second_sim": 0.217505544424057,
+    "sim_gap": 0.1749027967453003,
+    "all_sims": {
+      "purpose": 0.21338869631290436,
+      "good_employer": 0.217505544424057,
+      "compensation": 0.3924083411693573,
+      "job_tasks": 0.20726217329502106
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "life insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "insurance benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.3888538181781769,
+    "second_bucket": "good_employer",
+    "second_sim": 0.23588129878044128,
+    "sim_gap": 0.1529725193977356,
+    "all_sims": {
+      "purpose": 0.15560278296470642,
+      "good_employer": 0.23588129878044128,
+      "compensation": 0.3888538181781769,
+      "job_tasks": 0.12936806678771973
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "disability insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "insurance benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.3751351833343506,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2241622656583786,
+    "sim_gap": 0.15097291767597198,
+    "all_sims": {
+      "purpose": 0.16740208864212036,
+      "good_employer": 0.2241622656583786,
+      "compensation": 0.3751351833343506,
+      "job_tasks": 0.0984937772154808
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "medical plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "insurance benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.4254480004310608,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3461175262928009,
+    "sim_gap": 0.07933047413825989,
+    "all_sims": {
+      "purpose": 0.2512260377407074,
+      "good_employer": 0.32773321866989136,
+      "compensation": 0.4254480004310608,
+      "job_tasks": 0.3461175262928009
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "mental health coverage",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "insurance benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.3711234927177429,
+    "second_bucket": "good_employer",
+    "second_sim": 0.21837477385997772,
+    "sim_gap": 0.1527487188577652,
+    "all_sims": {
+      "purpose": 0.19954967498779297,
+      "good_employer": 0.21837477385997772,
+      "compensation": 0.3711234927177429,
+      "job_tasks": 0.12940771877765656
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "career training sponsorship",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5124496817588806,
+    "second_bucket": "compensation",
+    "second_sim": 0.4457930624485016,
+    "sim_gap": 0.06665661931037903,
+    "all_sims": {
+      "purpose": 0.34929636120796204,
+      "good_employer": 0.5124496817588806,
+      "compensation": 0.4457930624485016,
+      "job_tasks": 0.36252889037132263
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "certification reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.49197736382484436,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2544998526573181,
+    "sim_gap": 0.23747751116752625,
+    "all_sims": {
+      "purpose": 0.16870415210723877,
+      "good_employer": 0.2544998526573181,
+      "compensation": 0.49197736382484436,
+      "job_tasks": 0.22642189264297485
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "student loan assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.38917967677116394,
+    "second_bucket": "good_employer",
+    "second_sim": 0.27544617652893066,
+    "sim_gap": 0.11373350024223328,
+    "all_sims": {
+      "purpose": 0.1723126769065857,
+      "good_employer": 0.27544617652893066,
+      "compensation": 0.38917967677116394,
+      "job_tasks": 0.22280184924602509
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "education support",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.4627819359302521,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4387238919734955,
+    "sim_gap": 0.024058043956756592,
+    "all_sims": {
+      "purpose": 0.35391998291015625,
+      "good_employer": 0.4387238919734955,
+      "compensation": 0.4627819359302521,
+      "job_tasks": 0.28529828786849976
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "tuition aid",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.5069461464881897,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2945093810558319,
+    "sim_gap": 0.2124367654323578,
+    "all_sims": {
+      "purpose": 0.2060968577861786,
+      "good_employer": 0.2945093810558319,
+      "compensation": 0.5069461464881897,
+      "job_tasks": 0.1481209248304367
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "tuition assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.526634693145752,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3336266279220581,
+    "sim_gap": 0.19300806522369385,
+    "all_sims": {
+      "purpose": 0.1958400160074234,
+      "good_employer": 0.3336266279220581,
+      "compensation": 0.526634693145752,
+      "job_tasks": 0.2183043509721756
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "scholarship programs",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.38887253403663635,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3598574995994568,
+    "sim_gap": 0.029015034437179565,
+    "all_sims": {
+      "purpose": 0.24279144406318665,
+      "good_employer": 0.3598574995994568,
+      "compensation": 0.38887253403663635,
+      "job_tasks": 0.2450377643108368
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "tuition benefit",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.6107500195503235,
+    "second_bucket": "good_employer",
+    "second_sim": 0.28680941462516785,
+    "sim_gap": 0.32394060492515564,
+    "all_sims": {
+      "purpose": 0.17732124030590057,
+      "good_employer": 0.28680941462516785,
+      "compensation": 0.6107500195503235,
+      "job_tasks": 0.13002607226371765
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "student loan repayment assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "tuition reimbursement",
+    "best_bucket": "compensation",
+    "best_sim": 0.35758113861083984,
+    "second_bucket": "good_employer",
+    "second_sim": 0.18323533236980438,
+    "sim_gap": 0.17434580624103546,
+    "all_sims": {
+      "purpose": 0.09476060420274734,
+      "good_employer": 0.18323533236980438,
+      "compensation": 0.35758113861083984,
+      "job_tasks": 0.14106300473213196
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "commuter benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.431072860956192,
+    "second_bucket": "good_employer",
+    "second_sim": 0.28279924392700195,
+    "sim_gap": 0.14827361702919006,
+    "all_sims": {
+      "purpose": 0.23950892686843872,
+      "good_employer": 0.28279924392700195,
+      "compensation": 0.431072860956192,
+      "job_tasks": 0.1531556397676468
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "transportation stipend",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.413826584815979,
+    "second_bucket": "purpose",
+    "second_sim": 0.27785325050354004,
+    "sim_gap": 0.13597333431243896,
+    "all_sims": {
+      "purpose": 0.27785325050354004,
+      "good_employer": 0.26419341564178467,
+      "compensation": 0.413826584815979,
+      "job_tasks": 0.22590510547161102
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "mileage reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.40223458409309387,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.14437130093574524,
+    "sim_gap": 0.25786328315734863,
+    "all_sims": {
+      "purpose": 0.12805919349193573,
+      "good_employer": 0.11356812715530396,
+      "compensation": 0.40223458409309387,
+      "job_tasks": 0.14437130093574524
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "parking allowance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.3907279372215271,
+    "second_bucket": "purpose",
+    "second_sim": 0.16360490024089813,
+    "sim_gap": 0.22712303698062897,
+    "all_sims": {
+      "purpose": 0.16360490024089813,
+      "good_employer": 0.1571475863456726,
+      "compensation": 0.3907279372215271,
+      "job_tasks": 0.07658110558986664
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "travel allowance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.3848532736301422,
+    "second_bucket": "purpose",
+    "second_sim": 0.18375058472156525,
+    "sim_gap": 0.20110268890857697,
+    "all_sims": {
+      "purpose": 0.18375058472156525,
+      "good_employer": 0.17488931119441986,
+      "compensation": 0.3848532736301422,
+      "job_tasks": 0.10503938049077988
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "public transit reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.3894534111022949,
+    "second_bucket": "purpose",
+    "second_sim": 0.12178105115890503,
+    "sim_gap": 0.2676723599433899,
+    "all_sims": {
+      "purpose": 0.12178105115890503,
+      "good_employer": 0.0842696949839592,
+      "compensation": 0.3894534111022949,
+      "job_tasks": 0.07260647416114807
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "commuter allowance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "commuter subsidies",
+    "best_bucket": "compensation",
+    "best_sim": 0.4312771260738373,
+    "second_bucket": "good_employer",
+    "second_sim": 0.21502014994621277,
+    "sim_gap": 0.2162569761276245,
+    "all_sims": {
+      "purpose": 0.17665724456310272,
+      "good_employer": 0.21502014994621277,
+      "compensation": 0.4312771260738373,
+      "job_tasks": 0.12137097865343094
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "sick leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "paid time off",
+    "best_bucket": "compensation",
+    "best_sim": 0.35833877325057983,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2758758068084717,
+    "sim_gap": 0.08246296644210815,
+    "all_sims": {
+      "purpose": 0.24487757682800293,
+      "good_employer": 0.2758758068084717,
+      "compensation": 0.35833877325057983,
+      "job_tasks": 0.15441492199897766
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "maternity leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "paid time off",
+    "best_bucket": "compensation",
+    "best_sim": 0.37330397963523865,
+    "second_bucket": "good_employer",
+    "second_sim": 0.32101213932037354,
+    "sim_gap": 0.05229184031486511,
+    "all_sims": {
+      "purpose": 0.14493446052074432,
+      "good_employer": 0.32101213932037354,
+      "compensation": 0.37330397963523865,
+      "job_tasks": 0.12590518593788147
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "paid holidays",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "paid time off",
+    "best_bucket": "compensation",
+    "best_sim": 0.4925583302974701,
+    "second_bucket": "good_employer",
+    "second_sim": 0.29223501682281494,
+    "sim_gap": 0.20032331347465515,
+    "all_sims": {
+      "purpose": 0.21973255276679993,
+      "good_employer": 0.29223501682281494,
+      "compensation": 0.4925583302974701,
+      "job_tasks": 0.22932948172092438
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "holiday pay",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "paid time off",
+    "best_bucket": "compensation",
+    "best_sim": 0.5360495448112488,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3082258105278015,
+    "sim_gap": 0.22782373428344727,
+    "all_sims": {
+      "purpose": 0.21343819797039032,
+      "good_employer": 0.3082258105278015,
+      "compensation": 0.5360495448112488,
+      "job_tasks": 0.21277552843093872
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "personal leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "paid time off",
+    "best_bucket": "compensation",
+    "best_sim": 0.38468244671821594,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3516390025615692,
+    "sim_gap": 0.03304344415664673,
+    "all_sims": {
+      "purpose": 0.24114006757736206,
+      "good_employer": 0.3516390025615692,
+      "compensation": 0.38468244671821594,
+      "job_tasks": 0.16257838904857635
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "competitive benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.5866453051567078,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4668208956718445,
+    "sim_gap": 0.11982440948486328,
+    "all_sims": {
+      "purpose": 0.44899311661720276,
+      "good_employer": 0.4668208956718445,
+      "compensation": 0.5866453051567078,
+      "job_tasks": 0.3650885224342346
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "benefits package",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.627302885055542,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3649640381336212,
+    "sim_gap": 0.2623388469219208,
+    "all_sims": {
+      "purpose": 0.30817878246307373,
+      "good_employer": 0.3649640381336212,
+      "compensation": 0.627302885055542,
+      "job_tasks": 0.25417715311050415
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee discount",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.5619257092475891,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4160977005958557,
+    "sim_gap": 0.1458280086517334,
+    "all_sims": {
+      "purpose": 0.23634754121303558,
+      "good_employer": 0.4160977005958557,
+      "compensation": 0.5619257092475891,
+      "job_tasks": 0.30368852615356445
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "sign on bonus",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.5142437815666199,
+    "second_bucket": "good_employer",
+    "second_sim": 0.2817537784576416,
+    "sim_gap": 0.23249000310897827,
+    "all_sims": {
+      "purpose": 0.1711115837097168,
+      "good_employer": 0.2817537784576416,
+      "compensation": 0.5142437815666199,
+      "job_tasks": 0.19721466302871704
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "comprehensive benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.5405591726303101,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3899773061275482,
+    "sim_gap": 0.15058186650276184,
+    "all_sims": {
+      "purpose": 0.38591769337654114,
+      "good_employer": 0.3899773061275482,
+      "compensation": 0.5405591726303101,
+      "job_tasks": 0.29692453145980835
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "commission based earnings",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.5158135890960693,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3875899612903595,
+    "sim_gap": 0.12822362780570984,
+    "all_sims": {
+      "purpose": 0.10306257754564285,
+      "good_employer": 0.2624082565307617,
+      "compensation": 0.5158135890960693,
+      "job_tasks": 0.3875899612903595
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee referral award",
+    "source_dict": "pecuniary_benefits",
+    "source_subcat": "additional financial benefits",
+    "best_bucket": "compensation",
+    "best_sim": 0.3890511989593506,
+    "second_bucket": "good_employer",
+    "second_sim": 0.295326292514801,
+    "sim_gap": 0.09372490644454956,
+    "all_sims": {
+      "purpose": 0.13273365795612335,
+      "good_employer": 0.295326292514801,
+      "compensation": 0.3890511989593506,
+      "job_tasks": 0.2070653885602951
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "remote work",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5232356190681458,
+    "second_bucket": "purpose",
+    "second_sim": 0.3603350818157196,
+    "sim_gap": 0.16290053725242615,
+    "all_sims": {
+      "purpose": 0.3603350818157196,
+      "good_employer": 0.5232356190681458,
+      "compensation": 0.2397037148475647,
+      "job_tasks": 0.3330993354320526
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "work from home",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4763678014278412,
+    "second_bucket": "purpose",
+    "second_sim": 0.2590138912200928,
+    "sim_gap": 0.2173539102077484,
+    "all_sims": {
+      "purpose": 0.2590138912200928,
+      "good_employer": 0.4763678014278412,
+      "compensation": 0.22949956357479095,
+      "job_tasks": 0.2382616549730301
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "flexible hours",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4522620141506195,
+    "second_bucket": "compensation",
+    "second_sim": 0.32242804765701294,
+    "sim_gap": 0.12983396649360657,
+    "all_sims": {
+      "purpose": 0.21905508637428284,
+      "good_employer": 0.4522620141506195,
+      "compensation": 0.32242804765701294,
+      "job_tasks": 0.2433524876832962
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "distributed team",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.4870603382587433,
+    "second_bucket": "purpose",
+    "second_sim": 0.46208781003952026,
+    "sim_gap": 0.024972528219223022,
+    "all_sims": {
+      "purpose": 0.46208781003952026,
+      "good_employer": 0.4046304225921631,
+      "compensation": 0.23659616708755493,
+      "job_tasks": 0.4870603382587433
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "flexible workplace",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6077051162719727,
+    "second_bucket": "purpose",
+    "second_sim": 0.45464855432510376,
+    "sim_gap": 0.1530565619468689,
+    "all_sims": {
+      "purpose": 0.45464855432510376,
+      "good_employer": 0.6077051162719727,
+      "compensation": 0.2418127954006195,
+      "job_tasks": 0.42319735884666443
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "work anywhere",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5192461609840393,
+    "second_bucket": "purpose",
+    "second_sim": 0.3340626060962677,
+    "sim_gap": 0.1851835548877716,
+    "all_sims": {
+      "purpose": 0.3340626060962677,
+      "good_employer": 0.5192461609840393,
+      "compensation": 0.2499367892742157,
+      "job_tasks": 0.21875153481960297
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "flexible schedule",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "flexible work arrangements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4501584768295288,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4017619788646698,
+    "sim_gap": 0.04839649796485901,
+    "all_sims": {
+      "purpose": 0.25665271282196045,
+      "good_employer": 0.4501584768295288,
+      "compensation": 0.3061438500881195,
+      "job_tasks": 0.4017619788646698
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "decision making authority",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "purpose",
+    "best_sim": 0.4228671193122864,
+    "second_bucket": "good_employer",
+    "second_sim": 0.371151864528656,
+    "sim_gap": 0.05171525478363037,
+    "all_sims": {
+      "purpose": 0.4228671193122864,
+      "good_employer": 0.371151864528656,
+      "compensation": 0.20873871445655823,
+      "job_tasks": 0.3695663511753082
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "self directed",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "purpose",
+    "best_sim": 0.35493069887161255,
+    "second_bucket": "good_employer",
+    "second_sim": 0.31135520339012146,
+    "sim_gap": 0.04357549548149109,
+    "all_sims": {
+      "purpose": 0.35493069887161255,
+      "good_employer": 0.31135520339012146,
+      "compensation": 0.16018453240394592,
+      "job_tasks": 0.30897361040115356
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "minimal supervision",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.3699098825454712,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3611084222793579,
+    "sim_gap": 0.008801460266113281,
+    "all_sims": {
+      "purpose": 0.32550641894340515,
+      "good_employer": 0.3611084222793579,
+      "compensation": 0.19069640338420868,
+      "job_tasks": 0.3699098825454712
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "creative freedom",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "purpose",
+    "best_sim": 0.4463503658771515,
+    "second_bucket": "good_employer",
+    "second_sim": 0.40620777010917664,
+    "sim_gap": 0.040142595767974854,
+    "all_sims": {
+      "purpose": 0.4463503658771515,
+      "good_employer": 0.40620777010917664,
+      "compensation": 0.24445630609989166,
+      "job_tasks": 0.22736260294914246
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "empowered decision making",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "purpose",
+    "best_sim": 0.47938308119773865,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4275871515274048,
+    "sim_gap": 0.05179592967033386,
+    "all_sims": {
+      "purpose": 0.47938308119773865,
+      "good_employer": 0.4275871515274048,
+      "compensation": 0.28919824957847595,
+      "job_tasks": 0.34301820397377014
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "independent work environment",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5744093656539917,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4084703028202057,
+    "sim_gap": 0.165939062833786,
+    "all_sims": {
+      "purpose": 0.38088878989219666,
+      "good_employer": 0.5744093656539917,
+      "compensation": 0.30183494091033936,
+      "job_tasks": 0.4084703028202057
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "project ownership",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "job autonomy",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4198125898838043,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4151366949081421,
+    "sim_gap": 0.0046758949756622314,
+    "all_sims": {
+      "purpose": 0.35211384296417236,
+      "good_employer": 0.4198125898838043,
+      "compensation": 0.31129613518714905,
+      "job_tasks": 0.4151366949081421
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "work life balance",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5838773846626282,
+    "second_bucket": "purpose",
+    "second_sim": 0.42879581451416016,
+    "sim_gap": 0.15508157014846802,
+    "all_sims": {
+      "purpose": 0.42879581451416016,
+      "good_employer": 0.5838773846626282,
+      "compensation": 0.40313926339149475,
+      "job_tasks": 0.32743650674819946
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "balanced lifestyle",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "purpose",
+    "best_sim": 0.4493311941623688,
+    "second_bucket": "good_employer",
+    "second_sim": 0.3726770877838135,
+    "sim_gap": 0.0766541063785553,
+    "all_sims": {
+      "purpose": 0.4493311941623688,
+      "good_employer": 0.3726770877838135,
+      "compensation": 0.23982985317707062,
+      "job_tasks": 0.24001026153564453
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "healthy worklife",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5221372842788696,
+    "second_bucket": "purpose",
+    "second_sim": 0.40145325660705566,
+    "sim_gap": 0.12068402767181396,
+    "all_sims": {
+      "purpose": 0.40145325660705566,
+      "good_employer": 0.5221372842788696,
+      "compensation": 0.37480854988098145,
+      "job_tasks": 0.22216667234897614
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "work life harmony",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6266387104988098,
+    "second_bucket": "purpose",
+    "second_sim": 0.542451798915863,
+    "sim_gap": 0.08418691158294678,
+    "all_sims": {
+      "purpose": 0.542451798915863,
+      "good_employer": 0.6266387104988098,
+      "compensation": 0.28550347685813904,
+      "job_tasks": 0.2992672622203827
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "family friendly policies",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "purpose",
+    "best_sim": 0.39389434456825256,
+    "second_bucket": "compensation",
+    "second_sim": 0.31662890315055847,
+    "sim_gap": 0.07726544141769409,
+    "all_sims": {
+      "purpose": 0.39389434456825256,
+      "good_employer": 0.3096754848957062,
+      "compensation": 0.31662890315055847,
+      "job_tasks": 0.18768316507339478
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee well being initiatives",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5689206123352051,
+    "second_bucket": "purpose",
+    "second_sim": 0.5088717937469482,
+    "sim_gap": 0.060048818588256836,
+    "all_sims": {
+      "purpose": 0.5088717937469482,
+      "good_employer": 0.5689206123352051,
+      "compensation": 0.48232224583625793,
+      "job_tasks": 0.4327850043773651
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "wellness programs",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "work life balance initiatives",
+    "best_bucket": "compensation",
+    "best_sim": 0.48607802391052246,
+    "second_bucket": "good_employer",
+    "second_sim": 0.4715259373188019,
+    "sim_gap": 0.014552086591720581,
+    "all_sims": {
+      "purpose": 0.38687142729759216,
+      "good_employer": 0.4715259373188019,
+      "compensation": 0.48607802391052246,
+      "job_tasks": 0.22477318346500397
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "job stability",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "secure and decent work",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6026805639266968,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.37859368324279785,
+    "sim_gap": 0.22408688068389893,
+    "all_sims": {
+      "purpose": 0.3635075092315674,
+      "good_employer": 0.6026805639266968,
+      "compensation": 0.3292095959186554,
+      "job_tasks": 0.37859368324279785
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "stable employment",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "secure and decent work",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5806400775909424,
+    "second_bucket": "compensation",
+    "second_sim": 0.3770703673362732,
+    "sim_gap": 0.2035697102546692,
+    "all_sims": {
+      "purpose": 0.35715430974960327,
+      "good_employer": 0.5806400775909424,
+      "compensation": 0.3770703673362732,
+      "job_tasks": 0.3501017689704895
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "long term opportunities",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "secure and decent work",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5996022820472717,
+    "second_bucket": "purpose",
+    "second_sim": 0.479083389043808,
+    "sim_gap": 0.12051889300346375,
+    "all_sims": {
+      "purpose": 0.479083389043808,
+      "good_employer": 0.5996022820472717,
+      "compensation": 0.4444226324558258,
+      "job_tasks": 0.44913122057914734
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "career stability",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "secure and decent work",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6012498140335083,
+    "second_bucket": "purpose",
+    "second_sim": 0.3862006664276123,
+    "sim_gap": 0.215049147605896,
+    "all_sims": {
+      "purpose": 0.3862006664276123,
+      "good_employer": 0.6012498140335083,
+      "compensation": 0.32249921560287476,
+      "job_tasks": 0.3620088994503021
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "ethical work environment",
+    "source_dict": "job_design_characteristics",
+    "source_subcat": "secure and decent work",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5585887432098389,
+    "second_bucket": "purpose",
+    "second_sim": 0.4393328130245209,
+    "sim_gap": 0.119255930185318,
+    "all_sims": {
+      "purpose": 0.4393328130245209,
+      "good_employer": 0.5585887432098389,
+      "compensation": 0.24236668646335602,
+      "job_tasks": 0.3568480312824249
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "training programs",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5726240873336792,
+    "second_bucket": "compensation",
+    "second_sim": 0.4349362850189209,
+    "sim_gap": 0.1376878023147583,
+    "all_sims": {
+      "purpose": 0.3252210319042206,
+      "good_employer": 0.5726240873336792,
+      "compensation": 0.4349362850189209,
+      "job_tasks": 0.42391595244407654
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "skill development",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5514305233955383,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4677058458328247,
+    "sim_gap": 0.08372467756271362,
+    "all_sims": {
+      "purpose": 0.42949315905570984,
+      "good_employer": 0.5514305233955383,
+      "compensation": 0.2959901988506317,
+      "job_tasks": 0.4677058458328247
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "professional development",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5741710066795349,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.48904410004615784,
+    "sim_gap": 0.08512690663337708,
+    "all_sims": {
+      "purpose": 0.424540251493454,
+      "good_employer": 0.5741710066795349,
+      "compensation": 0.37008410692214966,
+      "job_tasks": 0.48904410004615784
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "reskilling opportunities",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.44603121280670166,
+    "second_bucket": "purpose",
+    "second_sim": 0.40399807691574097,
+    "sim_gap": 0.04203313589096069,
+    "all_sims": {
+      "purpose": 0.40399807691574097,
+      "good_employer": 0.44603121280670166,
+      "compensation": 0.3627253472805023,
+      "job_tasks": 0.3414035141468048
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "technical training",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4899755120277405,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4472164213657379,
+    "sim_gap": 0.042759090662002563,
+    "all_sims": {
+      "purpose": 0.33833688497543335,
+      "good_employer": 0.4899755120277405,
+      "compensation": 0.31641754508018494,
+      "job_tasks": 0.4472164213657379
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "leadership training",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5369369387626648,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4955978989601135,
+    "sim_gap": 0.04133903980255127,
+    "all_sims": {
+      "purpose": 0.37292250990867615,
+      "good_employer": 0.5369369387626648,
+      "compensation": 0.3238421082496643,
+      "job_tasks": 0.4955978989601135
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "career development workshops",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "skill development programs",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5672901272773743,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4579649567604065,
+    "sim_gap": 0.10932517051696777,
+    "all_sims": {
+      "purpose": 0.369912326335907,
+      "good_employer": 0.5672901272773743,
+      "compensation": 0.26051780581474304,
+      "job_tasks": 0.4579649567604065
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "career guidance",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5747645497322083,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.44425177574157715,
+    "sim_gap": 0.1305127739906311,
+    "all_sims": {
+      "purpose": 0.3305404484272003,
+      "good_employer": 0.5747645497322083,
+      "compensation": 0.28801411390304565,
+      "job_tasks": 0.44425177574157715
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "employee development",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6489948034286499,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.5159326791763306,
+    "sim_gap": 0.13306212425231934,
+    "all_sims": {
+      "purpose": 0.443230539560318,
+      "good_employer": 0.6489948034286499,
+      "compensation": 0.4028751850128174,
+      "job_tasks": 0.5159326791763306
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "mentor programs",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5674595832824707,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.46071290969848633,
+    "sim_gap": 0.10674667358398438,
+    "all_sims": {
+      "purpose": 0.3668777048587799,
+      "good_employer": 0.5674595832824707,
+      "compensation": 0.2967100739479065,
+      "job_tasks": 0.46071290969848633
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "peer mentorship",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.47198763489723206,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.39546501636505127,
+    "sim_gap": 0.07652261853218079,
+    "all_sims": {
+      "purpose": 0.38261866569519043,
+      "good_employer": 0.47198763489723206,
+      "compensation": 0.21517668664455414,
+      "job_tasks": 0.39546501636505127
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "executive coaching",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5117290616035461,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4662885367870331,
+    "sim_gap": 0.04544052481651306,
+    "all_sims": {
+      "purpose": 0.3416982591152191,
+      "good_employer": 0.5117290616035461,
+      "compensation": 0.39505118131637573,
+      "job_tasks": 0.4662885367870331
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "leadership mentoring",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4537244439125061,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4194977283477783,
+    "sim_gap": 0.03422671556472778,
+    "all_sims": {
+      "purpose": 0.33958226442337036,
+      "good_employer": 0.4537244439125061,
+      "compensation": 0.18755097687244415,
+      "job_tasks": 0.4194977283477783
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "career coaching",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5836693048477173,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.42161718010902405,
+    "sim_gap": 0.16205212473869324,
+    "all_sims": {
+      "purpose": 0.35246726870536804,
+      "good_employer": 0.5836693048477173,
+      "compensation": 0.33733832836151123,
+      "job_tasks": 0.42161718010902405
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "personal growth",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5214108824729919,
+    "second_bucket": "purpose",
+    "second_sim": 0.4708262085914612,
+    "sim_gap": 0.05058467388153076,
+    "all_sims": {
+      "purpose": 0.4708262085914612,
+      "good_employer": 0.5214108824729919,
+      "compensation": 0.3973989486694336,
+      "job_tasks": 0.33674195408821106
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "learning opportunities",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "mentorship and coaching",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5889160633087158,
+    "second_bucket": "purpose",
+    "second_sim": 0.48157015442848206,
+    "sim_gap": 0.10734590888023376,
+    "all_sims": {
+      "purpose": 0.48157015442848206,
+      "good_employer": 0.5889160633087158,
+      "compensation": 0.41614100337028503,
+      "job_tasks": 0.4404849708080292
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "promotion tracks",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "compensation",
+    "best_sim": 0.36122140288352966,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3270275294780731,
+    "sim_gap": 0.03419387340545654,
+    "all_sims": {
+      "purpose": 0.283307284116745,
+      "good_employer": 0.3206423819065094,
+      "compensation": 0.36122140288352966,
+      "job_tasks": 0.3270275294780731
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "career progression",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6369166970252991,
+    "second_bucket": "purpose",
+    "second_sim": 0.46311628818511963,
+    "sim_gap": 0.17380040884017944,
+    "all_sims": {
+      "purpose": 0.46311628818511963,
+      "good_employer": 0.6369166970252991,
+      "compensation": 0.3860265612602234,
+      "job_tasks": 0.4333784580230713
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "growth opportunities",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5499287247657776,
+    "second_bucket": "purpose",
+    "second_sim": 0.5445629954338074,
+    "sim_gap": 0.005365729331970215,
+    "all_sims": {
+      "purpose": 0.5445629954338074,
+      "good_employer": 0.5499287247657776,
+      "compensation": 0.4335198998451233,
+      "job_tasks": 0.40816056728363037
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "career advancement",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6593086123466492,
+    "second_bucket": "purpose",
+    "second_sim": 0.4451672434806824,
+    "sim_gap": 0.2141413688659668,
+    "all_sims": {
+      "purpose": 0.4451672434806824,
+      "good_employer": 0.6593086123466492,
+      "compensation": 0.41414543986320496,
+      "job_tasks": 0.38164329528808594
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "career opportunities",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "good_employer",
+    "best_sim": 0.6699880361557007,
+    "second_bucket": "purpose",
+    "second_sim": 0.45650455355644226,
+    "sim_gap": 0.21348348259925842,
+    "all_sims": {
+      "purpose": 0.45650455355644226,
+      "good_employer": 0.6699880361557007,
+      "compensation": 0.3513129949569702,
+      "job_tasks": 0.42401930689811707
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "career path",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5833835005760193,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.39612600207328796,
+    "sim_gap": 0.18725749850273132,
+    "all_sims": {
+      "purpose": 0.3870035707950592,
+      "good_employer": 0.5833835005760193,
+      "compensation": 0.3008491098880768,
+      "job_tasks": 0.39612600207328796
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "rapid advancement",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "clear career progression paths",
+    "best_bucket": "purpose",
+    "best_sim": 0.5361526608467102,
+    "second_bucket": "good_employer",
+    "second_sim": 0.5039791464805603,
+    "sim_gap": 0.0321735143661499,
+    "all_sims": {
+      "purpose": 0.5361526608467102,
+      "good_employer": 0.5039791464805603,
+      "compensation": 0.3543344736099243,
+      "job_tasks": 0.3871331810951233
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "internal mobility",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "support for lateral moves",
+    "best_bucket": "purpose",
+    "best_sim": 0.358455628156662,
+    "second_bucket": "good_employer",
+    "second_sim": 0.28720822930336,
+    "sim_gap": 0.071247398853302,
+    "all_sims": {
+      "purpose": 0.358455628156662,
+      "good_employer": 0.28720822930336,
+      "compensation": 0.1487724334001541,
+      "job_tasks": 0.20502877235412598
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "role flexibility",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "support for lateral moves",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5241791009902954,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.4351818263530731,
+    "sim_gap": 0.08899727463722229,
+    "all_sims": {
+      "purpose": 0.42179057002067566,
+      "good_employer": 0.5241791009902954,
+      "compensation": 0.3044372498989105,
+      "job_tasks": 0.4351818263530731
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "job rotation programs",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "support for lateral moves",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5143846869468689,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.39141520857810974,
+    "sim_gap": 0.12296947836875916,
+    "all_sims": {
+      "purpose": 0.14830178022384644,
+      "good_employer": 0.5143846869468689,
+      "compensation": 0.2832322418689728,
+      "job_tasks": 0.39141520857810974
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "diverse career paths",
+    "source_dict": "career_development_opportunities",
+    "source_subcat": "support for lateral moves",
+    "best_bucket": "good_employer",
+    "best_sim": 0.5359514355659485,
+    "second_bucket": "purpose",
+    "second_sim": 0.44709527492523193,
+    "sim_gap": 0.08885616064071655,
+    "all_sims": {
+      "purpose": 0.44709527492523193,
+      "good_employer": 0.5359514355659485,
+      "compensation": 0.22839806973934174,
+      "job_tasks": 0.37591707706451416
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "manage cross functional teams",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.514887273311615,
+    "second_bucket": "purpose",
+    "second_sim": 0.36266428232192993,
+    "sim_gap": 0.15222299098968506,
+    "all_sims": {
+      "purpose": 0.36266428232192993,
+      "good_employer": 0.3532259166240692,
+      "compensation": 0.22162126004695892,
+      "job_tasks": 0.514887273311615
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "design marketing campaigns",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.4540909230709076,
+    "second_bucket": "purpose",
+    "second_sim": 0.3751838505268097,
+    "sim_gap": 0.0789070725440979,
+    "all_sims": {
+      "purpose": 0.3751838505268097,
+      "good_employer": 0.3523896038532257,
+      "compensation": 0.2264317274093628,
+      "job_tasks": 0.4540909230709076
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "implement new systems",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "purpose",
+    "best_sim": 0.44310861825942993,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.3591092526912689,
+    "sim_gap": 0.08399936556816101,
+    "all_sims": {
+      "purpose": 0.44310861825942993,
+      "good_employer": 0.2910439968109131,
+      "compensation": 0.15378393232822418,
+      "job_tasks": 0.3591092526912689
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "write technical documentation",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.4106760621070862,
+    "second_bucket": "purpose",
+    "second_sim": 0.26572737097740173,
+    "sim_gap": 0.14494869112968445,
+    "all_sims": {
+      "purpose": 0.26572737097740173,
+      "good_employer": 0.21945171058177948,
+      "compensation": 0.12461653351783752,
+      "job_tasks": 0.4106760621070862
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "present to stakeholders",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "purpose",
+    "best_sim": 0.564090371131897,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.5322033762931824,
+    "sim_gap": 0.0318869948387146,
+    "all_sims": {
+      "purpose": 0.564090371131897,
+      "good_employer": 0.3533434569835663,
+      "compensation": 0.3143872022628784,
+      "job_tasks": 0.5322033762931824
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "develop business strategies",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.5668905377388,
+    "second_bucket": "purpose",
+    "second_sim": 0.42495572566986084,
+    "sim_gap": 0.1419348120689392,
+    "all_sims": {
+      "purpose": 0.42495572566986084,
+      "good_employer": 0.39996984601020813,
+      "compensation": 0.2311650961637497,
+      "job_tasks": 0.5668905377388
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "maintain client relationships",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_tasks_verbs",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.35310447216033936,
+    "second_bucket": "purpose",
+    "second_sim": 0.23812983930110931,
+    "sim_gap": 0.11497463285923004,
+    "all_sims": {
+      "purpose": 0.23812983930110931,
+      "good_employer": 0.20958790183067322,
+      "compensation": 0.06255283951759338,
+      "job_tasks": 0.35310447216033936
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "years of experience",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_requirements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.41720521450042725,
+    "second_bucket": "purpose",
+    "second_sim": 0.3660796284675598,
+    "sim_gap": 0.05112558603286743,
+    "all_sims": {
+      "purpose": 0.3660796284675598,
+      "good_employer": 0.41720521450042725,
+      "compensation": 0.2680835723876953,
+      "job_tasks": 0.3464389741420746
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "excellent communication skills",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_requirements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4444325268268585,
+    "second_bucket": "purpose",
+    "second_sim": 0.34143075346946716,
+    "sim_gap": 0.10300177335739136,
+    "all_sims": {
+      "purpose": 0.34143075346946716,
+      "good_employer": 0.4444325268268585,
+      "compensation": 0.22779963910579681,
+      "job_tasks": 0.33842596411705017
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "ability to multitask",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_requirements",
+    "best_bucket": "good_employer",
+    "best_sim": 0.4267664849758148,
+    "second_bucket": "job_tasks",
+    "second_sim": 0.32256388664245605,
+    "sim_gap": 0.10420259833335876,
+    "all_sims": {
+      "purpose": 0.32178303599357605,
+      "good_employer": 0.4267664849758148,
+      "compensation": 0.28342384099960327,
+      "job_tasks": 0.32256388664245605
+    },
+    "is_boundary": false
+  },
+  {
+    "phrase": "detail oriented",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_requirements",
+    "best_bucket": "job_tasks",
+    "best_sim": 0.35028940439224243,
+    "second_bucket": "purpose",
+    "second_sim": 0.3043174743652344,
+    "sim_gap": 0.04597193002700806,
+    "all_sims": {
+      "purpose": 0.3043174743652344,
+      "good_employer": 0.24466203153133392,
+      "compensation": 0.14764074981212616,
+      "job_tasks": 0.35028940439224243
+    },
+    "is_boundary": true
+  },
+  {
+    "phrase": "hands on experience",
+    "source_dict": "job_tasks_requirements",
+    "source_subcat": "job_requirements",
+    "best_bucket": "purpose",
+    "best_sim": 0.441642165184021,
+    "second_bucket": "good_employer",
+    "second_sim": 0.40632501244544983,
+    "sim_gap": 0.03531715273857117,
+    "all_sims": {
+      "purpose": 0.441642165184021,
+      "good_employer": 0.40632501244544983,
+      "compensation": 0.22436635196208954,
+      "job_tasks": 0.36052218079566956
+    },
+    "is_boundary": true
+  }
+]

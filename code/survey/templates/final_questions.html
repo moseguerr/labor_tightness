@@ -1,0 +1,496 @@
+{% extends "base.html" %}
+
+{% block content_width %}max-w-7xl{% endblock %}
+
+{% block content %}
+<div>
+    <h2 class="text-xl font-semibold text-slate-800 mb-1">Some Final Questions</h2>
+    <p class="text-slate-500 text-sm mb-6">Almost done — just two short sections.</p>
+
+    <form method="post" id="final-form">
+        {% csrf_token %}
+
+        <!-- ============================================================ -->
+        <!-- SECTION 1: Dream Job & Preferences -->
+        <!-- ============================================================ -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Left column: dream job + weights -->
+                <div>
+                    <div class="mb-5">
+                        <label for="dream_job" class="block text-sm font-medium text-slate-700 mb-1">
+                            What is your dream job?
+                        </label>
+                        <input type="text" name="dream_job" id="dream_job" required
+                               class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm
+                                      focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                               placeholder="e.g. Environmental lawyer, startup founder, doctor...">
+                    </div>
+
+                    <p class="text-sm font-medium text-slate-700 mb-3">
+                        When you think about this dream job, what matters most to you?
+                        Assign a percentage to each of the following.
+                    </p>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="weight_matters_to_me" min="0" max="100" value=""
+                                   class="weight-input w-20 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-right
+                                          focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                                   placeholder="0">
+                            <span class="text-sm text-slate-600">% — Working on something that matters to me</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="weight_not_worse" min="0" max="100" value=""
+                                   class="weight-input w-20 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-right
+                                          focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                                   placeholder="0">
+                            <span class="text-sm text-slate-600">% — Working for a company that doesn't leave the world worse than it found it</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="weight_outside_work" min="0" max="100" value=""
+                                   class="weight-input w-20 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-right
+                                          focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                                   placeholder="0">
+                            <span class="text-sm text-slate-600">% — Working for a company that lets me focus on the things I care about outside of work</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="weight_talented_people" min="0" max="100" value=""
+                                   class="weight-input w-20 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-right
+                                          focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                                   placeholder="0">
+                            <span class="text-sm text-slate-600">% — Working with the most talented people</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <input type="number" name="weight_successful_company" min="0" max="100" value=""
+                                   class="weight-input w-20 border border-gray-300 rounded-lg px-3 py-1.5 text-sm text-right
+                                          focus:ring-2 focus:ring-primary-400 focus:border-primary-400 outline-none"
+                                   placeholder="0">
+                            <span class="text-sm text-slate-600">% — Working for a successful company</span>
+                        </div>
+                        <span id="weight-total" class="hidden">0</span>
+                    </div>
+                </div>
+
+                <!-- Right column: pie chart centered -->
+                <div class="flex items-center justify-center">
+                    <canvas id="pie-chart" width="340" height="340"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 2: Income Distribution -->
+        <!-- ============================================================ -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+            <h3 class="text-lg font-semibold text-slate-700 mb-4">Income Distribution</h3>
+
+            <div class="flex flex-col items-center gap-6">
+                <!-- Growing up -->
+                <div class="w-full max-w-lg">
+                    <p class="text-sm font-medium text-slate-700 mb-1">
+                        Growing up, where would you place your household in the income distribution?
+                    </p>
+                    <p class="text-xs text-slate-400 mb-3">Click on the chart to place your marker. (U.S. household income, 2010)</p>
+                    <div class="border border-gray-200 rounded-lg p-1 bg-gray-50">
+                        <canvas id="dist-growing-up" style="width:100%; height:auto;"></canvas>
+                    </div>
+                    <p id="growing-up-label" class="text-xs text-slate-500 mt-2 text-center"></p>
+                    <input type="hidden" name="income_growing_up_percentile" id="income_growing_up_percentile">
+                </div>
+
+                <!-- 20 years from now -->
+                <div class="w-full max-w-lg">
+                    <p class="text-sm font-medium text-slate-700 mb-1">
+                        Where would you like to be in 20 years?
+                    </p>
+                    <p class="text-xs text-slate-400 mb-3">Click on the chart to place your marker. (U.S. household income, 2024)</p>
+                    <div class="border border-gray-200 rounded-lg p-1 bg-gray-50">
+                        <canvas id="dist-future" style="width:100%; height:auto;"></canvas>
+                    </div>
+                    <p id="future-label" class="text-xs text-slate-500 mt-2 text-center"></p>
+                    <input type="hidden" name="income_future_year" id="income_future_year" value="2024">
+                    <input type="hidden" name="income_future_percentile" id="income_future_percentile">
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center">
+            <button type="submit" id="submit-btn"
+                    class="bg-primary-500 hover:bg-primary-700 text-white font-medium
+                           py-3 px-10 rounded-lg text-base transition-colors">
+                Continue
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function() {
+    var DISTRIBUTIONS = {{ distributions_json|safe }};
+
+    // ========== SECTION 1: Weights + Pie Chart ==========
+
+    var inputs = document.querySelectorAll('.weight-input');
+    var totalEl = document.getElementById('weight-total');
+    var canvas = document.getElementById('pie-chart');
+    var ctx = canvas.getContext('2d');
+
+    var labels = [
+        'Matters to me',
+        'Not worse',
+        'Outside work',
+        'Talented people',
+        'Successful co.'
+    ];
+    var colors = ['#B2C985', '#AAC0AA', '#E2CCA2', '#F4B886', '#A18276'];
+
+    function getWeights() {
+        var vals = [];
+        inputs.forEach(function(inp) {
+            vals.push(parseInt(inp.value) || 0);
+        });
+        return vals;
+    }
+
+    function drawPie(vals) {
+        var total = vals.reduce(function(a, b) { return a + b; }, 0);
+        var cx = 170, cy = 170, r = 155;
+        ctx.clearRect(0, 0, 340, 340);
+
+        if (total === 0) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.fillStyle = '#f1f5f9';
+            ctx.fill();
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Enter weights', cx, cy + 4);
+            return;
+        }
+
+        var start = -Math.PI / 2;
+        for (var i = 0; i < vals.length; i++) {
+            if (vals[i] === 0) continue;
+            var slice = (vals[i] / total) * Math.PI * 2;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, r, start, start + slice);
+            ctx.closePath();
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Label inside slice if big enough
+            if (vals[i] / total > 0.08) {
+                var mid = start + slice / 2;
+                var lx = cx + Math.cos(mid) * r * 0.6;
+                var ly = cy + Math.sin(mid) * r * 0.6;
+                ctx.fillStyle = vals[i] / total > 0.15 ? '#fff' : '#334155';
+                ctx.font = 'bold 15px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(vals[i] + '%', lx, ly);
+            }
+            start += slice;
+        }
+    }
+
+    function updateWeights() {
+        var vals = getWeights();
+        var total = vals.reduce(function(a, b) { return a + b; }, 0);
+        totalEl.textContent = total;
+        totalEl.textContent = total;
+        drawPie(vals);
+    }
+
+    inputs.forEach(function(inp) {
+        inp.addEventListener('input', updateWeights);
+    });
+    drawPie([0, 0, 0, 0, 0]);
+
+    // ========== SECTION 2: Income Distributions ==========
+
+    function sizeCanvas(canvasId) {
+        var cvs = document.getElementById(canvasId);
+        var container = cvs.parentElement;
+        var dpr = window.devicePixelRatio || 1;
+        var w = container.clientWidth - 8;
+        var h = Math.round(w * 0.55);
+        cvs.width = w * dpr;
+        cvs.height = h * dpr;
+        cvs.style.width = w + 'px';
+        cvs.style.height = h + 'px';
+        cvs.getContext('2d').scale(dpr, dpr);
+        return { w: w, h: h };
+    }
+
+    function interpolate(data, percentile) {
+        // data is [[p, income], ...] sorted by p
+        for (var i = 0; i < data.length - 1; i++) {
+            if (percentile >= data[i][0] && percentile <= data[i + 1][0]) {
+                var t = (percentile - data[i][0]) / (data[i + 1][0] - data[i][0]);
+                return data[i][1] + t * (data[i + 1][1] - data[i][1]);
+            }
+        }
+        if (percentile <= data[0][0]) return data[0][1];
+        return data[data.length - 1][1];
+    }
+
+    function reverseInterpolate(data, income) {
+        // data is [[p, income], ...] sorted by p (income is monotonically increasing)
+        // Given income, find percentile
+        for (var i = 0; i < data.length - 1; i++) {
+            if (income >= data[i][1] && income <= data[i + 1][1]) {
+                var t = (income - data[i][1]) / (data[i + 1][1] - data[i][1]);
+                return data[i][0] + t * (data[i + 1][0] - data[i][0]);
+            }
+        }
+        if (income <= data[0][1]) return data[0][0];
+        return data[data.length - 1][0];
+    }
+
+    // Aggregate CDF data into fixed-width income bins and return % of households per bin
+    // binWidth defaults to $25,000
+    function cdfToBins(data, binWidth) {
+        binWidth = binWidth || 25000;
+        var maxVal = data[data.length - 1][1];
+        var nBins = Math.ceil(maxVal / binWidth);
+        var bins = [];
+        for (var b = 0; b < nBins; b++) {
+            var lo = b * binWidth;
+            var hi = (b + 1) * binWidth;
+            // Interpolate CDF at lo and hi to get % of households in this bin
+            // CDF at an income value = the percentile at that income
+            var cdfLo = 0, cdfHi = 0;
+            var pts = [[0, 0]].concat(data.map(function(d) { return [d[1], d[0]]; }));
+            // pts is now [[income, percentile], ...] sorted by income
+            for (var i = 0; i < pts.length - 1; i++) {
+                if (lo >= pts[i][0] && lo <= pts[i + 1][0]) {
+                    var t = (pts[i + 1][0] - pts[i][0]) === 0 ? 0 : (lo - pts[i][0]) / (pts[i + 1][0] - pts[i][0]);
+                    cdfLo = pts[i][1] + t * (pts[i + 1][1] - pts[i][1]);
+                }
+                if (hi >= pts[i][0] && hi <= pts[i + 1][0]) {
+                    var t2 = (pts[i + 1][0] - pts[i][0]) === 0 ? 0 : (hi - pts[i][0]) / (pts[i + 1][0] - pts[i][0]);
+                    cdfHi = pts[i][1] + t2 * (pts[i + 1][1] - pts[i][1]);
+                }
+            }
+            if (hi >= pts[pts.length - 1][0]) cdfHi = pts[pts.length - 1][1];
+            if (lo <= pts[0][0]) cdfLo = pts[0][1];
+            var pct = cdfHi - cdfLo;
+            if (pct > 0.01) { // only include bins with households
+                bins.push({ lo: lo, hi: hi, mid: (lo + hi) / 2, pct: pct });
+            }
+        }
+        return bins;
+    }
+
+    function drawDistribution(canvasId, yearKey, marker, allYears) {
+        var size = sizeCanvas(canvasId);
+        var cvs = document.getElementById(canvasId);
+        var c = cvs.getContext('2d');
+        var w = size.w, h = size.h;
+        var pad = { left: 50, right: 20, top: 20, bottom: 55 };
+        var pw = w - pad.left - pad.right;
+        var ph = h - pad.top - pad.bottom;
+
+        c.clearRect(0, 0, w, h);
+
+        var years = allYears || [yearKey];
+        var binWidth = 25000;
+
+        // Compute bins for all years, find maxIncome and maxPct
+        var allBins = {};
+        var maxIncome = 0;
+        var maxPct = 0;
+        years.forEach(function(y) {
+            var d = DISTRIBUTIONS[y];
+            if (!d) return;
+            var bins = cdfToBins(d, binWidth);
+            allBins[y] = bins;
+            bins.forEach(function(b) {
+                if (b.hi > maxIncome) maxIncome = b.hi;
+                if (b.pct > maxPct) maxPct = b.pct;
+            });
+        });
+        maxPct = Math.ceil(maxPct / 5) * 5; // round up to nearest 5
+
+        // Axes
+        c.strokeStyle = '#cbd5e1';
+        c.lineWidth = 1;
+        c.beginPath();
+        c.moveTo(pad.left, pad.top);
+        c.lineTo(pad.left, h - pad.bottom);
+        c.lineTo(w - pad.right, h - pad.bottom);
+        c.stroke();
+
+        // X-axis labels
+        c.fillStyle = '#64748b';
+        c.font = '11px sans-serif';
+        c.textAlign = 'center';
+        var xStep = maxIncome <= 250000 ? 50000 : 100000;
+        for (var v = 0; v <= maxIncome; v += xStep) {
+            var x = pad.left + (v / maxIncome) * pw;
+            c.fillText('$' + (v / 1000) + 'k', x, h - pad.bottom + 18);
+            c.beginPath();
+            c.moveTo(x, h - pad.bottom);
+            c.lineTo(x, h - pad.bottom + 4);
+            c.stroke();
+        }
+
+        // Y-axis labels
+        c.textAlign = 'right';
+        c.textBaseline = 'middle';
+        var yStep = maxPct <= 10 ? 5 : 10;
+        for (var p = 0; p <= maxPct; p += yStep) {
+            var y = h - pad.bottom - (p / maxPct) * ph;
+            c.fillText(p + '%', pad.left - 5, y);
+            c.strokeStyle = '#f1f5f9';
+            c.beginPath();
+            c.moveTo(pad.left, y);
+            c.lineTo(w - pad.right, y);
+            c.stroke();
+            c.strokeStyle = '#cbd5e1';
+        }
+
+        // X-axis title
+        c.fillStyle = '#94a3b8';
+        c.font = '11px sans-serif';
+        c.textAlign = 'center';
+        c.fillText('Household income', pad.left + pw / 2, h - 5);
+
+        // Y-axis title
+        c.save();
+        c.translate(12, pad.top + ph / 2);
+        c.rotate(-Math.PI / 2);
+        c.fillText('% of households', 0, 0);
+        c.restore();
+
+        // Draw fitted curves through bin midpoints
+        var curveColors = { '1970': '#6aabb8', '1990': '#4a7c8a', '2010': '#4a7c8a', '2019': '#243f47' };
+
+        years.forEach(function(y) {
+            var bins = allBins[y];
+            if (!bins || bins.length === 0) return;
+            var isActive = (y === yearKey);
+
+            // Build pixel coords from bin midpoints
+            // Add anchor points at start (0,0) and end (last hi, 0) for curve shape
+            var coords = [{ x: pad.left, y: h - pad.bottom }];
+            bins.forEach(function(b) {
+                coords.push({
+                    x: pad.left + (b.mid / maxIncome) * pw,
+                    y: h - pad.bottom - (b.pct / maxPct) * ph
+                });
+            });
+            coords.push({
+                x: pad.left + (bins[bins.length - 1].hi / maxIncome) * pw,
+                y: h - pad.bottom
+            });
+
+            // Draw smooth bezier curve
+            c.beginPath();
+            c.lineWidth = isActive ? 2.5 : 1.5;
+            c.strokeStyle = isActive ? (curveColors[y] || '#4a7c8a') : (curveColors[y] || '#94a3b8') + '40';
+
+            c.moveTo(coords[0].x, coords[0].y);
+            for (var ci = 1; ci < coords.length; ci++) {
+                var prev = coords[ci - 1];
+                var cur = coords[ci];
+                var cpx = (prev.x + cur.x) / 2;
+                c.bezierCurveTo(cpx, prev.y, cpx, cur.y, cur.x, cur.y);
+            }
+            c.stroke();
+
+            // Year label at peak bin
+            var peak = bins[0];
+            bins.forEach(function(b) { if (b.pct > peak.pct) peak = b; });
+            var lx = pad.left + (peak.mid / maxIncome) * pw;
+            var ly = h - pad.bottom - (peak.pct / maxPct) * ph;
+            c.fillStyle = isActive ? (curveColors[y] || '#4a7c8a') : '#94a3b8';
+            c.font = (isActive ? 'bold ' : '') + '11px sans-serif';
+            c.textAlign = 'center';
+            c.fillText(y, lx, ly - 8);
+        });
+
+        // Marker — red dot on the curve at the clicked income
+        if (marker !== null && marker !== undefined) {
+            var data = DISTRIBUTIONS[yearKey];
+            var income = interpolate(data, marker);
+            var bins = allBins[yearKey];
+            // Find the bin and interpolate y on the curve
+            var markerPct = 0;
+            for (var i = 0; i < bins.length; i++) {
+                if (income >= bins[i].lo && income <= bins[i].hi) {
+                    markerPct = bins[i].pct;
+                    break;
+                }
+            }
+            var mx = pad.left + (income / maxIncome) * pw;
+            var my = h - pad.bottom - (markerPct / maxPct) * ph;
+
+            c.beginPath();
+            c.arc(mx, my, 7, 0, Math.PI * 2);
+            c.fillStyle = '#ef4444';
+            c.fill();
+            c.strokeStyle = '#fff';
+            c.lineWidth = 2;
+            c.stroke();
+        }
+
+        return { pad: pad, pw: pw, ph: ph, w: w, h: h, maxIncome: maxIncome };
+    }
+
+    // --- Growing Up (2010) ---
+    var growingUpMarker = null;
+    var growingUpLayout = drawDistribution('dist-growing-up', '2010', null);
+
+    document.getElementById('dist-growing-up').addEventListener('click', function(e) {
+        var rect = this.getBoundingClientRect();
+        var scaleX = this.width / (window.devicePixelRatio || 1) / rect.width;
+        var x = (e.clientX - rect.left) * scaleX;
+        var layout = growingUpLayout;
+        // x-axis is income; map click x to income, then reverse-interpolate to percentile
+        var clickedIncome = ((x - layout.pad.left) / layout.pw) * layout.maxIncome;
+        clickedIncome = Math.max(0, Math.min(layout.maxIncome, clickedIncome));
+        var pct = Math.round(reverseInterpolate(DISTRIBUTIONS['2010'], clickedIncome));
+        pct = Math.max(1, Math.min(99, pct));
+        growingUpMarker = pct;
+        document.getElementById('income_growing_up_percentile').value = pct;
+        var income = interpolate(DISTRIBUTIONS['2010'], pct);
+        document.getElementById('growing-up-label').textContent =
+            'You selected: ' + pct + '% of households (~$' + Math.round(income / 1000) + 'k/year)';
+        growingUpLayout = drawDistribution('dist-growing-up', '2010', pct);
+    });
+
+    // --- Future (2024 only) ---
+    var futureMarker = null;
+    var futureLayout = drawDistribution('dist-future', '2024', null);
+
+    document.getElementById('dist-future').addEventListener('click', function(e) {
+        var rect = this.getBoundingClientRect();
+        var scaleX = this.width / (window.devicePixelRatio || 1) / rect.width;
+        var x = (e.clientX - rect.left) * scaleX;
+        var layout = futureLayout;
+        var clickedIncome = ((x - layout.pad.left) / layout.pw) * layout.maxIncome;
+        clickedIncome = Math.max(0, Math.min(layout.maxIncome, clickedIncome));
+        var pct = Math.round(reverseInterpolate(DISTRIBUTIONS['2024'], clickedIncome));
+        pct = Math.max(1, Math.min(99, pct));
+        futureMarker = pct;
+        document.getElementById('income_future_percentile').value = pct;
+        var income = interpolate(DISTRIBUTIONS['2024'], pct);
+        document.getElementById('future-label').textContent =
+            'You selected: ' + pct + '% of households (~$' + Math.round(income / 1000) + 'k/year)';
+        futureLayout = drawDistribution('dist-future', '2024', pct);
+    });
+
+    // No form validation — weights don't need to sum to 100
+})();
+</script>
+{% endblock %}

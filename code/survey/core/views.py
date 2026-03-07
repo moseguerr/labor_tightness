@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 from django.utils import timezone
 
 from .models import (
-    Participant, Posting, Demographics, IndividualDifferences,
+    Participant, Posting, FinalQuestions,
     RankingResponse, CardSortCard, CardSortResponse,
     HiringManagerCard, HiringManagerResponse,
     BucketSortPhrase, BucketSortResponse, BucketSortReconciliation,
@@ -73,7 +73,7 @@ class LandingView(SurveyFlowMixin, TemplateView):
         # Randomly assign participant to study2 (job seeker) or study3 (hiring manager)
         study = random.choice(['study2', 'study3'])
 
-        prolific_id = request.GET.get('PROLIFIC_PID', '')
+        prolific_id = request.GET.get('PROLIFIC_PID', '') or request.GET.get('pid', '')
         wage_arm = random.choice(['A', 'B'])
         posting_order_seed = random.randint(1, 999999)
 
@@ -627,63 +627,21 @@ class HMCompetitionView(SurveyFlowMixin, TemplateView):
         return redirect('core:bucket_sort_transition')
 
 
-# ---------------------------------------------------------------------------
-# Demographics & Individual Differences
-# ---------------------------------------------------------------------------
+class FinalQuestionsView(SurveyFlowMixin, TemplateView):
+    template_name = 'final_questions.html'
 
-class IndividualDifferencesView(SurveyFlowMixin, TemplateView):
-    template_name = 'individual_differences.html'
-
-    def get(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        self.update_status(participant, 'individual_diffs')
-        return super().get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        P = request.POST
-
-        def safe_int(key):
-            val = P.get(key)
-            try:
-                return int(val) if val else None
-            except ValueError:
-                return None
-
-        IndividualDifferences.objects.create(
-            participant=participant,
-            jsv_salary=safe_int('jsv_salary'),
-            jsv_benefits=safe_int('jsv_benefits'),
-            jsv_mission=safe_int('jsv_mission'),
-            jsv_worklife=safe_int('jsv_worklife'),
-            jsv_growth=safe_int('jsv_growth'),
-            jsv_security=safe_int('jsv_security'),
-            jsv_impact=safe_int('jsv_impact'),
-            jsv_autonomy=safe_int('jsv_autonomy'),
-            jsv_coworkers=safe_int('jsv_coworkers'),
-            jsv_reputation=safe_int('jsv_reputation'),
-            csr_responsibility=safe_int('csr_responsibility'),
-            csr_lower_salary=safe_int('csr_lower_salary'),
-            csr_usually_mean_it=safe_int('csr_usually_mean_it'),
-            csr_pay_attention=safe_int('csr_pay_attention'),
-            skep_improve_image=safe_int('skep_improve_image'),
-            skep_grain_of_salt=safe_int('skep_grain_of_salt'),
-            skep_genuinely_motivated=safe_int('skep_genuinely_motivated'),
-            political_orientation=safe_int('political_orientation'),
-            household_income=P.get('household_income', ''),
-            job_search_urgency=safe_int('job_search_urgency'),
-            job_satisfaction=safe_int('job_satisfaction'),
-        )
-        return redirect('core:demographics')
-
-
-class DemographicsView(SurveyFlowMixin, TemplateView):
-    template_name = 'demographics.html'
-
-    def get(self, request, *args, **kwargs):
-        participant = self.get_participant()
-        self.update_status(participant, 'demographics')
-        return super().get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        import json as _json
+        from pathlib import Path
+        data_path = Path(__file__).resolve().parent.parent / 'stimuli' / 'cps_income_distributions.json'
+        with open(data_path) as f:
+            distributions = _json.load(f)
+        # Remove metadata keys
+        distributions.pop('_source', None)
+        distributions.pop('_notes', None)
+        ctx['distributions_json'] = _json.dumps(distributions)
+        return ctx
 
     def post(self, request, *args, **kwargs):
         participant = self.get_participant()
@@ -696,27 +654,18 @@ class DemographicsView(SurveyFlowMixin, TemplateView):
             except ValueError:
                 return None
 
-        Demographics.objects.create(
+        FinalQuestions.objects.create(
             participant=participant,
-            age=safe_int('age'),
-            gender=P.get('gender', ''),
-            gender_other=P.get('gender_other', ''),
-            race=P.get('race', ''),
-            race_other=P.get('race_other', ''),
-            parents_income=P.get('parents_income', ''),
-            high_school_state=P.get('high_school_state', ''),
-            neighborhood=P.get('neighborhood', ''),
-            major=P.get('major', ''),
-            major_other=P.get('major_other', ''),
-            year_in_program=P.get('year_in_program', ''),
-            has_part_time_job=P.get('has_part_time_job', ''),
-            english_first_language=P.get('english_first_language', ''),
-            first_language=P.get('first_language', ''),
+            dream_job=P.get('dream_job', ''),
+            weight_matters_to_me=safe_int('weight_matters_to_me'),
+            weight_not_worse=safe_int('weight_not_worse'),
+            weight_outside_work=safe_int('weight_outside_work'),
+            weight_talented_people=safe_int('weight_talented_people'),
+            weight_successful_company=safe_int('weight_successful_company'),
+            income_growing_up_percentile=safe_int('income_growing_up_percentile'),
+            income_future_year=P.get('income_future_year', ''),
+            income_future_percentile=safe_int('income_future_percentile'),
         )
-
-        participant.status = 'completed'
-        participant.completed_at = timezone.now()
-        participant.save()
         return redirect('core:debrief')
 
 
@@ -759,11 +708,11 @@ class BucketSortGameView(SurveyFlowMixin, TemplateView):
 
         seed = participant.posting_order_seed or random.randint(1, 999999)
 
-        # Dynamic game duration: fit within 19-minute session, reserve 2 min for demographics + end
+        # Dynamic game duration: fit within 19-minute session
         session_start = self.request.session.get('session_start_time')
         if session_start:
             elapsed = time.time() - session_start
-            game_duration = min(240, max(60, (19 * 60) - elapsed - 120))
+            game_duration = min(240, max(60, (19 * 60) - elapsed))
         else:
             game_duration = 240  # fallback: 4 minutes
 
@@ -816,7 +765,7 @@ class BucketSortSubmitView(SurveyFlowMixin, View):
             request.session['inconsistent_phrases'] = inconsistent
             redirect_url = '/study1/reconciliation/'
         else:
-            redirect_url = '/demographics/'
+            redirect_url = '/debrief/'
 
         return JsonResponse({'redirect': redirect_url})
 
@@ -870,7 +819,10 @@ class BucketSortReconciliationView(SurveyFlowMixin, TemplateView):
 
         # Clean up session
         request.session.pop('inconsistent_phrases', None)
-        return redirect('core:demographics')
+        participant.status = 'completed'
+        participant.completed_at = timezone.now()
+        participant.save()
+        return redirect('core:debrief')
 
 
 # ---------------------------------------------------------------------------
@@ -880,6 +832,14 @@ class BucketSortReconciliationView(SurveyFlowMixin, TemplateView):
 class DebriefView(SurveyFlowMixin, TemplateView):
     template_name = 'debrief.html'
 
+    def get(self, request, *args, **kwargs):
+        participant = self.get_participant()
+        if participant and participant.status != 'completed':
+            participant.status = 'completed'
+            participant.completed_at = timezone.now()
+            participant.save()
+        return super().get(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         participant = self.get_participant()
@@ -887,7 +847,12 @@ class DebriefView(SurveyFlowMixin, TemplateView):
             ctx['study_assignment'] = participant.study_assignment
             ctx['participant_code'] = participant.participant_code
             ctx['completion_code'] = participant.completion_code
+            ctx['user_id'] = participant.user_id
         return ctx
+
+
+class CompleteView(SurveyFlowMixin, TemplateView):
+    template_name = 'complete.html'
 
 
 class WithdrawView(SurveyFlowMixin, TemplateView):

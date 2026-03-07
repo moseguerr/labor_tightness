@@ -1,0 +1,2900 @@
+[
+  {
+    "phrase_text": "benefits package",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "commission based earnings",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "competitive benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "comprehensive benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "profit sharing",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "relocation assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sign on bonus",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "additional financial benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "commuter benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "mileage reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "parking allowance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "subsidized transportation",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "transportation stipend",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "travel allowance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "commuter subsidies",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "dental insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "dependent care",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "dependent coverage",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "disability insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "health insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "life insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "long term disability",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "medical plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "mental health coverage",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "pet insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "short term disability",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "vision insurance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "insurance benefits",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "bereavement leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "flexible time off",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "holiday pay",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "maternity leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "mental health days",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "paid holidays",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "parental leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "paternity leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "personal leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sick leave",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "vacation days",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "vacation time",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "volunteer time off",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "wellness days",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "paid time off",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "deferred compensation plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "defined benefit plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "defined contribution plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employer matched retirement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "retirement benefits",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "savings plans",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "retirement plans",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "company shares",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee stock",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee stock ownership",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "equity grants",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "equity packages",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "long term incentives",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "performance based equity",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "restricted stock units",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "share options",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "stock appreciation rights",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "stock purchase plan",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "stock options or equity grants",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "certification reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "education support",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "scholarship programs",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "student loan assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "tuition aid",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "tuition assistance",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "tuition reimbursement",
+    "source_dict": "pecuniary_benefits",
+    "source_subcategory": "tuition reimbursement",
+    "proposed_bucket": "compensation",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career advancement",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career opportunities",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career path",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career progression",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "clear advancement paths",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "growth opportunities",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "promotion opportunities",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "promotion tracks",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "rapid advancement",
+    "source_dict": "career_development",
+    "source_subcategory": "clear career progression paths",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "compressed workweek",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "distributed team",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "flexible hours",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "flexible schedule",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "flexible shifts",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "flexible workplace",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "hybrid schedule",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "remote friendly",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "remote work",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "work anywhere",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "work from home",
+    "source_dict": "job_design",
+    "source_subcategory": "flexible work arrangements",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "creative freedom",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "decision making authority",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "empowered decision making",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "freedom to innovate",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "independent work environment",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "minimal supervision",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "ownership of projects",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "project ownership",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "self directed",
+    "source_dict": "job_design",
+    "source_subcategory": "job autonomy",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career coaching",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career guidance",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee development",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "executive coaching",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leadership mentoring",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "learning opportunities",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "mentor programs",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "one on one coaching",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "peer mentorship",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "personal growth",
+    "source_dict": "career_development",
+    "source_subcategory": "mentorship and coaching",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career stability",
+    "source_dict": "job_design",
+    "source_subcategory": "secure and decent work",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "job security",
+    "source_dict": "job_design",
+    "source_subcategory": "secure and decent work",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "job stability",
+    "source_dict": "job_design",
+    "source_subcategory": "secure and decent work",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "long term opportunities",
+    "source_dict": "job_design",
+    "source_subcategory": "secure and decent work",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "stable employment",
+    "source_dict": "job_design",
+    "source_subcategory": "secure and decent work",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "career development workshops",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "continuous learning",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leadership training",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "professional development",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "reskilling opportunities",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "skill development",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "technical training",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "training programs",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "upskilling programs",
+    "source_dict": "career_development",
+    "source_subcategory": "skill development programs",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "cross functional moves",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "diverse career paths",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "internal mobility",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "internal transfers",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "job rotation programs",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "role flexibility",
+    "source_dict": "career_development",
+    "source_subcategory": "support for lateral moves",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "balanced lifestyle",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee well being initiatives",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "family friendly policies",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "family time",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "healthy worklife",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "work life balance",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "work life harmony",
+    "source_dict": "job_design",
+    "source_subcategory": "work life balance initiatives",
+    "proposed_bucket": "good_employer",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "ability to multitask",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "bachelor degree required",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "detail oriented",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "excellent communication skills",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "proficiency in excel",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "project management experience",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "self starter",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "strong analytical skills",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "team player",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "years of experience",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_requirements",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "design marketing campaigns",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "develop business strategies",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "implement new systems",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "maintain client relationships",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "manage cross functional teams",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "oversee daily operations",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "present to stakeholders",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "review compliance documentation",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "write technical documentation",
+    "source_dict": "job_tasks_requirements",
+    "source_subcategory": "job_tasks",
+    "proposed_bucket": "job_tasks",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "align with the purpose",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "company mission",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "company values",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "corporate mission",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "double bottom line",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "ethical goals",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "ethical organization",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "greater good",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "heart pumping",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "life changing",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "meaning of work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "mission focused roles",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "mutually rewarding",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "purpose at work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "purpose driven",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "pursuing career with purpose",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "rewarding career",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "share values",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "social impact focus",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "social responsibility",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "socially conscious",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "values alignment",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "alignment with societal values",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "care of our people",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "collaborative atmosphere",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "collaborative teams",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "collaborative work environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "collective problem solving",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "cooperative workplace",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "cross functional collaboration",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employee involvement",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee relations",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employees are key",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employees are our greatest asset",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 5
+  },
+  {
+    "phrase_text": "helpful colleagues",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "peer support",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "shared goals",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "supportive teams",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team building",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team collaboration",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team oriented environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "teamoriented environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "teamwork culture",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "worker representation",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "working men and women",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "collaborative environment",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "civic engagement",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "community engagement",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "community investment",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "community outreach",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "community partnerships",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "local community support",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "neighborhood revitalization",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "volunteering programs",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "community development programs",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "diverse workforce",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "diversity and inclusion",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "equal opportunity",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "equity in workplace",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "gender equality",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "inclusive hiring",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "pay equity",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "racial equity",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "diversity equity inclusion",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "cross cultural inclusion",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "cultural inclusivity",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "diverse perspectives",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "diverse voices",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "diversity in decision making",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "equitable decision making",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "inclusive leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "inclusive teams",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "inclusive work environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "inclusive workplace",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "multicultural environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "multicultural workforce",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "representation in leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "valuing diverse opinions",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "inclusion of diverse perspectives",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "best work of their lives",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 5
+  },
+  {
+    "phrase_text": "better future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "build stronger communities",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "career rewarding",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "challenge yourself",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "challenging and rewarding",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "community building",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "create positive change",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "direct impact roles",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "engaging work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "fulfilling careers",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "fulfilling mission",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "help others",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "help people",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "helping people",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "impact driven work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "improve quality of life",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "improvement human life",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "improving communities",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "improving quality life",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "innovative work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "interesting and challenging",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "interesting work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "lasting impact",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leaving a legacy",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "make a difference",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "make real impact",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "meaningful work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "positively impact lives",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "rewarding work",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "strengthening communities",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "taking toughest challenges",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "transformative journeys",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "work with purpose",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "opportunities to make an impact",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "cause based giving",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "charitable contributions",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "community philanthropy",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "corporate giving",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "giving back",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "humanitarian aid",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "philanthropic initiatives",
+    "source_dict": "social_initiatives",
+    "source_subcategory": "philanthropy and charitable giving",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "constructive feedback",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee ideas",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee well being",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employees voice",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "encouraging expression",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "inclusive feedback",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "no fear of retaliation",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "non judgmental",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "open communication",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "psychologically safe",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "respectful conflict resolution",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "safe environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "safe to voice opinions",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "supportive environment",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "trust in leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "warm and friendly culture",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "workers voice",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "psychological safety",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "achievement celebrations",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "achievement rewards",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "appreciation programs",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "celebrates success",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "celebrating achievements",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "demonstrated achievements",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee appreciation",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee awards",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee recognition",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "employee value",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "incentive awards",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "milestone recognition",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "peer recognition",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "promote from within",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "promoting from within",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "recognized and rewarded",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "recognized rewarded",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "reinvest in our employees",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "shout outs",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "staff appreciation",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team celebrations",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "team recognition",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "recognition and celebration",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "carbon offset programs",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "clean energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "energy efficiency",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "green energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "renewable energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "solar energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "wind energy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "renewable energy commitments",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "a great environment",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "addressing global challenges",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "advancing human development",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "bright future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "building resilient societies",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "climate change solutions",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "eliminate poverty",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "environment that inspires",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "environmental challenges",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "eradicating hunger",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "global impact",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "humanitarian roles",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "inequality reduction",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "public health issues",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "reduce inequality",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "reducing inequality",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "solutions global",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "solving global problems",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "solving poverty",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable development goals",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "worlds challenging issues",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "worlds complex challenges",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "roles tied to solving global challenges",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "carbon neutrality",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "circular economy",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "eco friendly",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "environmentally friendly",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "green practices",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "net zero",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "recycling programs",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable development",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable growth",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable outcomes",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable practices",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable solutions",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "sustainable urbanization",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "waste reduction",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "zero waste",
+    "source_dict": "environmental_initiatives",
+    "source_subcategory": "sustainability practices",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "accessible management",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "accountable leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "clear communication from leaders",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "environment openness",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "ethical leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "held accountable",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "honest decision making",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "honest leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leader transparency",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leadership communication",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leadership integrity",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leadership oversight",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "management clear communication",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "managerial openness",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "openness in management",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "organizational accountability",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "positive leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "strong leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "transparent decision making",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "transparent leadership",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "transparency in leadership",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "breakthrough technologies",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "changing future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "creating better future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "creative environment",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "cutting edge research",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "cutting edge technology",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "designing the future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "develop breakthrough",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "disruptive innovation",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "free thinkers",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "future constantly changing",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "help build future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "history makers",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "innovative companies",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "innovative ideas",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "innovative roles",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leading innovation",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "leading product service innovation",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "leading research",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "next gen solutions",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "partner with great minds",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "pioneering advancements",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "raise the bar",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "shaping future",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "technology driven innovation",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "transformative technologies",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "vibrant work environment",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "world leading companies",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "worlds most innovative company",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "worldwide influence",
+    "source_dict": "meaningful_work",
+    "source_subcategory": "working on innovation",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "award winning staff",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "award winning workplace",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "awardwinning company",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "best companies to work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "best large employers",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "best places to work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 4
+  },
+  {
+    "phrase_text": "best places work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employee friendly workplace",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "employer of choice",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "excellent place work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "large companies world",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "leading companies world",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "perfect place work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "ranked best companies",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "recognized employer",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 2
+  },
+  {
+    "phrase_text": "wonderful place work",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  },
+  {
+    "phrase_text": "worlds admired companies",
+    "source_dict": "organizational_culture",
+    "source_subcategory": "workplace recognition",
+    "proposed_bucket": "purpose",
+    "word_count": 3
+  }
+]

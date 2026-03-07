@@ -15,7 +15,7 @@ from django.db.models import F
 from core.models import (
     Participant, Study1Response, Study1PostTask,
     PostingViewRecord, Study2ManipulationCheck,
-    Study2Ranking, Study2PostRanking, IndividualDifferences, Demographics,
+    Study2Ranking, Study2PostRanking, Demographics,
 )
 
 
@@ -39,7 +39,6 @@ class Command(BaseCommand):
         self._export_manipulation_checks(outdir)
         self._export_rankings(outdir)
         self._export_post_ranking(outdir)
-        self._export_individual_differences(outdir)
         self._export_demographics(outdir)
 
         if outdir:
@@ -172,29 +171,6 @@ class Command(BaseCommand):
                 pr.po_fit_values, pr.po_fit_belong, pr.po_fit_care,
             ])
         self._write_csv('study2_post_ranking.csv', headers, rows, outdir)
-
-    def _export_individual_differences(self, outdir):
-        headers = [
-            'participant_code',
-            'jsv_salary', 'jsv_benefits', 'jsv_mission', 'jsv_worklife', 'jsv_growth',
-            'jsv_security', 'jsv_impact', 'jsv_autonomy', 'jsv_coworkers', 'jsv_reputation',
-            'csr_responsibility', 'csr_lower_salary', 'csr_usually_mean_it', 'csr_pay_attention',
-            'skep_improve_image', 'skep_grain_of_salt', 'skep_genuinely_motivated',
-            'political_orientation', 'household_income',
-            'job_search_urgency', 'job_satisfaction',
-        ]
-        rows = []
-        for d in IndividualDifferences.objects.select_related('participant').all():
-            rows.append([
-                d.participant.participant_code,
-                d.jsv_salary, d.jsv_benefits, d.jsv_mission, d.jsv_worklife, d.jsv_growth,
-                d.jsv_security, d.jsv_impact, d.jsv_autonomy, d.jsv_coworkers, d.jsv_reputation,
-                d.csr_responsibility, d.csr_lower_salary, d.csr_usually_mean_it, d.csr_pay_attention,
-                d.skep_improve_image, d.skep_grain_of_salt, d.skep_genuinely_motivated,
-                d.political_orientation, d.household_income,
-                d.job_search_urgency, d.job_satisfaction,
-            ])
-        self._write_csv('individual_differences.csv', headers, rows, outdir)
 
     def _export_demographics(self, outdir):
         headers = [

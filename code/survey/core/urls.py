@@ -45,9 +45,11 @@ urlpatterns = [
     path('study1/reconciliation/', views.BucketSortReconciliationView.as_view(),
          name='bucket_sort_reconciliation'),
 
-    # Wrap-up (shared)
-    path('demographics/', views.DemographicsView.as_view(), name='demographics'),
+    # Wrap-up
+    path('final-questions/', views.FinalQuestionsView.as_view(),
+         name='final_questions'),
     path('debrief/', views.DebriefView.as_view(), name='debrief'),
+    path('complete/', views.CompleteView.as_view(), name='complete'),
 
     # Withdrawal
     path('withdraw/', views.WithdrawView.as_view(), name='withdraw'),

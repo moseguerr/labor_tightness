@@ -1,9 +1,10 @@
 from django.contrib import admin
 from .models import (
-    Participant, Posting, Demographics, IndividualDifferences,
+    Participant, Posting, Demographics,
     RankingResponse, CardSortCard, CardSortResponse,
     HiringManagerCard, HiringManagerResponse,
     BucketSortPhrase, BucketSortResponse, BucketSortReconciliation,
+    FinalQuestions,
 )
 
 
@@ -27,7 +28,6 @@ class PostingAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Demographics)
-admin.site.register(IndividualDifferences)
 
 
 @admin.register(RankingResponse)
@@ -82,3 +82,9 @@ class BucketSortReconciliationAdmin(admin.ModelAdmin):
     list_display = ['participant', 'phrase', 'first_bucket', 'second_bucket', 'resolution']
     list_filter = ['resolution']
     raw_id_fields = ['participant', 'phrase']
+
+
+@admin.register(FinalQuestions)
+class FinalQuestionsAdmin(admin.ModelAdmin):
+    list_display = ['participant', 'income_growing_up_percentile', 'income_future_year', 'income_future_percentile', 'created_at']
+    raw_id_fields = ['participant']
