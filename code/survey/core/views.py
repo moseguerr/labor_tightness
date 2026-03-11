@@ -67,13 +67,25 @@ class LandingView(SurveyFlowMixin, TemplateView):
                 return uid
         return uuid.uuid4().hex[:12].upper()
 
+    def get(self, request, *args, **kwargs):
+        # Stash external ID from query string in session as fallback
+        ext_id = (request.GET.get('PROLIFIC_PID', '')
+                  or request.GET.get('pid', '')
+                  or request.GET.get('id', ''))
+        if ext_id:
+            request.session['external_id'] = ext_id
+        return super().get(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         user_id = self._generate_user_id()
 
         # Randomly assign participant to study2 (job seeker) or study3 (hiring manager)
         study = random.choice(['study2', 'study3'])
 
-        prolific_id = request.GET.get('PROLIFIC_PID', '') or request.GET.get('pid', '')
+        prolific_id = (request.GET.get('PROLIFIC_PID', '')
+                       or request.GET.get('pid', '')
+                       or request.GET.get('id', '')
+                       or request.session.get('external_id', ''))
         wage_arm = random.choice(['A', 'B'])
         posting_order_seed = random.randint(1, 999999)
 
@@ -709,10 +721,12 @@ class BucketSortGameView(SurveyFlowMixin, TemplateView):
         seed = participant.posting_order_seed or random.randint(1, 999999)
 
         # Dynamic game duration: fit within 19-minute session
+        # Reserve 180s for reconciliation + final questions + debrief
+        TAIL_BUFFER = 180
         session_start = self.request.session.get('session_start_time')
         if session_start:
             elapsed = time.time() - session_start
-            game_duration = min(240, max(60, (19 * 60) - elapsed))
+            game_duration = min(240, max(60, (19 * 60) - elapsed - TAIL_BUFFER))
         else:
             game_duration = 240  # fallback: 4 minutes
 

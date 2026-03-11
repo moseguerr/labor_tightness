@@ -70,6 +70,7 @@
                         </div>
                         <span id="weight-total" class="hidden">0</span>
                     </div>
+                    <p id="weight-warning" class="text-sm font-medium mt-3 hidden"></p>
                 </div>
 
                 <!-- Right column: pie chart centered -->
@@ -202,12 +203,28 @@
         }
     }
 
+    var warningEl = document.getElementById('weight-warning');
+    var submitBtn = document.getElementById('submit-btn');
+
     function updateWeights() {
         var vals = getWeights();
         var total = vals.reduce(function(a, b) { return a + b; }, 0);
         totalEl.textContent = total;
-        totalEl.textContent = total;
         drawPie(vals);
+
+        if (total === 0) {
+            warningEl.classList.add('hidden');
+        } else if (total !== 100) {
+            warningEl.textContent = 'Your weights add up to ' + total + '%. They must total exactly 100%.';
+            warningEl.classList.remove('hidden');
+            warningEl.classList.add('text-red-600');
+            warningEl.classList.remove('text-green-600');
+        } else {
+            warningEl.textContent = 'Total: 100%';
+            warningEl.classList.remove('hidden');
+            warningEl.classList.remove('text-red-600');
+            warningEl.classList.add('text-green-600');
+        }
     }
 
     inputs.forEach(function(inp) {
@@ -490,7 +507,19 @@
         futureLayout = drawDistribution('dist-future', '2024', pct);
     });
 
-    // No form validation — weights don't need to sum to 100
+    // Validate weights sum to 100 before submit
+    document.getElementById('final-form').addEventListener('submit', function(e) {
+        var vals = getWeights();
+        var total = vals.reduce(function(a, b) { return a + b; }, 0);
+        if (total !== 100) {
+            e.preventDefault();
+            warningEl.textContent = 'Your weights add up to ' + total + '%. Please adjust them to total exactly 100%.';
+            warningEl.classList.remove('hidden');
+            warningEl.classList.add('text-red-600');
+            warningEl.classList.remove('text-green-600');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    });
 })();
 </script>
 {% endblock %}
